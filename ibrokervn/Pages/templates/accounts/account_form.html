@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load i18n mezzanine_tags staticfiles %}
+
+{% block meta_title %}{{ title }}{% endblock %}
+{% block title %}{{ title }}{% endblock %}
+{% block body_id %}account{% endblock %}
+
+{% block breadcrumb_menu %}
+{{ block.super }}
+<li>{{ title }}</li>
+{% endblock %}
+
+
+{% block main %}
+<div style="background-image: url({% static 'images/Helping_banner.jpg' %});background-size: cover; height: 100%;">	
+<div class="container">
+{% errors_for form %}
+
+<!--
+<form method="post"{% if form.is_multipart %} enctype="multipart/form-data"{% endif %} role="form" class="center">
+
+-->
+		<form method="post"{% if form.is_multipart %} enctype="multipart/form-data"{% endif %} role="form" >
+			<div class="login-box">	
+			<div class="login-box-body">
+			<legend style="text-align: center;">{{ title|upper }}</legend>
+		    <fieldset>	
+		    {% fields_for form %}	
+		    <div class="form-group">
+
+		    <button type="submit" class="btn btn-success btn-md btn-block" >{{ title }}</button>
+		    	{% block account_form_actions %}
+		        {% endblock %}	
+		    </div>
+		    </fieldset>
+		    </div>		
+			</div>
+		</form>
+</div> 
+</div>	
+
+{% endblock %}
+
+

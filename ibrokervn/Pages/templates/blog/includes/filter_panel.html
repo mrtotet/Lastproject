@@ -1,0 +1,174 @@
+{% load blog_tags keyword_tags mezzanine_tags i18n %}
+
+{% block blog_recent_posts %}
+    {% blog_recent_posts 5 as recent_posts %}
+    {% if recent_posts %}
+    <div class="aside">
+    <div class="box-header with-border">
+    <h3 class="box-title">{% trans "Bài viết mới" %}</h3>
+    <!-- /.box-tools -->
+    </div>
+    <div class="blog-content">
+    <ul class="products-list product-list-in-box">
+    {% for recent_post in recent_posts %}
+    <li class="item">
+
+        <a href="{{ recent_post.get_absolute_url }}">
+            {% if settings.BLOG_USE_FEATURED_IMAGE and recent_post.featured_image %}
+                {% block blog_post_list_post_featured_image %}
+            <div class="product-img">
+                <img class="img-responsive img-blog" src="{{ MEDIA_URL }}{% thumbnail recent_post.featured_image 50 50 %}">
+            </div>
+                {% endblock %}
+            {% endif %}
+            <div class="product-info">
+                <span  class="product-title" >
+                {{ recent_post.title }}
+                </span>
+                <span class="product-description">
+                1080p 60Hz LED Smart HDTV
+                </span> 
+            </div>
+        </a>
+    </li>
+    {% endfor %}
+    </ul>
+    </div>
+    </div>
+    {% endif %}
+    {% endblock %}
+
+    {% block blog_categories %}
+    {% blog_categories as categories %}
+    {% if categories %}
+    <div class="aside">
+    <div class="box-header with-border">
+        <h3 class="box-title">{% trans "Chủ đề" %}</h3> 
+    </div>
+    <div class="blog-content">           
+
+        <ul class="products-list product-list-in-box">                
+        {% for category in categories %}
+        <li class="item">
+                   
+        <a href="{% url "blog_post_list_category" category.slug %}"
+        ><span  class="product-title" >{{ category }} ({{ category.post_count }})</span></a></li>
+        {% endfor %}
+        </ul>                 
+    </div>
+</div>
+    {% endif %}
+    {% endblock %}
+
+
+    {% block blog_keywords %}
+    {% keywords_for blog.blogpost as tags %}
+    {% if tags %}    
+    <div class="aside">
+    <div class="box-header with-border">
+    <h3 class="box-title">{% trans "Tags" %}</h3>
+    <!-- /.box-tools -->
+    </div>
+    <div class="blog-content">         
+        <ul class="products-list product-list-in-box">
+    {% for tag in tags %}
+    <li>
+        <a href="{% url "blog_post_list_tag" tag.slug %}"
+            class="tag-weight-{{ tag.weight }} product-title" style="color:#1e73be;">{{ tag }} ({{ tag.item_count }})</a>
+    
+    </li>
+    {% endfor %}
+    </ul>
+</div>
+</div>
+
+    {% endif %}
+    {% endblock %}
+    {% block blog_months %}
+    {% blog_months as months %}
+    {% if months %}
+    <div class="aside">
+    <div class="box-header with-border">
+    <h3 class="box-title">{% trans "Dòng thời gian" %}</h3>
+    <!-- /.box-tools -->
+    </div>
+    <div class="blog-content">    
+        <ul class="products-list product-list-in-box">
+    {% for month in months %}
+        {% ifchanged month.date.year %}
+            {% if not forloop.first %}</ul>{% endif %}
+            <h6>{{ month.date.year }}</h6><ul class="products-list product-list-in-box">  
+        {% endifchanged %}  
+                <li class="item"><a class="product-title" href="{% url "blog_post_list_month" year=month.date.year month=month.date.month %}"
+        >Tháng: {{ month.date|date:"m" }} ({{ month.post_count }})</a> </li>
+    {% endfor %}
+    </ul>
+</div>
+</div>
+    {% endif %}
+    {% endblock %}
+ 
+    {% block blog_authors %}
+    {% blog_authors as authors %}
+    {% if authors %}
+    <div class="aside">
+    <div class="box-header with-border">
+        <h3 class="box-title">{% trans "Tác giả" %}</h3> 
+    </div>
+    <div class="blog-content">           
+        <ul class="products-list product-list-in-box">                
+   {% for author in authors %}
+        <li class="item">
+        <a href="{% url "blog_post_list_author" author.username %}"
+        ><span  class="product-title" >{{ author.get_full_name|default:author.username }}
+        ({{ author.post_count }})</span>   </a> </li>        
+
+        {% endfor %}
+        </ul>
+                 </div>
+</div>
+    {% endif %}
+    {% endblock %}
+
+ 
+
+
+    
+    {% block blog_feeds %}
+
+    <div class="aside">
+    <div class="box-header with-border">
+        <h3 class="box-title">{% trans "Feeds" %}</h3> 
+    </div>
+    <div class="blog-content">           
+        <ul class="products-list product-list-in-box">                
+    {% if tag %}
+        <li class="item">
+        <a href="{% url "blog_post_feed_tag" tag.slug "rss" %}">{% trans "RSS" %}</a> /
+        <a href="{% url "blog_post_feed_tag" tag.slug "atom" %}">{% trans "Atom" %}</a>
+        </li>
+    {% endif %}
+    {% if category %}
+        <li class="item">
+        <a href="{% url "blog_post_feed_category" category.slug "rss" %}">{% trans "RSS" %}</a> /
+        <a href="{% url "blog_post_feed_category" category.slug "atom" %}">{% trans "Atom" %}</a>
+        </li>
+    {% endif %}
+    {% if author %}
+        <li class="item">
+        <a href="{% url "blog_post_feed_author" author.username "rss" %}">{% trans "RSS" %}</a> /
+        <a href="{% url "blog_post_feed_author" author.username "atom" %}">{% trans "Atom" %}</a>
+        </li>
+    {% endif %}
+    {% if not tag and not category and not author %}
+        <li class="item">
+        <a href="{% url "blog_post_feed" "rss" %}">{% trans "RSS" %}</a> /
+        <a href="{% url "blog_post_feed" "atom" %}">{% trans "Atom" %}</a>
+        </li>
+
+        </ul>
+</div>
+</div>    
+
+    {% endif %}
+    {% endblock %}

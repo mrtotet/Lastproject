@@ -1,0 +1,38 @@
+{% extends "accounts/account_form.html" %}
+{% load i18n %}
+
+{% block account_form_actions %}
+
+
+			{% if request.user.is_authenticated %}
+			    <p>{% trans "Bạn đã đăng nhập. Để đăng nhập bằng tài khoản khác, bạn cần phải đăng xuất tài khoản này trước" %}			
+			    </p>s
+			{% else %}
+				
+			    {{ block.super }}
+			    <div class="social-auth-links text-center">
+			    <p align="center">- HOẶC -</p>
+			    <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-primary btn-block btn-social1 btn-facebook btn-flat"> <i class="fa fa-facebook"></i> Đăng nhập bằng Facebook</a> 
+
+			    <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-danger btn-block  btn-social1 btn-google btn-flat"> <i class="fa fa-google-plus"></i>Đăng nhập bằng Google</a>
+
+			    </div>	
+			    {% url "signup" as signup_url %}
+			    <p>
+			    	{% blocktrans with request.GET.next as next %}Chưa có tài khoản, <a href="{{ 			signup_url }}?next={{ next }}"><strong>Đăng Ký tài khoản mới</strong></a>{% endblocktrans %}
+			    </p>
+
+			    {% url "mezzanine_password_reset" as password_reset_url %}
+			    {% url "profile_update" as profile_update_url %}
+			    {% blocktrans %}
+			    <p>Tôi quên Mật Khẩu, 
+			    <a href="{{ password_reset_url }}?next={{profile_update_url }}">
+			    	<strong>Lấy lại mật khẩu mới</strong>
+			    </a>
+			    </p>
+				{% endblocktrans %}</p>
+				{% endif %}
+		
+
+{% endblock %}
+

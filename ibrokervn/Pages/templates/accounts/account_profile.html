@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load i18n mezzanine_tags accounts_tags %}
+
+{% block meta_title %}{{ profile_user|username_or:"get_full_name" }}{% endblock %}
+{% block title %}{{ profile_user|username_or:"get_full_name" }}{% endblock %}
+{% block body_id %}account{% endblock %}
+
+{% block breadcrumb_menu %}
+{{ block.super }}
+
+<li>{{ profile_user|username_or:"get_full_name" }}</li>
+{% endblock %}
+
+{% block main %}
+<div class="row">
+<div class="profile-image col-md-3">
+
+
+            {% with user.clientprofile as user_ %}
+            {% if user_.avatar %}
+              <img class="img-thumbnail" src="{{MEDIA_URL}}{% thumbnail user_.avatar 128 128 %}">
+            {% else %}
+          
+              {% for ass in backends.associated %}
+            <!-- The user image in the menu -->
+                {% if ass.provider == 'facebook' %}
+                <img width="120" height="120" src="{{ass.extra_data.picture.data.url}}" class="img-thumbnail" alt="User Image">
+                {% elif ass.provider == 'google-oauth2' %}  
+                <img class="img-thumbnail" src="{% gravatar_url user.email 128 %}">       
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+            {% endwith %}       
+
+
+
+
+
+
+    {% if profile_user == request.user %}
+    <br><a class="btn btn-primary" href="{% url "profile_update" %}">{% trans "Update profile" %}</a>
+        {{profile_user.user}}
+    {% endif %}
+</div>
+<div class="profile-content col-md-9">
+    <h2>{{ profile_user.get_full_name }}</h2>
+
+
+    <p>Tên đăng nhập: {{ user.username }}</p>
+          {% for ass in backends.associated %}
+          {% if ass.provider == 'facebook' %}
+          <!-- The user image in the menu -->
+
+            <p>Bạn đang đăng nhập qua: <a href="{{ass.extra_data.profile_url}}">{{ ass.provider }}</a> </p>
+
+          {% endif %}
+          {% if ass.provider == 'google-oauth2' %}
+          <!-- The user image in the menu -->
+            <p> Bạn đang đang nhập qua: <a href="{{ass.extra_data.profile_url}}">Google</a> </p>
+          {% endif %}
+          {% endfor %}    
+    <p>Email: {{ user.email }}</p>
+    <p>Ngày tham gia: {{ user.date_joined|date:" H:i a d/m/y" }}</p>
+    <p>Hoạt động cuối: {{ user.last_login|timesince }} ago</p>
+
+    {% for field, value in user|profile_fields %}
+    <p>{{ field }}: {{ value|linebreaksbr }}</p>
+    {% endfor %}
+</div>
+</div>
+
+
+{% endblock %}
+
