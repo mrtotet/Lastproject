@@ -17,8 +17,8 @@
 {% endblock meta %}
 
 <title>{% if settings.SITE_TITLE %}{{ settings.SITE_TITLE }}{% endif %}</title>
-<link rel="shortcut icon" href="{% static "img/favicon.ico" %}">
-<link rel="icon" href="{% static "img/favicon.ico" %}">
+<link rel="shortcut icon" href="{% static "images/logo_ibrokervn/favicon.ico" %}">
+<link rel="icon" href="{% static "images/logo_ibrokervn/favicon.ico" %}">
 
 {% ifinstalled mezzanine.blog %}
 <link rel="alternate" type="application/rss+xml" title="RSS" href="{% url "blog_post_feed" "rss" %}">
@@ -27,7 +27,7 @@
 
 {% compress css %}
 <link href="{% static "css/reset.css" %}" rel="stylesheet">
-<link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
+<link href="{% static "css/bootstrap.css" %}" rel="stylesheet">
 <link rel="stylesheet" href="{% static "css/mezzanine.css" %}">
 <link href="{% static "css/font-awesome1.min.css" %}" rel="stylesheet">
 <link href="{% static "css/font-awesome.min.css" %}" rel="stylesheet">
@@ -94,7 +94,7 @@
                 </button>
                 {% if settings.SITE_TITLE %}<a class="navbar-brand" href="/">
                 
-                <img src="{% static "img/logo10.png" %}" height="30" rel="stylesheet">		
+                <img src="{% static "images/logo_ibrokervn/logo10.png" %}" height="30" rel="stylesheet">
                 {{ settings.SITE_TITLE }}</a>{% endif %}
 				{% if settings.SITE_TAGLINE %}<p class="navbar-text visible-lg">{{ settings.SITE_TAGLINE }}</p>{% endif %}
             </div>

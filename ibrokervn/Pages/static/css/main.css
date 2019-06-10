@@ -714,6 +714,7 @@ ul.tag-cloud li {
 }
 .navbar-inverse {
   border: none;
+
 }
 #navbar {
   position: fixed;
@@ -1184,6 +1185,10 @@ ul.faq li > div h3 {
   text-align: center;
   margin-top: 150px;
   margin-bottom: 150px;
+}
+
+.navbar-header {
+  height: 80px;
 }
 
 .navbar-header img {

@@ -14,9 +14,9 @@ admin.autodiscover()
 urlpatterns = i18n_patterns(
 
     url("^admin/", include(admin.site.urls)),
-    url(r'^toidautu/giaodichNN/', include('GDNN.urls',namespace='giaodichNN',app_name='GDNN')),
-    url(r'^toidautu/thongtinvimo/', include('Vimo.urls',namespace='thongtinvimo',app_name='Vimo')),
-    url(r'^toidautu/', include('DexuatGD.urls',namespace='nhandinhthitruong',app_name='DexuatGD')),
+    #url(r'^toidautu/giaodichNN/', include('GDNN.urls',namespace='giaodichNN',app_name='GDNN')),
+    #url(r'^toidautu/thongtinvimo/', include('Vimo.urls',namespace='thongtinvimo',app_name='Vimo')),
+    #url(r'^toidautu/', include('DexuatGD.urls',namespace='nhandinhthitruong',app_name='DexuatGD')),
     url(r'^auth/',include('social_django.urls', namespace='social')),
     url(r'^auth/', include('django.contrib.auth.urls', namespace='auth'))
                )
