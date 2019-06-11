@@ -622,10 +622,10 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'u1fhHhjqEjHh1ilD6f4ae5y2'
 SOCIAL_AUTH_FACEBOOK_KEY = '759846494409715' # Facebook App ID
 SOCIAL_AUTH_FACEBOOK_SECRET = 'c420f46457196d3b32eecb8c843c3621'
 
-SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', 'user_link']
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 
 SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {  # add this
-    'fields': 'id, name, email, picture.type(large), link'
+    'fields': 'id, name, email, picture.type(large)'
         }
 SOCIAL_AUTH_FACEBOOK_EXTRA_DATA = [  # add this
                                  ('name', 'name'),
@@ -644,7 +644,7 @@ ACCOUNTS_PROFILE_VIEWS_ENABLED = True
 
 FORMS_USE_HTML5 = True
 
-ACCOUNTS_PROFILE_MODEL = "Pages.Myprofile"
+#ACCOUNTS_PROFILE_MODEL = "Pages.Myprofile"
 
 ACCOUNTS_PROFILE_FORM_EXCLUDE_FIELDS = (
     #"first_name",

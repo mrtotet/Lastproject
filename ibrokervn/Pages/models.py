@@ -1,5 +1,6 @@
 from django.db import models
 #from phonenumber_field.modelfields import PhoneNumberField
+
 class MyProfile(models.Model):
     user = models.OneToOneField("auth.User",related_name="clientprofile")
     date_of_birth = models.DateField(null=True, blank=True, verbose_name = "Ngày sinh")
