@@ -1,0 +1,434 @@
+
+{% extends "base_toidautu.html" %}
+{% load mezzanine_tags keyword_tags toidautu_tags staticfiles %}
+
+{% block meta_title %} {{ page.meta_title }} {% endblock %}
+
+
+{% block stylesheets %}
+
+  {{ block.super }}
+  <script src="{% static "js/gauge.js" %}"></script>
+  
+
+  
+  
+{% endblock stylesheets %}
+
+{% block content %}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    Tổng quan Thị Trường
+    <small></small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="chienluocgiaodich"><i class="fa fa-home"></i> Tổng quan thị trường</a></li><i class="fa fa-eye"> {{views}}  lượt xem</i>
+  </ol>
+</section>
+
+ <!-- Main content -->
+    <section class="content">
+      <div class="row">  <!-- Để co margin trái phải lại -15px -->
+      <div class="row">  <!-- Để co margin trái phải lại -15px -->
+      <!-- CỘT TRÁI -->      
+        <div class="col-lg-6" >
+          {%Vimosimple%}
+
+          <div class="box box-warning box-solid">
+            <div class="box-header with-border">
+              <h3 class="box-title"> Đánh giá Vnindex  <small><a href="{% url "nhandinhthitruong:newest" %}" > (chi tiết...)</a></small>
+              </h3>
+            </div>
+            <!-- /.box-header -->
+              <div class="box-body no-padding">
+                {% Nhandinh_detail_moinhat as Post_moinhat_1 %}
+                <!-- gauge.js -->
+
+                <div style="height: 300px" >
+
+                  <div>
+
+                     <div id="preview-textfield"></div>
+
+                    <canvas id="gauge" ></canvas>
+                    <div id="cmtTT" >{{ Post_moinhat_1.do_manh }}</div>
+                  </div>
+                </div>
+              </div>
+
+
+              <script>
+                  var opts1 = {
+                    angle: 0.08, // The span of the gauge arc
+                    lineWidth: 0.44, // The line thickness
+                      radiusScale: 1, // Relative radius
+                    pointer: {
+                      length: 0.6, // // Relative to gauge radius
+                      strokeWidth: 0.035, // The thickness
+                      color: '#000000' // Fill color
+                    },
+                    limitMax: false,     // If false, max value increases automatically if value > maxValue
+                    limitMin: false,     // If true, the min value of the gauge will be fixed
+                    colorStart: '#6FADCF',   // Colors
+                    colorStop: '#23DA2F',    // just experiment with them
+                    strokeColor: '#F2301B',  // to see which ones work best for you
+                    generateGradient: true,
+                    highDpiSupport: true,     // High resolution support
+                    // renderTicks is Optional
+                    renderTicks: {
+                      divisions: 8,
+                      divWidth: 1.2,
+                      divLength: 0.59,
+                      divColor: '#333333',
+                      subDivisions: 4,
+                      subLength: 0.26,
+                      subWidth: 1,
+                      subColor: '#666666'
+                    }
+                  };
+                  var target = document.getElementById('gauge'); // your canvas element
+                  var gauge = new Gauge(target).setOptions(opts1); // create sexy gauge!
+                  gauge.setTextField(document.getElementById("preview-textfield"));
+                  gauge.maxValue = 100; // set max gauge value
+                  gauge.setMinValue(0);  // Prefer setter over gauge.minValue = 0
+                  gauge.animationSpeed = 32; // set animation speed (32 is default value)
+                  gauge.set({{ Post_moinhat_1.Streng}}); // set actual value
+
+              </script>
+
+
+                      {% if Post_moinhat_1.nganhdandattt_set.all %}
+                      <table class="table" style="margin-top: 15px; ">
+                          <thead>
+                            <th style="width: 100px; text-align:center; ">Ngành dẫn dắt TT</th>
+                            <th>Mức độ</th>
+                            <th >CP nổi bật</th>
+                          </thead>
+                          {% for nganh in Post_moinhat_1.nganhdandattt_set.all %}
+                          <tr>
+                            <td>
+                            <span class="badge bg-{{nganh.Mau}}">
+                            {% editable nganh.Nganh %}
+                            {{ nganh.Nganh}}
+                            {% endeditable %}
+                            </span>
+                            </td>
+                            <td>
+                              <div class="progress progress-xs progress-striped active">
+                                <div class="progress-bar progress-bar-{{nganh.Mau}}" style="width:{{nganh.Mucdo}}%"></div>
+                              </div>
+                            </td>
+                            <td>  {% editable nganh.CP_noibat %}{{nganh.CP_noibat}}  {% endeditable %}</td>
+                          </tr>
+                           {% endfor %}
+
+                      </table>
+                      {% endif %}
+
+                
+           
+
+                 </div>
+
+            <!-- /.box-body -->
+
+
+            <div class="box box-primary box-solid">
+              <div class="box-header with-border" style="height: 50px">
+                <h3 class="box-title">CP ĐẦU TƯ NGẮN HẠN </h3>
+              </div>
+              <!-- /.box-header -->
+              <div class="box-body no-padding">
+                <table class="table table-bordered" style="font-size: 12px;">
+                  <tr ">
+                    <th style="width: 10px; text-align:center;">Stock</th>
+                    <th style="width: 80px; ">Trade</th>
+                    <th style="width: 80px; text-align:center;">Giá KN</th>
+                    <th style="width: 80px; text-align:center;">Cập nhật</th>
+                    <th style="width: 80px; ">Lời/Lỗ</th>
+                    <th style="text-align:center;">Độ mạnh</th>
+                  </tr>
+                  <tr>
+                    <td>AAA</td>
+                    <td><span class="badge bg-yellow">Mua mới</span></td>
+                    <td style="text-align:center;"> 22  </td>
+                    <td style="text-align:center;"> 25  </td>
+                    <td><i class="fa fa-arrow-up bg-green"></i> 15%  </td>
+                    <td style="text-align:center;">
+                      <div class="progress progress-xs">
+                        <div class="progress-bar progress-bar-green" style="width: 60%"></div>
+                      </div>
+                    </td>
+                    <td style="text-align:center;"><span class="badge bg-red">55%</span></td>
+                  </tr>
+                  <tr>
+                    <td>ABC</td>
+                    <td><span class="badge bg-light-blue">Bán bớt</span></td>
+                    <td style="text-align:center;"> 22 </td>
+                    <td style="text-align:center;"> 25 </td>
+                    <td><i class="fa fa-arrow-down bg-red"></i> -10% </td>
+                    <td style="text-align:center;">
+                      <div class="progress progress-xs">
+                        <div class="progress-bar progress-bar-green" style="width: 90%"></div>
+                      </div>
+                    </td>
+                    <td style="text-align:center;">
+                      <span class="badge bg-yellow">70%</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>STK</td>
+                    <td style="text-align:center;"><span class="badge bg-green">Mua thêm</span></td>
+                    <td style="text-align:center;"> 30 </td>
+                    <td style="text-align:center;"> 37 </td>
+                    <td><i class="fa fa-arrow-up bg-green"></i> 20% </td>
+                    <td style="text-align:center;">
+                      <div class="progress progress-xs">
+
+
+                      </div>
+                    </td>
+                    <td style="text-align:center;"><span class="badge bg-light-blue">30%</span></td>
+                  </tr>
+                  <tr>
+                    <td style="text-align:center;">HCM</td>
+                    <td><span class="badge bg-red">Cắt lỗ</span></td>
+                    <td style="text-align:center;">  </td>
+                    <td style="text-align:center;">  </td>
+                    <td><i class="fa fa-arrow-up bg-green"></i></td>
+                    <td style="text-align:center;">
+                      <div class="progress progress-xs">
+                        <div class="progress-bar progress-bar-green" style="width: 50%"></div>
+                      </div>
+                    </td>
+                    <td style="text-align:center;"><span class="badge bg-green">90%</span></td>
+                  </tr>
+                </table>
+              </div>
+              <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+
+           <div class="box box-primary box-solid">
+              <div class="box-header with-border" style="height: 50px">
+                <h3 class="box-title">CP ĐẦU TƯ DÀI HẠN </h3>
+              </div>
+              <!-- /.box-header -->
+              <div class="box-body no-padding">
+                <table class="table table-bordered" style="font-size: 12px;">
+                  <tr ">
+                    <th style="width: 10px; text-align:center;">Stock</th>
+                    <th style="width: 80px; ">Trade</th>
+                    <th style="width: 80px; text-align:center;">Giá KN</th>
+                    <th style="width: 80px; text-align:center;">Cập nhật</th>
+                    <th style="width: 80px; ">Lời/Lỗ</th>
+                    <th style="text-align:center;">Độ mạnh</th>
+                  </tr>
+                  <tr>
+                    <td>AAA</td>
+                    <td><span class="badge bg-yellow">Mua mới</span></td>
+                    <td style="text-align:center;"> 22  </td>
+                    <td style="text-align:center;"> 25  </td>
+                    <td><i class="fa fa-arrow-up bg-green"></i> 15%  </td>
+                    <td style="text-align:center;">
+                      <div class="progress progress-xs">
+                        <div class="progress-bar progress-bar-green" style="width: 60%"></div>
+                      </div>
+                    </td>
+                    <td style="text-align:center;"><span class="badge bg-red">55%</span></td>
+                  </tr>
+                  <tr>
+                    <td>ABC</td>
+                    <td><span class="badge bg-light-blue">Bán bớt</span></td>
+                    <td style="text-align:center;"> 22 </td>
+                    <td style="text-align:center;"> 25 </td>
+                    <td><i class="fa fa-arrow-down bg-red"></i> -10% </td>
+                    <td style="text-align:center;">
+                      <div class="progress progress-xs">
+                        <div class="progress-bar progress-bar-green" style="width: 90%"></div>
+                      </div>
+                    </td>
+                    <td style="text-align:center;">
+                      <span class="badge bg-yellow">70%</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>STK</td>
+                    <td style="text-align:center;"><span class="badge bg-green">Mua thêm</span></td>
+                    <td style="text-align:center;"> 30 </td>
+                    <td style="text-align:center;"> 37 </td>
+                    <td><i class="fa fa-arrow-up bg-green"></i> 20% </td>
+                    <td style="text-align:center;">
+                      <div class="progress progress-xs">
+
+                        <div class="progress-bar progress-bar-green" style="width: 20%"></div>
+
+                      </div>
+                    </td>
+                    <td style="text-align:center;"><span class="badge bg-light-blue">30%</span></td>
+                  </tr>
+                  <tr>
+                    <td style="text-align:center;">HCM</td>
+                    <td><span class="badge bg-red">Cắt lỗ</span></td>
+                    <td style="text-align:center;">  </td>
+                    <td style="text-align:center;">  </td>
+                    <td><i class="fa fa-arrow-up bg-green"></i></td>
+                    <td style="text-align:center;">
+                      <div class="progress progress-xs">
+                        <div class="progress-bar progress-bar-green" style="width: 50%"></div>
+                      </div>
+                    </td>
+                    <td style="text-align:center;"><span class="badge bg-green">90%</span></td>
+                  </tr>
+                </table>
+              </div>
+              <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+
+
+
+        </div>
+          <!-- /.col -->
+              
+     
+            
+         <!-- CỘT PHẢI -->       
+        <div class="col-md-6" >
+          
+           <!-- TKgdNN -->
+
+          {%TKgdnn%}
+
+      
+       
+
+          <div class="box box-warning box-solid">
+            <div class="box-header with-border">
+              <h3 class="box-title">TT Thế giới</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body" style="height: 560px">
+            <!-- TradingView Widget BEGIN -->
+            <div class="tradingview-widget-container">
+              <div class="tradingview-widget-container__widget"></div>
+              <div class="tradingview-widget-copyright"><a href="https://vn.tradingview.com/markets/indices/" rel="noopener" target="_blank"><span class="blue-text">Các chỉ số</span></a>, <a href="https://vn.tradingview.com/markets/futures/" rel="noopener" target="_blank"><span class="blue-text">Hàng hóa</span></a> <span class="blue-text">và</span> <a href="https://vn.tradingview.com/markets/currencies/" rel="noopener" target="_blank"><span class="blue-text">Ngoại hối</span></a> bởi TradingView</div>
+              <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
+              {
+              "showChart": true,
+              "locale": "vi_VN",
+              "width": "100%",
+              "height": "100%",
+              "largeChartUrl": "",
+              "plotLineColorGrowing": "rgba(60, 188, 152, 1)",
+              "plotLineColorFalling": "rgba(255, 74, 104, 1)",
+              "gridLineColor": "rgba(233, 233, 234, 1)",
+              "scaleFontColor": "rgba(214, 216, 224, 1)",
+              "belowLineFillColorGrowing": "rgba(60, 188, 152, 0.05)",
+              "belowLineFillColorFalling": "rgba(255, 74, 104, 0.05)",
+              "symbolActiveColor": "rgba(242, 250, 254, 1)",
+              "tabs": [
+                {
+                  "title": "Các chỉ số",
+                  "symbols": [
+                    {
+                      "s": "INDEX:SPX",
+                      "d": "S&P 500"
+                    },
+                    {
+                      "s": "INDEX:IUXX",
+                      "d": "Nasdaq 100"
+                    },
+                    {
+                      "s": "INDEX:DOWI",
+                      "d": "Dow 30"
+                    },
+                    {
+                      "s": "INDEX:NKY",
+                      "d": "Nikkei 225"
+                    },
+                    {
+                      "s": "INDEX:DAX",
+                      "d": "DAX Index"
+                    },
+                    {
+                      "s": "OANDA:UK100GBP",
+                      "d": "FTSE 100"
+                    }
+                  ],
+                  "originalTitle": "Indices"
+                },
+                {
+                  "title": "Hàng hóa",
+                  "symbols": [
+                    {
+                      "s": "COMEX:GC1!",
+                      "d": "Gold"
+                    },
+                    {
+                      "s": "TVC:USOIL"
+                    },
+                    {
+                      "s": "TVC:UKOIL"
+                    },
+                    {
+                      "s": "NYMEX:KT1!"
+                    }
+                  ],
+                  "originalTitle": "Commodities"
+                },
+                {
+                  "title": "Ngoại hối",
+                  "symbols": [
+                    {
+                      "s": "FX:EURUSD"
+                    },
+                    {
+                      "s": "FX_IDC:USDVND"
+                    },
+                    {
+                      "s": "FX:USDJPY"
+                    },
+                    {
+                      "s": "FX_IDC:USDCNY"
+                    },
+                    {
+                      "s": "FOREXCOM:USDRUB"
+                    }
+                  ],
+                  "originalTitle": "Forex"
+                }
+              ]
+            }
+              </script>
+            </div>
+
+
+
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+
+
+      </div>
+
+   
+ 
+
+
+  </section>
+  <!-- /.content -->
+
+          
+
+{% endblock content %}
+
+{% block javascripts %}
+  {{ block.super}}
+<!-- REQUIRED JS SCRIPTS -->
+
+
+{% endblock javascripts %}

@@ -1,0 +1,266 @@
+          <div class="box box-info box-solid">
+            <div class="box-header with-border">
+              <h3 class="box-title">ĐÁNH GIÁ VN INDEX</h3>
+            </div>
+            <!-- /.box-header -->
+              <div class="box-body no-padding">
+
+                <!-- gauge.js -->
+
+                <div style="height: 300px" >
+
+                  <div>
+
+                     <div id="preview-textfield"></div>
+
+                    <canvas id="gauge" ></canvas>
+                    <div id="cmtTT" >MẠNH</div>
+                  </div>
+                </div>
+              </div>
+
+
+              <script>
+                  var opts1 = {
+                    angle: 0.08, // The span of the gauge arc
+                    lineWidth: 0.44, // The line thickness
+                      radiusScale: 1, // Relative radius
+                    pointer: {
+                      length: 0.6, // // Relative to gauge radius
+                      strokeWidth: 0.035, // The thickness
+                      color: '#000000' // Fill color
+                    },
+                    limitMax: false,     // If false, max value increases automatically if value > maxValue
+                    limitMin: false,     // If true, the min value of the gauge will be fixed
+                    colorStart: '#6FADCF',   // Colors
+                    colorStop: '#23DA2F',    // just experiment with them
+                    strokeColor: '#F2301B',  // to see which ones work best for you
+                    generateGradient: true,
+                    highDpiSupport: true,     // High resolution support
+                    // renderTicks is Optional
+                    renderTicks: {
+                      divisions: 8,
+                      divWidth: 1.2,
+                      divLength: 0.59,
+                      divColor: '#333333',
+                      subDivisions: 4,
+                      subLength: 0.26,
+                      subWidth: 1,
+                      subColor: '#666666'
+                    }
+                  };
+                  var target = document.getElementById('gauge'); // your canvas element
+                  var gauge = new Gauge(target).setOptions(opts1); // create sexy gauge!
+                  gauge.setTextField(document.getElementById("preview-textfield"));
+                  gauge.maxValue = 100; // set max gauge value
+                  gauge.setMinValue(0);  // Prefer setter over gauge.minValue = 0
+                  gauge.animationSpeed = 32; // set animation speed (32 is default value)
+                  gauge.set(75); // set actual value
+
+              </script>
+
+
+            <table class="table">
+              <tr>
+                <th style="width: 100px; text-align:center; ">Ngành dẫn dắt TT</th>
+                <th>Mức độ</th>
+                <th >CP nổi bật</th>
+              </tr>
+              <tr>
+                <td><span class="badge bg-red">Ngân hàng</span></td>
+                <td>
+                  <div class="progress progress-xs">
+                    <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                  </div>
+                </td>
+                <td>VCB BID TCB</td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-yellow">BĐS</span></td>
+                <td>
+                  <div class="progress progress-xs">
+                    <div class="progress-bar progress-bar-yellow" style="width: 70%"></div>
+                  </div>
+                </td>
+                <td>NVL VHM KDH</td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-light-blue">Dệt may</span></td>
+                <td>
+                  <div class="progress progress-xs progress-striped active">
+                    <div class="progress-bar progress-bar-primary" style="width: 30%"></div>
+                  </div>
+                </td>
+                <td>TCM STK</td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-green">Bán lẻ</span></td>
+                <td>
+                  <div class="progress progress-xs progress-striped active">
+                    <div class="progress-bar progress-bar-green" style="width: 90%"></div>
+                  </div>
+                </td>
+                <td>VNM PNJ</td>
+              </tr>
+            </table>
+
+          </div>
+            <!-- /.box-body -->
+
+            <div class="box box-primary box-solid">
+              <div class="box-header with-border" style="height: 50px">
+                <h3 class="box-title">CP ĐẦU TƯ NGẮN HẠN </h3>
+              </div>
+              <!-- /.box-header -->
+              <div class="box-body no-padding">
+                <table class="table table-bordered" style="font-size: 12px;">
+                  <tr ">
+                    <th style="width: 10px; text-align:center;">Stock</th>
+                    <th style="width: 80px; ">Trade</th>
+                    <th style="width: 80px; text-align:center;">Giá KN</th>
+                    <th style="width: 80px; text-align:center;">Cập nhật</th>
+                    <th style="width: 80px; ">Lời/Lỗ</th>
+                    <th style="text-align:center;">Độ mạnh</th>
+                  </tr>
+                  <tr>
+                    <td>AAA</td>
+                    <td><span class="badge bg-yellow">Mua mới</span></td>
+                    <td style="text-align:center;"> 22  </td>
+                    <td style="text-align:center;"> 25  </td>
+                    <td><i class="fa fa-arrow-up bg-green"></i> 15%  </td>
+                    <td style="text-align:center;">
+                      <div class="progress progress-xs">
+                        <div class="progress-bar progress-bar-green" style="width: 60%"></div>
+                      </div>
+                    </td>
+                    <td style="text-align:center;"><span class="badge bg-red">55%</span></td>
+                  </tr>
+                  <tr>
+                    <td>ABC</td>
+                    <td><span class="badge bg-light-blue">Bán bớt</span></td>
+                    <td style="text-align:center;"> 22 </td>
+                    <td style="text-align:center;"> 25 </td>
+                    <td><i class="fa fa-arrow-down bg-red"></i> -10% </td>
+                    <td style="text-align:center;">
+                      <div class="progress progress-xs">
+                        <div class="progress-bar progress-bar-green" style="width: 90%"></div>
+                      </div>
+                    </td>
+                    <td style="text-align:center;">
+                      <span class="badge bg-yellow">70%</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>STK</td>
+                    <td style="text-align:center;"><span class="badge bg-green">Mua thêm</span></td>
+                    <td style="text-align:center;"> 30 </td>
+                    <td style="text-align:center;"> 37 </td>
+                    <td><i class="fa fa-arrow-up bg-green"></i> 20% </td>
+                    <td style="text-align:center;">
+                      <div class="progress progress-xs">
+
+
+                      </div>
+                    </td>
+                    <td style="text-align:center;"><span class="badge bg-light-blue">30%</span></td>
+                  </tr>
+                  <tr>
+                    <td style="text-align:center;">HCM</td>
+                    <td><span class="badge bg-red">Cắt lỗ</span></td>
+                    <td style="text-align:center;">  </td>
+                    <td style="text-align:center;">  </td>
+                    <td><i class="fa fa-arrow-up bg-green"></i></td>
+                    <td style="text-align:center;">
+                      <div class="progress progress-xs">
+                        <div class="progress-bar progress-bar-green" style="width: 50%"></div>
+                      </div>
+                    </td>
+                    <td style="text-align:center;"><span class="badge bg-green">90%</span></td>
+                  </tr>
+                </table>
+              </div>
+              <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+
+           <div class="box box-primary box-solid">
+              <div class="box-header with-border" style="height: 50px">
+                <h3 class="box-title">CP ĐẦU TƯ DÀI HẠN </h3>
+              </div>
+              <!-- /.box-header -->
+              <div class="box-body no-padding">
+                <table class="table table-bordered" style="font-size: 12px;">
+                  <tr ">
+                    <th style="width: 10px; text-align:center;">Stock</th>
+                    <th style="width: 80px; ">Trade</th>
+                    <th style="width: 80px; text-align:center;">Giá KN</th>
+                    <th style="width: 80px; text-align:center;">Cập nhật</th>
+                    <th style="width: 80px; ">Lời/Lỗ</th>
+                    <th style="text-align:center;">Độ mạnh</th>
+                  </tr>
+                  <tr>
+                    <td>AAA</td>
+                    <td><span class="badge bg-yellow">Mua mới</span></td>
+                    <td style="text-align:center;"> 22  </td>
+                    <td style="text-align:center;"> 25  </td>
+                    <td><i class="fa fa-arrow-up bg-green"></i> 15%  </td>
+                    <td style="text-align:center;">
+                      <div class="progress progress-xs">
+                        <div class="progress-bar progress-bar-green" style="width: 60%"></div>
+                      </div>
+                    </td>
+                    <td style="text-align:center;"><span class="badge bg-red">55%</span></td>
+                  </tr>
+                  <tr>
+                    <td>ABC</td>
+                    <td><span class="badge bg-light-blue">Bán bớt</span></td>
+                    <td style="text-align:center;"> 22 </td>
+                    <td style="text-align:center;"> 25 </td>
+                    <td><i class="fa fa-arrow-down bg-red"></i> -10% </td>
+                    <td style="text-align:center;">
+                      <div class="progress progress-xs">
+                        <div class="progress-bar progress-bar-green" style="width: 90%"></div>
+                      </div>
+                    </td>
+                    <td style="text-align:center;">
+                      <span class="badge bg-yellow">70%</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>STK</td>
+                    <td style="text-align:center;"><span class="badge bg-green">Mua thêm</span></td>
+                    <td style="text-align:center;"> 30 </td>
+                    <td style="text-align:center;"> 37 </td>
+                    <td><i class="fa fa-arrow-up bg-green"></i> 20% </td>
+                    <td style="text-align:center;">
+                      <div class="progress progress-xs">
+
+                        <div class="progress-bar progress-bar-green" style="width: 20%"></div>
+
+                      </div>
+                    </td>
+                    <td style="text-align:center;"><span class="badge bg-light-blue">30%</span></td>
+                  </tr>
+                  <tr>
+                    <td style="text-align:center;">HCM</td>
+                    <td><span class="badge bg-red">Cắt lỗ</span></td>
+                    <td style="text-align:center;">  </td>
+                    <td style="text-align:center;">  </td>
+                    <td><i class="fa fa-arrow-up bg-green"></i></td>
+                    <td style="text-align:center;">
+                      <div class="progress progress-xs">
+                        <div class="progress-bar progress-bar-green" style="width: 50%"></div>
+                      </div>
+                    </td>
+                    <td style="text-align:center;"><span class="badge bg-green">90%</span></td>
+                  </tr>
+                </table>
+              </div>
+              <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+
+
+
+        </div>
+          <!-- /.col -->

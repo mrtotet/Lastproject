@@ -1,0 +1,288 @@
+
+{% extends "base_toidautu.html" %}
+
+{% block title %} CHIẾN LƯỢC GIAO DỊCH {% endblock title %}
+
+{% block stylesheets %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css" href="/static/vendors/DataTables/datatables.min.css"/>
+  <link rel="stylesheet" href="/static/vendors/gauge.js/assets/bootstrap.min.css" type="text/css" rel="stylesheet">
+  <link rel="stylesheet" href="/static/vendors/gauge.js/assets/main.css?v=5" type="text/css" rel="stylesheet">
+
+
+  
+  
+{% endblock stylesheets %}
+
+{% block content %}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    Tổng quan Thị Trường & Chiến lược GD
+    <small>cập nhật 23/12/18</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="chienluocgiaodich"><i class="fa fa-home"></i> chienluocGD</a></li>
+    <li class="active">Here</li>
+  </ol>
+</section>
+
+ <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <!-- Cột trái -----------------------------------------------------  -->     
+        <div class="col-md-6" >
+          <div class="box box-info box-solid">
+            <div class="box-header with-border">
+              <h3 class="box-title">TT Vĩ mô quan trọng</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+              <table class="table">
+                <tr>
+                  <th>Thông tin</th>
+                  <th>Mức độ</th>
+                  <th style="width: 40px; text-align:center; ">AH</th>
+                </tr>
+                {% for post in ConAH %}
+                <tr>
+                  <td>{{post.Tenthongtin}}</td>
+                  <td>
+                    <div class="progress progress-xs">
+                      <div class="progress-bar progress-bar-{{post.AH}}" style="width: {{post.Mucdo}}%"></div>
+                    </div>
+                  </td>
+                  <td><span class="badge bg-{{post.AH}}">{{post.anh_huong}}</span></td>
+                </tr>
+                {% endfor %}
+
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+
+          <div class="box box-info box-solid">
+            <div class="box-header with-border">
+              <h3 class="box-title">ĐÁNH GIÁ VN INDEX</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+
+              <!-- gauge.js -->
+                  
+              <div style="height: 250px" >
+                <script src="/static/vendors/gauge.js/dist/gauge.js" async></script>             
+                <div id="preview-textfield">
+                  <div><p>25%</p></div>
+                  <canvas id="gauge" ></canvas>
+
+                  <div style="margin: 20px"><p>YẾU</p></div>
+                </div>
+              </div>  
+              <script>    
+                  selectGauge = new Gauge(document.getElementById("gauge"));
+                  selectGauge.maxValue = 100;
+                  selectGauge.set(25);
+              </script>
+
+
+              <table class="table">
+                <tr>
+                  <th style="width: 100px; text-align:center; ">Ngành dẫn dắt TT</th>
+                  <th>Mức độ</th>
+                  <th >CP nổi bật</th>
+                </tr>
+                <tr>
+                  <td><span class="badge bg-red">Ngân hàng</span></td>
+                  <td>
+                    <div class="progress progress-xs">
+                      <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                    </div>
+                  </td>
+                  <td>VCB BID TCB</td>
+                </tr>
+                <tr>
+                  <td><span class="badge bg-yellow">BĐS</span></td>
+                  <td>
+                    <div class="progress progress-xs">
+                      <div class="progress-bar progress-bar-yellow" style="width: 70%"></div>
+                    </div>
+                  </td>
+                  <td>NVL VHM KDH</td>
+                </tr>
+                <tr>
+                  <td><span class="badge bg-light-blue">Dệt may</span></td>
+                  <td>
+                    <div class="progress progress-xs progress-striped active">
+                      <div class="progress-bar progress-bar-primary" style="width: 30%"></div>
+                    </div>
+                  </td>
+                  <td>TCM STK</td>
+                </tr>
+                <tr>
+                  <td><span class="badge bg-green">Bán lẻ</span></td>
+                  <td>
+                    <div class="progress progress-xs progress-striped active">
+                      <div class="progress-bar progress-bar-green" style="width: 90%"></div>
+                    </div>
+                  </td>
+                  <td>VNM PNJ</td>
+                </tr>
+
+              </table>
+
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+
+        <div class="col-md-6">
+
+
+          <div class="box">
+            <div class="box-header with-border">
+              <h3 class="box-title">TT Thế giới</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body" style="height: 560px">
+            <!-- TradingView Widget BEGIN -->
+            <div class="tradingview-widget-container">
+              <div class="tradingview-widget-container__widget"></div>
+              <div class="tradingview-widget-copyright"><a href="https://vn.tradingview.com/markets/indices/" rel="noopener" target="_blank"><span class="blue-text">Các chỉ số</span></a>, <a href="https://vn.tradingview.com/markets/futures/" rel="noopener" target="_blank"><span class="blue-text">Hàng hóa</span></a> <span class="blue-text">và</span> <a href="https://vn.tradingview.com/markets/currencies/" rel="noopener" target="_blank"><span class="blue-text">Ngoại hối</span></a> bởi TradingView</div>
+              <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
+              {
+              "showChart": true,
+              "locale": "vi_VN",
+              "width": "100%",
+              "height": "100%",
+              "largeChartUrl": "",
+              "plotLineColorGrowing": "rgba(60, 188, 152, 1)",
+              "plotLineColorFalling": "rgba(255, 74, 104, 1)",
+              "gridLineColor": "rgba(233, 233, 234, 1)",
+              "scaleFontColor": "rgba(214, 216, 224, 1)",
+              "belowLineFillColorGrowing": "rgba(60, 188, 152, 0.05)",
+              "belowLineFillColorFalling": "rgba(255, 74, 104, 0.05)",
+              "symbolActiveColor": "rgba(242, 250, 254, 1)",
+              "tabs": [
+                {
+                  "title": "Các chỉ số",
+                  "symbols": [
+                    {
+                      "s": "INDEX:SPX",
+                      "d": "S&P 500"
+                    },
+                    {
+                      "s": "INDEX:IUXX",
+                      "d": "Nasdaq 100"
+                    },
+                    {
+                      "s": "INDEX:DOWI",
+                      "d": "Dow 30"
+                    },
+                    {
+                      "s": "INDEX:NKY",
+                      "d": "Nikkei 225"
+                    },
+                    {
+                      "s": "INDEX:DAX",
+                      "d": "DAX Index"
+                    },
+                    {
+                      "s": "OANDA:UK100GBP",
+                      "d": "FTSE 100"
+                    }
+                  ],
+                  "originalTitle": "Indices"
+                },
+                {
+                  "title": "Hàng hóa",
+                  "symbols": [
+                    {
+                      "s": "COMEX:GC1!",
+                      "d": "Gold"
+                    },
+                    {
+                      "s": "TVC:USOIL"
+                    },
+                    {
+                      "s": "TVC:UKOIL"
+                    },
+                    {
+                      "s": "NYMEX:KT1!"
+                    }
+                  ],
+                  "originalTitle": "Commodities"
+                },
+                {
+                  "title": "Ngoại hối",
+                  "symbols": [
+                    {
+                      "s": "FX:EURUSD"
+                    },
+                    {
+                      "s": "FX_IDC:USDVND"
+                    },
+                    {
+                      "s": "FX:USDJPY"
+                    },
+                    {
+                      "s": "FX_IDC:USDCNY"
+                    },
+                    {
+                      "s": "FOREXCOM:USDRUB"
+                    }
+                  ],
+                  "originalTitle": "Forex"
+                }
+              ]
+            }
+              </script>
+            </div>
+
+
+
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+
+
+      </div>       
+  </section>
+  <!-- /.content -->
+
+          
+
+{% endblock content %}
+
+{% block javascripts %}
+  {{ block.super}}
+<!-- REQUIRED JS SCRIPTS -->
+<script type="text/javascript" src="/static/vendors/DataTables/datatables.min.js"></script>
+
+  <!-- Skycons -->
+
+<script>
+  $(function () {
+ 
+    $('#example1').DataTable({
+      'paging'      : true,
+      'lengthChange': true,
+      'searching'   : true,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : true,
+      "scrollX"     : true,
+      
+     
+          })
+      })
+
+
+</script>
+
+{% endblock javascripts %}

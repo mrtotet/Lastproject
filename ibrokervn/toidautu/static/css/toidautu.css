@@ -1,0 +1,353 @@
+/* page Trang Tong hop thong tin */
+
+#preview-textfield, .preview-textfield{
+  position: relative; top: 10px; left: 0; right: 0;
+  text-align: center; font-size: 2em; font-weight: bold;
+  color: black; font-family: 'Amaranth', sans-serif;
+}
+
+#gauge {
+	display: block;  
+    top: 10px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#cmtTT{
+  position: relative; top: 10px; left: 0; right: 0;
+  text-align: center; font-size: 2em; font-weight: bold;
+  color: black; font-family: 'Amaranth', sans-serif;
+} 
+
+canvas {
+    display: block;  
+    top: 10px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+}
+/* page GDNN */
+
+ div.tkggnn {
+ width: 100%;
+ position: relative;               
+             }              
+
+ div.tkggnn .col-md-6 {
+     position: relative;
+     float: none;
+     margin-left: auto;
+     margin-right: auto;
+ }
+
+ .content-header {
+    margin: 0; 
+    color: #003a5c;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-bottom: solid 1px #d0d2da;
+    margin-right: 25px;
+}
+
+.content-title {
+    font-size: 1.125em;
+    color: #014993;
+    text-transform: uppercase;
+    font-weight: bold;
+    line-height: 40px;
+    border-bottom: solid 1px #d0d2da;
+}
+
+.facebook-like {
+    position: relative;
+    float: right;
+    top: -10px;
+}
+
+.facebook-share {
+      position: relative;
+      display: block;  
+      float: right;
+      margin-top: -22px;
+      padding-top: 5px; 
+      }
+
+.fb-share-button {
+      position: absolute;
+      display: block; 
+      top: -6px; 
+      }
+
+#comments,{
+  margin:20px 0;
+}
+
+.rating span, .rating form {
+   display: inline-block;
+}
+.rating ul {
+  padding-left: 0;
+  list-style: none;
+}
+.rating li {
+  float: left;
+  display: inline-block;
+  margin: 0 5px;
+}
+.comment .rating {
+  margin-top: 5px;
+}
+
+/*
+
+ul:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+    clip:rect(0,0,0,0);
+}
+
+ul:not(:checked) > label {
+    float:right;
+    width:1em;
+    padding:0 .1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:200%;
+    line-height:1.2;
+    color:#ddd;
+    text-shadow:1px 1px #bbb, 2px 2px #666, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+ul:not(:checked) > label:before {
+    content: '★ ';
+}
+
+ul > input:checked ~ label {
+    color: #f70;
+    text-shadow:1px 1px #c60, 2px 2px #940, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+ul:not(:checked) > label:hover,
+ul:not(:checked) > label:hover ~ label{
+    color: gold;
+    text-shadow:1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+ul > input:checked + label:hover,
+ul > input:checked + label:hover ~ label,
+ul > input:checked ~ label:hover,
+ul > input:checked ~ label:hover ~ label,
+ul > label:hover ~ input:checked ~ label {
+    color: #c59b08;
+}
+
+ul label:active {
+    position:relative;
+    top:0px;
+    left:5px;
+}
+
+*/
+
+.comment-author {
+  border: 1px solid #DDD;
+  border-radius: 4px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  padding: 15px;
+  margin-bottom: 30px;
+  background-color: #FEFFEE;
+}
+
+.blog .blog-item {
+  background-color: #fff;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 2px 3px rgba(0,0,0,.2);
+}
+.blog .blog-item .img-blog {
+  width: 100%;
+  border-radius: 5px 5px 0 0;
+}
+.blog .blog-item .blog-content {
+  padding: 20px;
+}
+.blog .blog-item h3 {
+  margin-top: 0;
+} 
+.blog .blog-item .entry-meta {
+  margin-bottom: 20px;
+}
+.blog .blog-item .entry-meta > span {
+  display: inline-block;
+  color: #999;
+  margin-right: 10px;
+  font-size: 12px;
+}
+.blog .blog-item .entry-meta > span a {
+  color: #999;
+}
+ul.pagination > li > a {
+  border: 0;
+}
+ul.pagination > li.active > a,
+ul.pagination > li:hover > a {
+  background-color: #34495e;
+  color: #fff;
+}
+textarea#message {
+  padding: 10px 15px;
+  height: 219px;
+}
+.widget {
+  margin-bottom: 30px;
+}
+ul.gallery {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+ul.gallery li {
+  display: block;
+  width: 60px;
+  padding: 0;
+  margin: 0 4px 4px 0;
+  float: left;
+}
+ul.faq {
+  list-style: none;
+  margin: 0;
+}
+ul.faq li {
+  margin-top: 30px;
+}
+ul.faq li:first-child {
+  margin-top: 0;
+}
+ul.faq li span.number {
+  display: block;
+  float: left;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  background: #34495e;
+  color: #fff;
+  font-size: 24px;
+}
+ul.faq li > div {
+  margin-left: 70px;
+}
+ul.faq li > div h3 {
+  margin-top: 0;
+}
+#error {
+  text-align: center;
+  margin-top: 150px;
+  margin-bottom: 150px;
+}
+
+.navbar-header img {
+  margin-top:-10px;
+}
+
+
+body {
+  color: #34495e;
+}
+
+#gototop {
+  position: fixed;
+  bottom:15px;
+  right: 500px;
+}
+
+
+#vithe {
+  height: 100px;
+
+}
+
+.box.box-solid.box-warning {
+    border: 0px solid #f39c12;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 2px 3px rgba(0,0,0,.2);
+}
+
+
+d.tile_count .tile_stats_count {
+    border-bottom: 1px solid #D9DEE4;
+    padding: 0 10px 0 20px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative
+}
+@media (min-width: 992px) {
+    footer {
+        margin-left: 230px
+    }
+}
+@media (min-width: 992px) {
+    .tile_count .tile_stats_count {
+        
+        border-bottom: 0;
+        
+    }
+}
+.tile_count .tile_stats_count:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    height: 65px;
+    border-left: 2px solid #fff;
+    margin-top: 5px
+}
+@media (min-width: 992px) {
+    .tile_count .tile_stats_count:first-child:before {
+        border-left: 0
+    }
+}
+.tile_count .tile_stats_count .count {
+    font-size: 30px;
+    line-height: 47px;
+    font-weight: 600
+}
+@media (min-width: 768px) {
+    .tile_count .tile_stats_count .count {
+        font-size: 40px
+    }
+}
+@media (min-width: 992px) and (max-width: 1100px) {
+    .tile_count .tile_stats_count .count {
+        font-size: 30px
+    }
+}
+.tile_count .tile_stats_count span {
+    font-size: 12px
+}
+@media (min-width: 768px) {
+    .tile_count .tile_stats_count span {
+        font-size: 13px
+    }
+}
+.tile_count .tile_stats_count .count_bottom i {
+    width: 12px
+}
+
+
+.search-form {
+    border-radius: 3px;
+    border: 1px solid #374850;
+    margin: 10px 10px;
+    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    text-overflow: clip;
+
+.search-form input {
+  background-color: #e4e9eb; 
+}
+
+
+

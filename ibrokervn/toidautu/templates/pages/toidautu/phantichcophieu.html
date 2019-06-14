@@ -1,0 +1,733 @@
+{% extends "base_toidautu.html" %}
+
+{% load staticfiles %}
+{% load toidautu_tags %}
+
+{% block title %} TT Vĩ Mô {% endblock title %}
+
+{% block stylesheets %}
+  {{ block.super }}
+  <link href="{% static "css/datatables.min.css" %}" rel="stylesheet">
+{% endblock stylesheets %}
+{% block content %}
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    Thông tin cổ phiếu
+    <small></small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="phantichcophieu"><i class="fa fa-bar-chart"></i>phantichcophieu</a></li>
+    <li class="active"></li><i class="fa fa-eye"></i>    {{views.viewed_list_Vimo}}
+  </ol>
+</section>
+<!-- ./ Content Header (Page header) -->
+
+
+<!-- Main content -->
+<section class="content">
+  <div class="row">
+    <!-- Main Chinh giua -->        
+    <div class="col-md-9">
+      <!--tab -->
+      <div class="nav-tabs-custom">
+        <!-- Head tab -->            
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#khuyennghi" data-toggle="tab">KHUYẾN NGHỊ</a></li>
+          <li ><a href="#danhgia" data-toggle="tab">ĐÁNH GIÁ</a></li>
+          <li><a href="#BCTC" data-toggle="tab">BCTC</a></li>
+        </ul>
+        <!-- Tab content -->            
+        <div class="tab-content">
+          <!-- Tab khuyen nghi -->             
+          <div class="active tab-pane" id="khuyennghi">
+            <!-- Post MỞ VỊ THẾ --> 
+            {% if estimate_moinhat.Postion == 'Mở vị thế' %}    
+            <div class="post">
+              <!-- MỞ VỊ THẾ --> 
+              <div class="col-md-6  col-xs-12" style=" padding-top: 20px;" >
+                <div class="info-box bg-green">
+                  <span class="info-box-icon"><i class="fa fa-thumbs-o-up"></i></span>          
+                  <div class="info-box-content">
+                    <span class="info-box-text"></span>
+                    <span class="info-box-number" style="font-size: 20px;">MỞ VỊ THẾ</span>
+                    <div class="progress">
+                      <div class="progress-bar" style="width: 70%"></div>
+                    </div>
+                      <span class="progress-description">
+                        <i class="fa fa-clock-o"></i>  {{ estimate_moinhat.publish|date:"d/m/Y" }}
+                      </span>
+                        <span class="progress-description">
+                        <i class="fa fa-hand-o-right"></i> {{ estimate_moinhat.Style }}
+                      </span>
+                  <!-- /.info-box-content -->    
+                  </div>
+                <!-- /.info-box -->  
+                </div>
+              <!-- /.box -->
+              </div>
+              <!-- GIÁ MUA --> 
+              <div class="col-md-6  col-xs-12" style=" padding-top: 20px;" >
+                <div class="info-box bg-yellow">         
+                  <div class="box-body" style="padding:5px;">
+                    <div class="tile_count">
+                      <div class="col-md-6 col-sm-6 col-xs-12 tile_stats_count">
+                      <span class="count_top">Giá mua</span>
+                      <div class="count"  style=" text-align:center;">{{ estimate_moinhat.Price_open }}</div>                      
+                      </div>
+                      <div class="col-md-6 col-sm-6 col-xs-12 tile_stats_count">
+                        <span class="count_top">Giá cập nhật</span>
+                        <div class="count"  style=" text-align:center;">{{ Update_trade_latest.Price_update }} <span style="font-size: 12px;" class="description-percentage  text-{{Gain_Loss_update.1}}">(<i class="fa fa-caret-{{Gain_Loss.2}}"></i>  {{Gain_Loss_update.0|floatformat:1}}%)</span></div>                         
+                      </div>
+                    </div>
+                  </div>
+                <!-- /.info-box-content -->
+                </div>               
+              <!-- /.GIÁ MUA -->
+              </div>
+            <!-- /.post -->  
+            </div>
+            
+            <!-- Post ĐỘ MẠNH Và Mua Bán -->
+            <div class="post clearfix"> 
+              <!--ĐỘ MẠNH -->      
+              <div class="col-lg-6 col-xs-9 col-xs-12">
+               <!-- small box -->
+                <!-- Widget: user widget style 1 -->
+                <div class="box box-widget widget-user-2">                                  
+                  <div class="widget-user-header bg-green">
+                    <h3 class="box-title" style="margin: 0px" >Chỉ số sức mạnh</h3>
+                  </div>
+                    <div class="box-body no-padding">  
+                      <!-- gauge.js -->                    
+                      <div >             
+                        <div>  
+                           <div id="preview-textfield"></div>  
+                          <canvas id="gauge" ></canvas>
+                          <div id="cmtTT" >{{ Update_trade_latest.do_manh }}</div>
+
+                    <script>
+                        var opts1 = {
+                          angle: 0.08, // The span of the gauge arc
+                          lineWidth: 0.44, // The line thickness
+                            radiusScale: 1, // Relative radius
+                          pointer: {
+                            length: 0.6, // // Relative to gauge radius
+                            strokeWidth: 0.035, // The thickness
+                            color: '#000000' // Fill color
+                          },
+                          limitMax: false,     // If false, max value increases automatically if value > maxValue
+                          limitMin: false,     // If true, the min value of the gauge will be fixed
+                          colorStart: '#6FADCF',   // Colors
+                          colorStop: '#23DA2F',    // just experiment with them
+                          strokeColor: '#F2301B',  // to see which ones work best for you
+                          generateGradient: true,
+                          highDpiSupport: true,     // High resolution support
+                          // renderTicks is Optional
+                          renderTicks: {
+                            divisions: 8,
+                            divWidth: 1.2,
+                            divLength: 0.59,
+                            divColor: '#333333',
+                            subDivisions: 4,
+                            subLength: 0.26,
+                            subWidth: 1,
+                            subColor: '#666666'
+                          }
+                        };
+                        var target = document.getElementById('gauge'); // your canvas element
+                        var gauge = new Gauge(target).setOptions(opts1); // create sexy gauge!
+                        gauge.setTextField(document.getElementById("preview-textfield"));
+                        gauge.maxValue = 100; // set max gauge value
+                        gauge.setMinValue(0);  // Prefer setter over gauge.minValue = 0
+                        gauge.animationSpeed = 32; // set animation speed (32 is default value)
+                        gauge.set({{ Update_trade_latest.Indicator }}); // set actual value                  
+                      </script>
+
+
+
+                       </div>
+                      </div>
+                    </div>
+                </div>
+              </div> 
+              <!--/Gauge-->
+              <!-- Giao dich -->
+              <div class="col-lg-6 col-xs-9 col-xs-12">
+                <!-- small box           <!-- Widget: user widget style 1 -->
+                <div class="box box-widget widget-user-2">                                  
+                  <div class="widget-user-header bg-yellow">
+                    <h3 class="box-title" style="margin: 0px" >Giao dịch</h3>
+                  </div>
+                  <div class="box-footer no-padding">
+                    <ul class="nav nav-stacked">                     
+                        {% for trade in Update_trade_all  %}
+                        <li title="click để xem chi tiết "><a href="{{ trade.DateRecommend.get_absolute_url }}">{{ trade.publish|date:"d/m/y" }} <span class="pull-right badge bg-{{trade.Color_Trade}}">{{ trade.Trade }}</span> </a></li>
+                        {%  endfor %}
+                    </ul>
+                  </div>
+                </div>
+                  <!-- /.widget-user -->
+              </div>
+            </div>
+            <!-- /.post -->
+            {%  endif %}
+
+              <!-- Fireant Widget BEGIN -->
+              
+              <!--  <div class="col-md-6"> -->
+                  <div class="col-lg-12 col-xs-9 col-xs-12">
+                        <div class="box box-widget box-solid">
+                          <div class="box-header with-border bg-yellow">
+                            <h3 class="box-title">Đồ thị giá realtime</h3>
+              
+                            <div class="box-tools pull-right">
+                              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                              </button>
+                            </div>
+                            <!-- /.box-tools -->
+                          </div>
+                          <!-- /.box-header -->
+                          <div class="box-body no-padding">
+                  <script src="https://www.fireant.vn/Scripts/web/widgets.js"></script>
+              <div id="fan-quote-934"></div>
+              <script type="text/javascript">
+                new FireAnt.QuoteWidget({
+                  "container_id": "fan-quote-934",
+                  "symbols": "{{post.Symbol|upper}}",
+                  "locale": "vi",
+                  "price_line_color": "#71BDDF",
+                  "grid_color": "#999999",
+                  "label_color": "#999999",
+                  "width": "100%",
+                  "height": "300px"
+                });
+              </script>
+                          </div>
+                          <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+                      </div>
+
+                      <!-- End  Fireant-->
+
+                        <!-- Bengin  Cac vi the da dong-->      
+
+
+              {% if estimate_close %}
+                      <!-- Các vị thế đã đóng -->
+                  <div class="col-lg-12 col-xs-9 col-xs-12">
+                        <div class="box box-widget box-solid">
+                          <div class="box-header with-border bg-yellow">
+                            <h3 class="box-title">Các vị thế đã đóng (hãy click dòng để xem chi tiết)</h3>
+              
+                            <div class="box-tools pull-right">
+                              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                              </button>
+                            </div>
+                            <!-- /.box-tools -->
+                          </div>
+                          <!-- /.box-header -->
+                          <div class="box-body no-padding">
+             <table id="vithedadong" data-page-length='20' class="cell-border display nowrap compact" style="width:100%">
+                      <thead>                      
+                          <tr title="click để sắp xếp thứ tự">
+                         
+                              <th style="color: #3c8dbc; text-align: center">Ngày mở vị thế</th>
+                              <th style="color: #3c8dbc; text-align: center">Ngày đóng vị thế</th>
+                              <th style="color: #3c8dbc; text-align: center">Giá mở</th>
+                              <th style="color: #3c8dbc; text-align: center">Giá đóng</th>
+                              <th style="color: #3c8dbc; text-align: center">Lời/lỗ</th>                    
+                          </tr>
+                           
+                      </thead>
+                      <tbody>
+        
+              {% for estimate in estimate_close %} 
+                      <tr  >
+                            <td title="click để xem chi tiết" style="text-align: center"><a href="{{ estimate.update_trade.all.0.DateRecommend.get_absolute_url }}">{{ estimate.publish|date:"Y/m/d" }}</a></td>
+                            
+                            
+                            <td title="click để xem chi tiết" style="text-align: center"><a href="
+                              {% for obj in  estimate.update_trade.all %}
+                              {% if forloop.last %}{{obj.DateRecommend.get_absolute_url }}{% endif %}
+                               {% endfor %}    
+                              ">{{ estimate.close_date|date:"Y/m/d" }}</a></td>
+                           
+                                              
+                            <td style="text-align: center">{{ estimate.Price_open }}</td>
+                            <td style="text-align: center">{{ estimate.Price_close }}</td>
+                            <td style="text-align: center"><span style="font-size: 12px;" class="description-percentage  text-{{trade.Gain_Loss.1}}"><i class="fa fa-caret-{{estimate.Gain_Loss.2}}"></i>  {{ estimate.Gain_Loss.0 }}%</span>
+                            </td>
+                          </tr>
+   
+                {% endfor %}  
+
+                      </tbody>
+                      <tfoot>
+
+                          <tr>
+                         
+                              <th style="color: #3c8dbc; text-align: center">Ngày mở vị thế</th>
+                              <th style="color: #3c8dbc; text-align: center">Ngày đóng vị thế</th>
+                              <th style="color: #3c8dbc; text-align: center">Giá mở</th>
+                              <th style="color: #3c8dbc; text-align: center">Giá đóng</th>
+                              <th style="color: #3c8dbc; text-align: center">Lời/lỗ</th>
+                          
+                          </tr>
+
+                        </tfoot>
+
+                      </table>
+                          </div>
+                          <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+                      </div>
+                {% endif %}
+  
+                <div class="post">
+
+                  <!-- /.user-block -->
+                  <div class="row margin-bottom">
+                    <div class="col-sm-6">
+                    
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-sm-6">
+
+                    </div>
+                    <!-- /.col -->
+                  </div>
+                  <!-- /.row -->
+
+                  <ul class="list-inline">
+                    <li><a href="#" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i> Share</a></li>
+                    <li><a href="#" class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i> Like</a>
+                    </li>
+                    <li class="pull-right">
+                      <a href="#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> Comments
+                        (5)</a></li>
+                  </ul>
+                  <input class="form-control input-sm" type="text" placeholder="Type a comment">
+                </div>
+                <!-- /.post -->            
+              </div>
+              <!-- /.tab-pane -->
+
+
+          <!--Begin Danh gia cp -->        
+              <div class="tab-pane" id="danhgia" >
+                <!-- Đánh giá -->
+                <div class="row">
+
+
+                      {% for est in estimate %}
+                  <div class="col-md-12">
+                    <!-- AREA CHART -->
+                      <div class="box box-primary">
+                          <div class="box-header with-border">
+                            <h3 class="box-title">  <strong>ĐÁNH GIÁ TỔNG QUAN NGÀY {{ est.publish|date:"d/m/Y"}} </strong></h3>
+              
+                            <div class="box-tools pull-right">
+                              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                              </button>
+                              <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                            </div>
+                          </div>
+                          <div class="box-body">
+                                  <div class="col-md-6">
+                                    <p class="text-center">
+                                      CỞ BẢN DOANH NGHIỆP 
+                                    </p>
+                  
+                                    <div class="progress-group">
+                                      <span class="progress-text">Môi trường kinh doanh</span>
+                                      <span class="progress-number"><b>{{ est.EnvironmentIndustry}}</b>/100</span>
+                  
+                                      <div class="progress sm">
+                                        <div class="progress-bar progress-bar-aqua" style="width: {{ est.EnvironmentIndustry}}%"></div>
+                                      </div>
+                                    </div>
+                                    <!-- /.progress-group -->
+                                    <div class="progress-group">
+                                      <span class="progress-text">Quản trị</span>
+                                      <span class="progress-number"><b>{{ est.Management}}</b>/100</span>
+                  
+                                      <div class="progress sm">
+                                        <div class="progress-bar progress-bar-red" style="width: {{ est.Management}}%"></div>
+                                      </div>
+                                    </div>
+                                    <!-- /.progress-group -->
+                                    <div class="progress-group">
+                                      <span class="progress-text">Chất lượng tài sản</span>
+                                      <span class="progress-number"><b>{{ est.Qualify_asset }}</b>/100</span>
+                  
+                                      <div class="progress sm">
+                                        <div class="progress-bar progress-bar-green" style="width: {{ est.Qualify_asset }}%"></div>
+                                      </div>
+                                    </div>
+                                    <!-- /.progress-group -->
+                                    <div class="progress-group">
+                                      <span class="progress-text">Tỷ lệ vay nợ</span>
+                                      <span class="progress-number"><b>{{ est.Leverage }}</b>/100</span>
+                  
+                                      <div class="progress sm">
+                                        <div class="progress-bar progress-bar-yellow" style="width: {{ est.Leverage }}%"></div>
+                                      </div>
+                                    </div>
+                                    <!-- /.progress-group -->
+                                    <div class="progress-group">
+                                      <span class="progress-text">Khả năng gây ảnh hưởng</span>
+                                      <span class="progress-number"><b>{{ est.Top_industry }}</b>/100</span>
+                  
+                                      <div class="progress sm">
+                                        <div class="progress-bar progress-bar-blue" style="width: {{ est.Top_industry }}%"></div>
+                                      </div>
+                                    </div>
+                                    <!-- /.progress-group -->
+                                    <div class="progress-group">
+                                      <span class="progress-text">Hiệu suất kinh doanh</span>
+                                      <span class="progress-number"><b>{{ est.Perform }}</b>/100</span>
+                  
+                                      <div class="progress sm">
+                                        <div class="progress-bar progress-bar-pink" style="width: {{ est.Perform}}%"></div>
+                                      </div>
+                                    </div>
+                                    <!-- /.progress-group -->
+                                    <div class="progress-group">
+                                      <span class="progress-text">Vốn hóa</span>
+                                      <span class="progress-number"><b>{{ est.Capital }}</b>/100</span>
+                  
+                                      <div class="progress sm">
+                                        <div class="progress-bar progress-bar-brown" style="width: {{ est.Capital }}%"></div>
+                                      </div>
+                                    </div>
+                                    <!-- /.progress-group -->
+                                    <div class="progress-group">
+                                      <span class="progress-text">Thanh khoản</span>
+                                      <span class="progress-number"><b>{{ est.Liquidity }}</b>/100</span>
+                  
+                                      <div class="progress sm">
+                                        <div class="progress-bar progress-bar-purple" style="width: {{ est.Liquidity }}%"></div>
+                                      </div>
+                                    </div>
+                                    <!-- /.progress-group -->
+
+
+
+                                  </div>
+              <div class="col-lg-6 col-xs-9 col-xs-12">
+               <!-- small box -->
+                <!-- Widget: user widget style 1 -->
+                <div class="box box-widget widget-user-2">                                  
+                  <div class="widget-user-header bg-green">
+                    <h3 class="box-title" style="margin: 0px" >Điểm Đánh giá</h3>
+                  </div>
+                    <div class="box-body no-padding">  
+                      <!-- gauge.js -->              
+
+                      <div id="cmtTT" class="progress-group">  
+                          <span class="progress-text"> {{ est.Total_score.1|upper }}</span>
+                          <span class="progress-number"><b>{{ est.Total_score.0 }}</b>/100</span>
+                        <div style="width: 100%; height:15px;" class="progress progress-xs progress-striped ">
+                          <div class="progress-bar progress-bar-green" style="  height:15px;  width: {{ est.Total_score.0 }}%;"></div>
+                        </div>
+                      </div>                         
+                    </div>
+                </div>
+              </div>
+              <div class="col-lg-6 col-xs-9 col-xs-12">
+               <!-- small box -->
+                <!-- Widget: user widget style 1 -->
+                <div class="box box-widget widget-user-2">                                  
+                  <div class="widget-user-header bg-red">
+                    <h3 class="box-title" style="margin: 0px" >Độ rủi ro</h3>
+                  </div>
+                    <div class="box-body no-padding">  
+                      <!-- gauge.js -->              
+
+                      <div id="cmtTT" class="progress-group">  
+                          <span class="progress-text"> {{ est.RISK|upper }}</span>
+                          <span class="progress-number"><b>{{ est.Risk }}</b>/100</span>
+                        <div style="width: 100%; height:15px;" class="progress progress-xs progress-striped ">
+                          <div class="progress-bar progress-bar-red" style="  height:15px;  width: {{ est.Risk }}%;"></div>
+                        </div>
+                      </div>                         
+                    </div>
+                </div>
+              </div>
+              <div class="col-lg-6 col-xs-9 col-xs-12 style=" padding-top: 20px;" >
+                <div class="info-box bg-yellow">         
+                  <div class="box-body" style="padding:5px;">
+                    <div class="tile_count">
+                      <div class="col-md-4 col-sm-4 col-xs-12 tile_stats_count">
+                      <span class="count_top">Thanh khoản</span>
+                      <div class="count"  style=" text-align:center; font-size:15px; ">{{ est.Liquidity_30days }}</div>                      
+                      </div>
+                      <div class="col-md-4 col-sm-4 col-xs-12 tile_stats_count">
+                        <span class="count_top">EPS</span>
+                        <div class="count"  style=" text-align:center;">{{ est.EPS }} </div>                         
+                      </div>
+                      <div class="col-md-4 col-sm-4 col-xs-12 tile_stats_count">
+                      <span class="count_top">Book Value</span>
+                      <div class="count"  style=" text-align:center;">{{ est.Bookvalue }}</div>                      
+                      </div>
+                    </div>
+                  </div>
+                <!-- /.info-box-content -->
+                </div>               
+              <!-- /.GIÁ MUA -->
+              </div>
+            <!-- /.post --> 
+                              <div class="col-lg-12 col-xs-9 col-xs-12">
+                        <div class="box box-widget box-solid">
+                          <div class="box-header with-border bg-yellow">
+                            <h3 class="box-title">Nhận xét cổ phiếu</h3>
+              
+                            <div class="box-tools pull-right">
+                              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                              </button>
+                            </div>
+                            <!-- /.box-tools -->
+                          </div>
+                          <!-- /.box-header -->
+                          <div class="box-body no-padding">
+                            {% if est.estimate_url %}
+                            <p>{{ est.estimate_url }}</p>
+                            
+                            {% endif %}
+                            {{ est.action }}
+
+                          </div>
+                          <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+                      </div>
+            </div>
+  
+
+
+
+                    <!--/Gauge-->
+                      <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                  </div>
+                   {% endfor %}
+                </div>
+
+
+              </div>
+
+
+
+
+
+
+              <!-- /.tab-pane -->
+
+              <div class="tab-pane" id="BCTC">
+                <form class="form-horizontal">
+                  <div class="form-group">
+                    <label for="inputName" class="col-sm-2 control-label">Name</label>
+
+                    <div class="col-sm-10">
+                      <input type="email" class="form-control" id="inputName" placeholder="Name">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+
+                    <div class="col-sm-10">
+                      <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputName" class="col-sm-2 control-label">Name</label>
+
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="inputName" placeholder="Name">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputExperience" class="col-sm-2 control-label">Experience</label>
+
+                    <div class="col-sm-10">
+                      <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputSkills" class="col-sm-2 control-label">Skills</label>
+
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="inputSkills" placeholder="Skills">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                      <button type="submit" class="btn btn-danger">Submit</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <!-- /.tab-pane -->
+            </div>
+            <!-- /.tab-content -->
+          </div>
+          <!-- /.nav-tabs-custom -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3">
+
+          <!-- Profile Image -->
+          <div class="box box-primary">
+            <div class="box-body box-profile"> 
+            <form action="#" method="get" class="search-form">
+            <div class="input-group">
+              <input type="text" name="q" class="form-control" placeholder="Search...">
+              <span class="input-group-btn">
+                  <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search">   </i>
+                  </button>
+                </span>
+            </div>
+            </form>
+          <!-- /.search form -->
+
+              <h3 class="profile-username text-center">{{post.Symbol|upper}}</h3>
+
+              <p class="text-muted text-center">{{post.Name}}</p>
+
+              <ul class="list-group list-group-unbordered">
+                <li class="list-group-item">
+                  <b>Sàn</b> <a class="pull-right">{{post.San|upper}}</a>
+                </li>
+                <li class="list-group-item">
+                  <b>Ngành</b> <a class="pull-right">{{post.Industry}}</a>
+                </li>
+                <li class="list-group-item">
+                  <b>SL CP Niêm Yết</b> <a class="pull-right">{{post.SL_CP_Niem_yet}}</a>
+                </li>  
+                <li class="list-group-item">
+                  <b>Thanh khoản TB30</b> <a class="pull-right">{{estimate_moinhat.Liquidity_30days}}</a>
+                </li>  
+                <li class="list-group-item">
+                  <b>EPS</b> <a class="pull-right">{{estimate_moinhat.EPS}}</a>
+                </li>
+                <li class="list-group-item">
+                  <b>Book value</b> <a class="pull-right">{{estimate_moinhat.Bookvalue}}</a>
+                </li>                
+                <li class="list-group-item">
+                  <b>Tỷ lệ Freeloat</b> <a class="pull-right">{{post.Ty_le_Freeloat}}</a>
+                </li>                
+                <li class="list-group-item">
+                  <b>Tỷ lệ SHNN tối đa</b> <a class="pull-right">{{post.Ty_le_SHNN}}</a>
+                </li> 
+              </ul>
+
+              <a href="#" class="btn btn-primary btn-block"><b>Đăng ký nhận tư vấn chi tiết</b></a>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+
+          <!-- About Me Box -->
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Hồ sơ</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <strong><i class="fa fa-book margin-r-5"></i> Tổng quan</strong>
+
+              <p class="text-muted">
+                {{post.Tong_Quan}}
+              </p>
+
+              <hr>
+
+              <strong><i class="fa fa-map-marker margin-r-5"></i> Địa chỉ</strong>
+
+              <p class="text-muted">{{post.Dia_chi}},{{post.Quan}}{{post.Tinh}} </p>
+
+              <hr>
+
+              <hr>
+
+              <strong><i class="fa fa-phone margin-r-5"></i>Số điện thoại</strong>
+
+              <p class="text-muted">{{post.So_dien_thoai}}</p>
+
+              <hr>              
+
+              <strong><i class="fa fa-globe "></i> Website</strong>
+
+              <p>
+                <a href="{{post.Website}}"class="text-muted">{{post.Website}}</a>
+              </p>  
+
+
+                <span class="label label-danger">UI Design</span>
+                <span class="label label-success">Coding</span>
+                <span class="label label-info">Javascript</span>
+                <span class="label label-warning">PHP</span>
+                <span class="label label-primary">Node.js</span>
+              </p>
+
+              <hr>
+
+              <strong><i class="fa fa-file-text-o margin-r-5"></i> Ghi chú</strong>
+
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+
+{% endblock content %}
+
+
+
+{% block javascripts %}
+  {{ block.super}}
+<!-- REQUIRED JS SCRIPTS -->
+
+<script src="{% static "js/datatables.min.js" %}"></script>
+
+
+<script>
+
+table = $('#vithedadong').DataTable({
+
+      'paging'      : true,
+      'lengthChange': true,
+      'searching'   : false,
+      'ordering'    : true,
+
+      'info'        : true,
+      'autoWidth'   : true,
+      "scrollX"     : true,
+          }); 
+
+table
+    .column( '4:visible' )
+    .order( 'desc' )
+    .draw(); 
+
+</script>
+
+{% endblock javascripts %}

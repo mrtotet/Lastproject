@@ -1,0 +1,25 @@
+<html>
+<head>
+    <title>{{title}}</title>
+</head>
+<body>
+    <h1>{{header}} IMPORT GIAO DỊCH NƯỚC NGOÀI</h1>
+
+    <p> Cẩn thận đừng nhầm lẫn file nhé !!!</p>
+
+    {% if form.errors %}
+        <p style="color: red;">
+            Please correct the error{{ form.errors|pluralize }} below.
+        </p>
+    {% endif %}
+
+    <form action="" enctype="multipart/form-data"  method="post">
+        <table>
+            {{ form.as_table }}
+        </table>
+        {% csrf_token %}
+
+        <input type="submit" value="Tải lên">
+    </form>
+</body>
+</html>

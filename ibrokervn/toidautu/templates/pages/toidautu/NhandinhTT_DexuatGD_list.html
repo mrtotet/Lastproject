@@ -1,0 +1,165 @@
+{% extends "base_toidautu.html" %}
+{% load toidautu_tags %}
+{% load i18n mezzanine_tags keyword_tags disqus_tags %}
+{% load staticfiles %}
+{% block meta_title %}{{ page.meta_title }}{% endblock %}
+{% keywords_for page as keywords %}
+{% for keyword in keywords %}
+    {% if not forloop.first %}, {% endif %}
+    {{ keyword }}
+{% endfor %}
+{% block meta_description %}{% metablock %}
+{{ page.description }}
+{% endmetablock %}{% endblock %}
+{% block stylesheets %}
+   {{ block.super }}
+
+
+{% endblock stylesheets %}
+{% block content %}
+{% block main %}
+<!-- Content Header (Page header) -->
+<section class="content-header">
+{% block title %}TỔNG HỢP NHẬN ĐỊNH THỊ TRƯỜNG{% endblock title %}
+</section>	
+	<section id="blog" class="content">
+	<div class="row">
+	<div class="row">		
+	<div class="col-md-9">
+	<div class="blog">
+			{% if tag or category or year or month or author %}
+    	{% block Nhandinh_posts_list_filterinfo %}
+    		<p>
+    		{% if tag %}
+    		    {% trans "Đang xem bài trong tagged" %}<strong style="text-transform: uppercase;"> {{ tag }} </		strong>
+    		{% else %}{% if category %}
+    		    {% trans "Đang xem bài trong mục" %}<strong style="text-transform: uppercase;">  {{ category }}  </		strong>
+    		{% else %}{% if year or month %}
+    		    {% trans "đang xem bài từ tháng" %} {% if month %}{{ month }}, {% endif %}
+    		   <strong style="text-transform: uppercase;">  {{ year }}  </strong>
+    		{% else %}{% if author %}
+    		    {% trans "Đang xem bài được viết bởi" %} <strong style="text-transform: uppercase;">  
+    		    {{ author.get_full_name|default:author.username }}  </strong>
+    		{% endif %}{% endif %}{% endif %}{% endif %}
+    		{% endblock %}
+			    </p>
+			{% else %}
+			    {% if page %}
+			    {% block Nhandinh_posts_list_pagecontent %}
+			    {% if page.get_content_model.content %}
+			        {% editable page.get_content_model.content %}
+			        {{ page.get_content_model.content|richtext_filters|safe }}
+			        {% endeditable %}
+			    {% endif %}
+			    {% endblock %}
+			    {% endif %}
+			{% endif %}		
+				{% for Nhandinh_posts in Nhandinh_posts.object_list %}
+				 <div class="blog-item">
+					 {% if settings.BLOG_USE_FEATURED_IMAGE and Nhandinh_posts.featured_image %}
+						{% block Nhandinh_posts_list_post_featured_image %}
+						<a href="{{ Nhandinh_posts.get_absolute_url }}">
+							<img width="100%" class="img-responsive img-blog" src="{{ MEDIA_URL }}{{ 			Nhandinh_posts.featured_image }}">
+						</a>
+						{% endblock %}
+						{% endif %}
+					<div class="blog-content">			
+				{% block Nhandinh_posts_list_post_title %}	
+					{% editable Nhandinh_posts.title %}
+					<a href="{{ Nhandinh_posts.get_absolute_url }}"><h3>{{ Nhandinh_posts.title }}</h3></a>
+					{% endeditable %}
+				{% endblock %}
+			{% block Nhandinh_posts_list_post_metainfo %}
+			{% editable Nhandinh_posts.publish_date %}
+                   <div class="entry-meta">
+                                <span><i class="icon-user"></i> {% with Nhandinh_posts.user as author %}
+								<a href="{% url "nhandinhthitruong:NhandinhTT_DexuatGD_list_author" author %}">{{ author.get_full_name|default:author.username }}</a>
+								{% endwith %}
+								</span>
+								<span><i class="icon-folder-close"></i>
+                                {% with Nhandinh_posts.categories.all as categories %}
+								{% if categories %}
+								{% trans "chuyên mục" %}
+								{% for category in categories %}
+								<a href="{% url "nhandinhthitruong:NhandinhTT_DexuatGD_list_category" category.slug %}"><strong style="text-transform: uppercase;">
+								"{{ category }}"	</strong></a>{% if not forloop.last %}, {% endif %}
+								{% endfor %}
+								{% endif %}
+								{% endwith %}                                
+                                </span>
+                                <span><i class="icon-calendar"></i> {% blocktrans with sometime=Nhandinh_posts.publish_date|date:"d/m/y H:i a " %}{{ sometime }} {% endblocktrans %}</span>
+                                <span><i class="icon-comment"></i> 
+                                {% if Nhandinh_posts.allow_comments %}							
+									{% if settings.COMMENTS_DISQUS_SHORTNAME %}
+									<a href="{{ Nhandinh_posts.get_absolute_url }}#disqus_thread"
+										data-disqus-identifier="{% disqus_id_for Nhandinh_posts %}">
+										{% trans "Comments" %}
+									</a>
+									{% else %}
+									<a href="{{ Nhandinh_posts.get_absolute_url }}#comments">
+										{% blocktrans count comments_count=Nhandinh_posts.comments_count %}{{ comments_count }} comment{% plural %}{{ comments_count }} nhận định khác{% endblocktrans %}
+									</a>
+									{% endif %}
+									{% endif %}														
+                                </span>
+                            </div>
+{% endeditable %}
+{% endblock %}
+{% block Nhandinh_posts_list_post_content %}
+{% editable Nhandinh_posts.content %}
+{{ Nhandinh_posts.description_from_content|safe }}
+{% endeditable %}
+{% endblock %}
+ <a href="{{ Nhandinh_posts.get_absolute_url }}" class="btn btn-default">{% trans "chi tiết..." %} <i class="icon-angle-right"> </i></a>
+{% block Nhandinh_posts_list_post_links %}
+{% keywords_for Nhandinh_posts as tags %}
+    {% if tags %}
+<div class="tags">
+  <i class="icon-tags"></i> {% trans "Tags" %}:
+    {% spaceless %}
+    {% for tag in tags %} 
+  <a href="{% url "nhandinhthitruong:NhandinhTT_DexuatGD_list_tag" tag.slug %}" class="btn btn-xs btn-primary">{{ tag }}</a> &nbsp;
+  {% endfor %}
+    {% endspaceless %}
+</div>
+{% endif %}
+</div>
+</div>
+{% endblock %}
+{% endfor %}
+</div>
+<!-- Endblog content -->
+
+</div>
+	    <!-- Right panel -->
+		{% block right_panel %}
+		<div class="col-md-3">
+
+          <!-- Profile Image -->
+          <div class="box box-primary">
+            <div class="box-body box-profile"> 
+
+
+
+		{% include "filter_toidautu.html" %} 
+
+		</div>
+		</div>
+		</div>
+		{% endblock %}
+
+{% pagination_for Nhandinh_postss %}
+{% if settings.COMMENTS_DISQUS_SHORTNAME %}
+{% include "generic/includes/disqus_counts.html" %}
+{% endif %}
+</div>
+</div>
+</section>
+{% endblock %}
+</section>
+<!-- /.content -->         
+{% endblock content %}
+{% block javascripts %}
+  {{ block.super}}
+<!-- REQUIRED JS SCRIPTS -->
+{% endblock javascripts %}

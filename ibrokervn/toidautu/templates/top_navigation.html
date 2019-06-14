@@ -1,0 +1,208 @@
+{% load pages_tags mezzanine_tags i18n staticfiles toidautu_tags accounts_tags  %}
+
+
+<!-- Logo -->
+{% if settings.SITE_TITLE %}<a href="/" class="logo">
+
+  <!-- mini logo for sidebar mini 50x50 pixels -->
+  <span class="logo-mini"><img style="margin-bottom: 6px;" src="{% static "images/logo_ibrokervn/logo10.png" %}" height="20" rel="stylesheet"></span>
+  <!-- logo for regular state and mobile devices -->
+  <span class="logo-lg"><img style="margin-bottom: 6px;" src="{% static "images/logo_ibrokervn/logo10.png" %}" height="20" rel="stylesheet">
+  {{ settings.SITE_TITLE }}</span>
+</a>
+{% endif %}
+
+
+<!-- Header Navbar -->
+<nav class="navbar navbar-static-top" role="navigation">
+  <!-- Sidebar toggle button-->
+  <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+    <span class="sr-only">Toggle navigation</span>
+  </a>
+  <!-- Navbar Right Menu -->
+  <div class="navbar-custom-menu">
+    <ul class="nav navbar-nav">
+      <!-- Messages: style can be found in dropdown.less-->
+      <li class="dropdown messages-menu">
+        <!-- Menu toggle button -->
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          <i class="fa fa-envelope-o" aria-hidden="true"></i>
+          <span class="label label-success">4</span>
+        </a>
+        <ul class="dropdown-menu">
+          <li class="header">Bạn có 4 tin nhắn mới</li>
+          <li>
+            <!-- inner menu: contains the messages -->
+            <ul class="menu">
+              <li><!-- start message -->
+                <a href="#">
+                  <div class="pull-left">
+                    <!-- User Image -->
+                    <img src="{% static "img/logotransparent.png" %}" class="img-circle" alt="User Image">
+                  </div>
+                  <!-- Message title and timestamp -->
+                  <h4>
+                    iBrokerVN Team
+                    <small><i class="fa fa-clock-o"></i> 5 phút</small>
+                  </h4>
+                  <!-- The message -->
+                  <p>Bản tin Giao dịch Video</p>
+                </a>
+              </li>
+              <!-- end message -->
+            </ul>
+            <!-- /.menu -->
+          </li>
+          <li class="footer"><a href="#">Xem tất cả</a></li>
+        </ul>
+      </li>
+      <!-- /.messages-menu -->
+      <!-- Notifications Menu -->
+      <li class="dropdown notifications-menu">
+        <!-- Menu toggle button -->
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          <i class="fa fa-bell-o"></i>
+          <span class="label label-warning">10</span>
+        </a>
+        <ul class="dropdown-menu">
+          <li class="header">Bạn có 10 notifications</li>
+          <li>
+            <!-- Inner Menu: contains the notifications -->
+            <ul class="menu">
+              <li><!-- start notification -->
+                <a href="#">
+                  <i class="fa fa-users text-aqua"></i> Chiến lược giao dịch 23/12/18
+                </a>
+              </li>
+              <!-- end notification -->
+            </ul>
+          </li>
+          <li class="footer"><a href="#">Xem tất cả</a></li>
+        </ul>
+      </li>
+      <!-- Tasks Menu -->
+      <li class="dropdown tasks-menu">
+        <!-- Menu Toggle Button -->
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          <i class="fa fa-flag-o"></i>
+          <span class="label label-danger">9</span>
+        </a>
+        <ul class="dropdown-menu">
+          <li class="header">Các tips Giao dịch</li>
+          <li>
+            <!-- Inner menu: contains the tasks -->
+            <ul class="menu">
+              <li><!-- Task item -->
+                <a href="#">
+                  <!-- Task title and progress text -->
+                  <h3>
+                    Mức độ tham gia thị trường
+                    <small class="pull-right">20%</small>
+                  </h3>
+                  <!-- The progress bar -->
+                  <div class="progress xs">
+                    <!-- Change the css width attribute to simulate progress -->
+                    <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar"
+                         aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                      <span class="sr-only">20% Complete</span>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <!-- end task item -->
+            </ul>
+          </li>
+          <li class="footer">
+            <a href="#">Xem tất cả</a>
+          </li>
+        </ul>
+      </li>
+      <!-- User Account Menu -->
+      {% if request.user.is_authenticated %}
+      <li class="dropdown user user-menu">
+        <!-- Menu Toggle Button -->
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          <!-- The user image in the navbar-->
+          <!--
+          <img src="static/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+          <!-- hidden-xs hides the username on small devices so only the image appears. -->
+          <span class="hidden-xs">{{request.user}}</span>
+        </a>
+        <ul class="dropdown-menu">
+          <li class="user-header">
+        {% with user.clientprofile as user_ %}    
+          {% if user_.avatar %} 
+          <img class="img-circle" src="{{MEDIA_URL}}{% thumbnail user_.avatar 128 128 %}">
+          <p> {{ user.username }}
+          <small>Ngày tham gia {{ user.date_joined|date:" H:i a d/m/y" }}</small>
+          {% else %}           
+            {% for ass in backends.associated %}
+            <!-- The user image in the menu -->
+            {% if ass.provider == 'facebook' %}
+              <img src="{{ass.extra_data.picture.data.url}}" class="img-circle" alt="User Image">
+              <p> {{ ass.extra_data.name }}
+                 <small>Thành viên từ ngày: {{ user.date_joined|date:"d/m/y" }}</small>
+
+               </p>
+
+            {% elif ass.provider == 'google-oauth2' %}  
+              <img class="img-circle" src="{% gravatar_url user.email 128 %}">
+              <p> Name:  {{ user.username }} 
+                  <small>Ngày tham gia {{ user.date_joined|date:" H:i a d/m/y" }}</small>
+              </p>    
+         
+            {% endif %}
+            {% endfor %}
+          {% endif %} 
+        {% endwith %} 
+
+          <!-- Menu Body -->
+          </li>
+
+   <!--       
+          <li class="user-body">
+            <div class="row">
+              <div class="col-xs-4 text-center">
+                <a href="#">Followers</a>
+              </div>
+              <div class="col-xs-4 text-center">
+                <a href="#">Sales</a>
+              </div>
+              <div class="col-xs-4 text-center">
+                <a href="#">Friends</a>
+              </div>
+            </div> 
+
+  
+          </li>
+          
+             -->
+          <!-- Menu Footer-->
+
+       
+    
+    
+          <li class="user-footer">
+            <div class="pull-left">
+              {% url "profile" request.user.username as profile_url %}
+              {% if profile_url %}
+              <a href="{{ profile_url }}" class="btn btn-default btn-flat">Profile</a>
+                  {% else %}
+                  <a href="{% url "profile_update" %}">{{ request.user|username_or:"email" }}</a>
+              {% endif %}
+    
+            </div>
+            <div class="pull-right">
+              <a href="{% url "logout" %}?next={{ request.path }}" class="btn btn-default btn-flat">Sign out</a>
+            </div>
+          </li>
+        </ul>
+      </li>
+              {% endif %}   
+      <!-- Control Sidebar Toggle Button -->
+      <li>
+        <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+      </li>
+    </ul>
+  </div>
+</nav>

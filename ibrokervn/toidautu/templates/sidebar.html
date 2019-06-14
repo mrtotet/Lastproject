@@ -1,0 +1,84 @@
+<!-- sidebar: style can be found in sidebar.less -->
+{% load staticfiles i18n toidautu_tags mezzanine_tags accounts_tags %}
+
+
+        <section class="sidebar">
+    
+          <!-- Sidebar user panel (optional) -->
+          <div class="user-panel">
+            {% if request.user.is_authenticated %}
+            {% url "profile" request.user.username as profile_url %}
+            {% if not profile_url %}{% url "profile_update" as profile_url %}{% endif %}
+            <div class="pull-left image">
+            {% with user.clientprofile as user_ %}
+            {% if user_.avatar %}
+              <img class="img-circle" src="{{MEDIA_URL}}{% thumbnail user_.avatar 128 128 %}">
+            {% else %}
+          
+              {% for ass in backends.associated %}
+            <!-- The user image in the menu -->
+                {% if ass.provider == 'facebook' %}
+                <img src="{{ass.extra_data.picture.data.url}}" class="img-circle" alt="User Image">
+                {% elif ass.provider == 'google-oauth2' %}  
+                <img class="img-circle" src="{% gravatar_url user.email 128 %}">       
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+            {% endwith %}
+             <!-- <img src="{% static "img/user.png" %}" style="height: 30px; width: 30px" class="img-circle" alt="User Image">   -->
+              
+            </div>
+            <div class="pull-left info">
+              <p class="navbar-text"> Xin chào,
+              <!-- Status -->
+    
+                <a class="navbar-link" href="{{ profile_url }}">
+                    {{ request.user|username_or:"email" }}</a>
+            </p>
+            </div>
+            {% endif %}
+          </div>
+    
+          <!-- search form (Optional) -->
+          <form action="#" method="get" class="sidebar-form">
+            <div class="input-group">
+              <input type="text" name="q" class="form-control" placeholder="Search...">
+              <span class="input-group-btn">
+                  <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search">   </i>
+                  </button>
+                </span>
+            </div>
+          </form>
+          <!-- /.search form -->
+
+          <!-- Sidebar Menu -->
+         <ul class="sidebar-menu" data-widget="tree" id="menu">
+            <li class="header">DANH MỤC</li>
+
+            <!-- Optionally, you can add icons to the links -->
+            <li {% if request.resolver_match.url_name == "tonghopthongtin" %}class="active"{% endif %}><a href="{% url "nhandinhthitruong:tonghopthongtin" %}"><i class="fa fa-home"></i> <span><TABLE>Tổng Hợp Thông Tin</TABLE></span></a></li>
+            <li {% if request.resolver_match.url_name == "newest" %}class="active"{% endif %}><a href="{% url "nhandinhthitruong:newest" %}"><i class="fa fa-rocket"></i> <span>NĐTT & Đề xuất GD</span> <span class="pull-right-container">
+              <small class="label pull-right bg-green">new</small>
+            </span></a></li>
+            <li {% if request.resolver_match.url_name == "NhandinhTT_DexuatGD_list" %}class="active"{% endif %}><a href="{% url "nhandinhthitruong:NhandinhTT_DexuatGD_list" %}"><i class="fa fa-folder"></i> <span>Tổng hợp nhận định</span></a></li>
+            <li {% if request.resolver_match.url_name == "vimo" %}class="active"{% endif %}><a href="{% url "thongtinvimo:vimo" %}"><i class="fa fa-table"></i> <span>TT Vĩ mô</span></a></li>
+            <li {% if request.resolver_match.url_name == "gdnn" %}class="active"{% endif %}><a href="{% url "giaodichNN:gdnn" %}"><i class="fa fa-globe"></i> <span>GD NDT Nước Ngoài</span></a></li>
+            <li {% if request.resolver_match.url_name == "" %}class="active"{% endif %}><a href="../phantichcophieu/"><i class="fa fa-bar-chart"></i> <span>Phân tích cổ phiếu</span></a></li>
+            <li {% if request.resolver_match.url_name == "" %}class="active"{% endif %}><a href="../giaodichphaisinh/"><i class="fa fa-line-chart"></i> <span>Giao dịch Phái sinh</span></a></li>
+            <li {% if request.resolver_match.url_name == "" %}class="active"{% endif %}><a href="../dienbienthitruong/"><i class="fa fa-clock-o"></i> <span>Diễn biến Thị Trường</span></a></li>
+            <li class="treeview">
+              <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </span>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="#">Link in level 2</a></li>
+                <li><a href="#">Link in level 2</a></li>
+              </ul>
+            </li>
+
+          </ul>
+          <!-- /.sidebar-menu -->
+        </section>
+        <!-- /.sidebar -->

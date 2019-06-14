@@ -1,0 +1,135 @@
+{% extends "base_toidautu.html" %}
+
+{% load staticfiles %}
+{% load toidautu_tags %}
+
+{% block meta_title %} {{ page.meta_title }} {% endblock %}
+
+{% block stylesheets %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css" href="/static/vendors/DataTables/datatables.min.css"/>
+  
+{% endblock stylesheets %}
+
+{% block content %}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    Thông tin Vĩ mô & làm thêm tag Sự kiện nhé
+    <small></small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="thongtinvimo"><i class="fa fa-table"></i>TT Vĩ mô</a></li><li class="active"></li><i class="fa fa-eye"> {{views.viewed_list_Vimo}}  lượt xem</i>
+  </ol>
+</section>
+ <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="row">
+        <div class="col-xs-12">
+          <div class="box box-info" >
+            <div class="box-header">
+              <div class="callout callout-info">
+                <p style="text-align: justify; "> <b>Thông tin vĩ mô</b> trong và ngoài nước có tác động dến toàn thị trường chứng khoán theo nhiều chiều và với các mức độ khác nhau. Để cung cấp góc nhìn bao quát thị trường iBrokerVN tổng hợp các thông tin quan trọng sau:</p>
+              </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+
+
+
+                    <div class="tab-pane" id="timeline">
+                <!-- The timeline -->
+                    {% for post in Post60 %}
+                <ul class="timeline timeline-inverse">
+                  <!-- timeline time label -->
+                  <li class="time-label">
+                        <span class="bg-red">
+                          {{post.publish|date:"d/m/y"}}
+                        </span>
+                  </li>
+                  <!-- /.timeline-label -->
+                  <!-- timeline item -->
+                  <li>
+                    <i class="fa fa-file-text-o bg-blue"></i>
+
+                    <div class="timeline-item">
+                      <span class="time"><i class="fa fa-clock-o"></i> {{post.publish|timesince}}</span>
+
+                      <h3 class="timeline-header"><a href="#">{{post.Tenthongtin|upper}}</a> </h3>
+
+                      <div class="timeline-body">
+                          <p >
+                          <span> Đang tác động:                           
+                            {% if post.dang_AH %} 
+                              <i style=" font-size: 15px; color: #0cc10c;" class="label bg-green"> 
+                              &#10004;</i>
+                            {% else %}
+                              <i style=" font-size: 15px; color: #0cc10c;" class="label bg-red">
+                              &#10006;
+                              </i>
+                          {% endif %}
+                          </span> | 
+                          <span> Chiều hướng:   
+                            <i " class="badge bg-{{post.AH}}">
+                                 {{post.anh_huong}}</i> 
+                          </span> |
+                          <span> Cổ phiếu bị ảnh hưởng :
+                          {% if post.CP_anhhuong %} 
+                          <strong style="color:#3c8dbc ">{{post.CP_anhhuong}}</strong>
+                          {% endif %}
+                          </span>                                                          
+
+                        </p>
+
+
+                        <p>Mức độ: <strong style="color:#3c8dbc ">{{post.do_manh}}</strong>
+
+                              <div style="width: 100%; max-width: 150px;height:15px;" class="progress progress-xs progress-striped ">
+                                  <div class="progress-bar progress-bar-{{post.AH}}" style="  height:15px;  width: {{post.Mucdo}}%;">
+                                    
+                                  </div>
+                              </div>
+                        </div>
+
+                      
+                        {% if post.Nhanxet %}
+                        <p>{{post.Nhanxet}}</p>
+                        {% endif %}
+                      
+  
+                    </div>
+                  </li>
+                    {% endfor %}
+                  <!-- END timeline item -->
+                  <!-- timeline time label -->
+          </div>
+          <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+      </div>
+
+
+
+
+              <!-- /.tab-pane -->
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+      </div>
+    <!-- /.row -->  
+
+  </section>
+  <!-- /.content -->
+</div>
+            <!-- /.content-wrapper -->
+          
+
+{% endblock content %}
+
+{% block javascripts %}
+  {{ block.super}}
+<!-- REQUIRED JS SCRIPTS -->
+
+
+{% endblock javascripts %}

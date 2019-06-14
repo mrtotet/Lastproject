@@ -1,0 +1,129 @@
+{% extends "base_toidautu.html" %}
+
+{% block title %} TT Vĩ Mô {% endblock title %}
+
+{% block stylesheets %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css" href="/static/vendors/DataTables/datatables.min.css"/>
+ 
+  
+{% endblock stylesheets %}
+
+{% block content %}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    Thông tin cổ phiếu
+    <small></small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="phantichcophieu"><i class="fa fa-bar-chart"></i>phantichcophieu</a></li><li class="active"></li><i class="fa fa-eye"></i>    {{views.viewed_list_Vimo}}
+  </ol>
+</section>
+ <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box box-info" >
+            <div class="box-header">
+              <div class="callout callout-info">
+                <p style="text-align: justify; "> <b>Đánh giá CP</b> này mang tính chất tham khảo chung. Việc ra quyết định giao dịch cần căn cứ thêm nhiều yếu tố khác của Nhà Đầu Tư. Xin liên hệ iBrokerVN.com để có tư vấn chi tiết </p>
+              </div>
+          <div class="nav-tabs-custom">              
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#fa-icons" data-toggle="tab">Khuyến nghị GD</a></li>
+              <li><a href="#glyphicons" data-toggle="tab">Đánh giá Cơ bản</a></li>
+              <li><a href="#glyphicons" data-toggle="tab">lịch sử GD</a></li>
+            </ul>  
+          </div>       
+            <!-- /.box-header -->
+<!--            <div class="box-body">
+
+              <table id="example1" class="display nowrap" style="width:100%">
+                      <thead>
+                          <tr>
+                              <th>Thông tin </th>
+                              <th style="width: 10px; text-align: center; ">AH</th>
+                              <th style="width: 200px">Mức độ</th>
+                              <th style="width: 10px">Ngày</th>
+                              <th>CP bị ảnh hưởng</th>
+                              <th style="width: 10px; text-align: center;">Còn AH?</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                      {% for post in Post %}
+                          <tr  >
+                              <td>{{post.Tenthongtin}}</td>
+                              <td style="text-align: center" >
+                                  <span class="badge bg-{{post.AH}}">{{post.anh_huong}}</span>
+                              </td>
+                              <td class="progress progress-xs progress-striped active">
+                                  <div class="progress-bar progress-bar-{{post.AH}}" style="  height:10px;  width: {{post.Mucdo}}%;"></div>
+                              </td>
+                              <td>{{post.publish|date:"d/m/y"}}</td>
+                              <td>{{post.CP_anhhuong}}</td>
+                              <td style=" text-align: center; font-size: 15px; color: #0cc10c;">
+
+                                {% if post.dang_AH %}
+                                  &#10004;
+                                {% endif %}
+
+                              </td>
+                                </tr>
+                      {% endfor %}
+
+                      </tbody>
+                  
+                      <tfoot>
+                          <tr>
+                              <th style="color: #3c8dbc">Thông tin </th>
+                              <th style=" text-align: center; color: #3c8dbc ">    Ảnh hưởng</th>
+                              <th style="color: #3c8dbc">Mức độ</th>
+                              <th style="color: #3c8dbc">Ngày</th>
+                              <th style="color: #3c8dbc">CP bị ảnh hưởng</th>
+                              <th style=" text-align: center; color: #3c8dbc">Còn AH?</th>
+                          </tr>
+                      </tfoot>
+          </table>
+          </div>
+          <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </section>
+  <!-- /.content -->
+</div>
+            <!-- /.content-wrapper -->
+          
+
+{% endblock content %}
+
+{% block javascripts %}
+  {{ block.super}}
+<!-- REQUIRED JS SCRIPTS -->
+<script type="text/javascript" src="/static/vendors/DataTables/datatables.min.js"></script>
+
+<script>
+  $(function () {
+ 
+    $('#example1').DataTable({
+      'paging'      : true,
+      'lengthChange': true,
+      'searching'   : true,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : true,
+      "scrollX"     : true,
+      
+     
+          })
+      })
+
+
+</script>
+
+{% endblock javascripts %}

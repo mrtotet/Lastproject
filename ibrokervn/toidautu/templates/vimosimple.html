@@ -1,0 +1,36 @@
+      
+
+        
+   <div class="box box-warning box-solid">  
+            <div class="box-header with-border">
+              <h3 class="box-title">TT Vĩ mô quan trọng </h3>
+              <small> <a href="{% url "thongtinvimo:vimo" %}" >(chi tiết...)</a></small>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+              <table class="table">
+                <tr>
+                  <th>Thông tin</th>
+                  <th>Mức độ</th>
+                  <th style="width: 40px; text-align:center; ">AH</th>
+                </tr>
+                {% for post in ConAH %}
+                <tr>
+                  <td>{{post.Tenthongtin}}</td>
+                  <td>
+                    <div class="progress progress-xs">
+                      <div class="progress-bar progress-bar-{{post.AH}}" style="width: {{post.Mucdo}}%"></div>
+                    </div>
+                  </td>
+                  <td><span class="badge bg-{{post.AH}}">{{post.anh_huong}}</span></td>
+                </tr>
+                {% endfor %}
+
+              </table>
+
+        
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+

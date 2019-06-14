@@ -1,0 +1,42 @@
+  <div>
+    <div class="col-md-6">
+          <div class="box box-info box-solid" style="text-align: center;">
+            <div class="box-header with-border">
+              <h3 class="box-title" >Tổng hợp GDNN</h3>
+            </div>
+            <!-- /.box-header -->
+
+              <table class="table">
+                <tr>
+                  <th style="text-align: center">#</th>
+                  <th style="text-align: center">GT Mua</th>
+                  <th style="text-align: center">GT Bán</th>
+                  <th style="text-align: center">GD Ròng</th>
+                </tr>
+
+                <tr>
+                  <th style="color: #3c8dbc; text-align: center">5 Ngày</th>
+                  <td style="text-align: center">{{GDmua5days.total}}</td>
+                  <td style="text-align: center">{{GDban5days.total}}</td>
+                  <td style="text-align: center">{{GDrong5days}}</td>
+                </tr>
+
+                <tr>
+                  <th style="color: #3c8dbc; text-align: center">1 tháng</th>
+                  <td style="text-align: center">{{GDmua20days.total}}</td>
+                  <td style="text-align: center">{{GDban20days.total}}</td>
+                  <td style="text-align: center">{{GDrong20days}}</td>
+                </tr>
+
+                 <tr>
+                  <th style="color: #3c8dbc; text-align: center">3 tháng</th>
+                  <td style="text-align: center">{{GDmua60days.total}}</td>
+                  <td style="text-align: center">{{GDban60days.total}}</td>
+                  <td style="text-align: center">{{GDrong60days}}</td>
+                </tr>
+              </table>
+          </div>
+            <!-- /.box-body -->
+    </div>
+          <!-- /.box -->
+  </div>

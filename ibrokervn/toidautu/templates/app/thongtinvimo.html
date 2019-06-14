@@ -1,0 +1,136 @@
+{% extends "starter_iBrokerVN.html" %}
+
+{% block title %} CHIẾN LƯỢC GIAO DỊCH {% endblock title %}
+
+{% block stylesheets %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css" href="/static/vendors/DataTables/datatables.min.css"/>
+  
+{% endblock stylesheets %}
+
+{% block content %}
+<section class="content-header">
+  <h1>
+    Thông tin Vĩ mô
+    <small></small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="thongtinvimo"><i class="fa fa-table"></i>TT Vĩ mô</a></li>
+    <li class="active">Here</li>
+  </ol>
+</section>
+
+    <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Hover Data Table</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+
+              <table id="example1" class="display nowrap" style="width:100%">
+                      <thead>
+                          <tr>
+                              <th>Ngày</th>
+                              <th>Thông tin </th>
+                              <th style=" text-align: center; ">Ảnh hưởng</th>
+                              <th>Mức độ</th>
+                              <th>CP bị ảnh hưởng</th>
+                              <th style=" text-align: center;">Còn AH?</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                      {% for post in Post %}
+                          <tr  >
+                              <td>{{post.publish|date:"d/m/y"}}</td>
+                              <td>{{post.Tenthongtin}}</td>
+                              <td style="text-align: center; font-size: 15px; color: {{post.AH}};" >
+                                {{post.anh_huong}}
+                              </td>
+                              <td  style="font-size: 15px; color: {{post.AH}};">
+                                {{post.Mucdo}}
+                              </td>
+                              <td>{{post.CP_anhhuong}}</td>
+                              <td style=" text-align: center; font-size: 15px; color: #0cc10c;">
+
+                                {% if post.dang_AH %}
+                                  &#10004;
+                                {% endif %}
+
+                              </td>
+                                </tr>
+                      {% endfor %}
+                          <tr>
+                              <td>Tiger</td>
+                              <td>Nixon</td>
+                              <td>System Architect</td>
+                              <td>Edinburgh</td>
+                              <td>61</td>
+                              <td>2011/04/25</td>
+
+                          </tr>
+                          <tr>
+                              <td>Donna</td>
+                              <td>Snider</td>
+                              <td>Customer Support</td>
+                              <td>New York</td>
+                              <td>27</td>
+                              <td>2011/01/25</td>
+
+                          </tr>
+                      </tbody>
+                  
+                      <tfoot>
+                          <tr>
+                              <th>Ngày</th>
+                              <th>Thông tin </th>
+                              <th style=" text-align: center; ">Ảnh hưởng</th>
+                              <th>Mức độ</th>
+                              <th>CP bị ảnh hưởng</th>
+                              <th style=" text-align: center;">Còn AH?</th>
+                          </tr>
+                      </tfoot>
+          </table>
+          </div>
+          <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </section>
+  <!-- /.content -->
+</div>
+            <!-- /.content-wrapper -->
+          
+
+{% endblock content %}
+
+{% block javascripts %}
+  {{ block.super}}
+<!-- REQUIRED JS SCRIPTS -->
+<script type="text/javascript" src="/static/vendors/DataTables/datatables.min.js"></script>
+
+<script>
+  $(function () {
+ 
+    $('#example1').DataTable({
+      'paging'      : true,
+      'lengthChange': true,
+      'searching'   : true,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : true,
+      "scrollX"     : true,
+      
+     
+          })
+      })
+
+
+</script>
+
+{% endblock javascripts %}
