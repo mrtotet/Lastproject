@@ -12,9 +12,9 @@
 			    {{ block.super }}
 			    <div class="social-auth-links text-center">
 			    <p align="center">- HOẶC -</p>
-			    <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-primary btn-block btn-social1 btn-facebook btn-flat"> <i class="fa fa-facebook"></i> Đăng nhập bằng Facebook</a> 
+			    <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-primary btn-block btn-social1 btn-facebook btn-flat"> <i class="icon-facebook"></i> Đăng nhập bằng Facebook</a>
 
-			    <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-danger btn-block  btn-social1 btn-google btn-flat"> <i class="fa fa-google-plus"></i>Đăng nhập bằng Google</a>
+			    <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-danger btn-block  btn-social1 btn-google btn-flat"> <i class="icon-google-plus"></i>Đăng nhập bằng Google</a>
 
 			    </div>	
 			    {% url "signup" as signup_url %}

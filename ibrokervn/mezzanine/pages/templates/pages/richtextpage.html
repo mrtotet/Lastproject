@@ -2,10 +2,18 @@
 
 {% load mezzanine_tags %}
 
-{% block main %}{{ block.super }}
+{% block main %}
+<section id="blog" class="container">
+	<div class="row">
+        <div class="col-sm-12"
+	        <div class="blog">
+            {{ block.super }}
 
-{% editable page.richtextpage.content %}
-{{ page.richtextpage.content|richtext_filters }}
-{% endeditable %}
-
+            {% editable page.richtextpage.content %}
+            {{ page.richtextpage.content|richtext_filters }}
+            {% endeditable %}
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}

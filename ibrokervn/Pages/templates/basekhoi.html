@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}"{% if LANGUAGE_BIDI %} dir="rtl"{% endif %}>
+{% load pages_tags mezzanine_tags i18n staticfiles %}
+
+{% block head %}
+<head>
+{% block meta %}
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="{% block meta_keywords %}{% endblock %}">
+    <meta property="og:url"           content="https://www.ibrokervn.com" />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="{% if page %}{{ page.meta_title }}{% else %}{% trans "Blog" %}{% endif %}{% if settings.SITE_TITLE %} | {{    settings.SITE_TITLE }}{% endif %}" />
+    <meta property="og:description"   content="{% block meta_description %}{% endblock %}" />
+    <meta property="og:image"         content="https://www.ibrokervn.com{{ MEDIA_URL }}{{blog_post.featured_image }}" />
+
+
+{% endblock meta %}
+
+<title>{% if settings.SITE_TITLE %}{{ settings.SITE_TITLE }}{% endif %}| {{ settings.SITE_TITLE }}</title>
+<link rel="shortcut icon" href="{% static "images/logo_ibrokervn/favicon.ico" %}">
+<link rel="icon" href="{% static "images/logo_ibrokervn/favicon.ico" %}">
+
+{% ifinstalled mezzanine.blog %}
+<link rel="alternate" type="application/rss+xml" title="RSS" href="{% url "blog_post_feed" "rss" %}">
+<link rel="alternate" type="application/atom+xml" title="Atom" href="{% url "blog_post_feed" "atom" %}">
+{% endifinstalled %}
+
+{% compress css %}
+<link href="{% static "css/reset.css" %}" rel="stylesheet">
+<link href="{% static "css/bootstrap.css" %}" rel="stylesheet">
+<link rel="stylesheet" href="{% static "css/mezzanine.css" %}">
+<link href="{% static "css/font-awesome1.min.css" %}" rel="stylesheet">
+<link href="{% static "css/font-awesome.min.css" %}" rel="stylesheet">
+<link href="{% static "css/prettyPhoto.css" %}" rel="stylesheet">
+<link href="{% static "css/animate.css" %}" rel="stylesheet">
+<link href="{% static "css/main.css" %}" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Sans+Pro" rel="stylesheet">
+
+{% if LANGUAGE_BIDI %}
+<link rel="stylesheet" href="{% static "css/rtl.css" %}">
+{% endif %}
+{% ifinstalled cartridge.shop %}
+<link rel="stylesheet" href="{% static "css/cartridge.css" %}">
+{% if LANGUAGE_BIDI %}
+<link rel="stylesheet" href="{% static "css/cartridge.rtl.css" %}">
+{% endif %}
+{% endifinstalled %}
+{% block extra_css %}{% endblock %}
+{% endcompress %}
+
+<!--
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+-->
+
+
+{% compress js %}
+<script src="{% static "js/prefixfree.min.js" %}"></script>
+<script src="{% static "mezzanine/js/"|add:settings.JQUERY_FILENAME %}"></script>
+<script src="{% static "js/bootstrap.min.js" %}"></script>
+<script src="{% static "js/bootstrap-extras.js" %}"></script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+ <!--[if lt IE 9]>
+    <script src="{% static "js/html5shiv.js" %}"></script>
+    <script src="{% static "js/respond.min.js" %}"></script>
+<![endif]-->
+{% block extra_js %}{% endblock %}
+{% include "includes/footer_scripts.html" %}
+
+{% endcompress %}
+
+{% block extra_head %}{% endblock %}
+</head>
+
+{% endblock head %}
+
+

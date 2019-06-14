@@ -1190,6 +1190,10 @@ ul.faq li > div h3 {
 .navbar-header {
   height: 80px;
 }
+.navbar-toggle {
+  height: 50px;
+}
+
 
 .navbar-header img {
   margin-top:-10px;
