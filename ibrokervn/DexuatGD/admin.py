@@ -37,7 +37,9 @@ class NganhdandatAdmin(admin.ModelAdmin):
 class StockAdmin(admin.ModelAdmin):
     list_display = ('Symbol','S_status','slug','San','Industry','SL_CP_Niem_yet','Ty_le_Freeloat','Ty_le_SHNN',)
     list_editable = ['S_status',]
-    list_per_page = 15
+    list_max_show_all = 500
+    list_per_page = 50
+
     list_filter = ('Industry','S_status', 'publish','San',)
     search_fields = ('Symbol','San',)
 
@@ -109,7 +111,7 @@ class Update_Trade_Admin(admin.ModelAdmin):
     actions = [published_selected_Objects]
 
 class EsitmateAdmin(admin.ModelAdmin):
-    list_display = ('title','Stock','publish','S_status','Postion','Style','Total_score','Gain_Loss','Risk','PE','PB',)
+    list_display = ('title','Stock','publish','S_status','Postion','Style','Total_score','Gain_Loss_close','Risk',)
     list_editable = ('S_status','Postion','Style',)
     search_fields = ['title',]
     list_filter = ('S_status', 'Postion','Style',)

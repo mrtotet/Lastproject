@@ -165,12 +165,25 @@ def stock_detail(request, year, month, day, post):
 
     Gain_Loss_update =Cal_Gain_loss(estimate_moinhat.Price_open, Update_trade_latest.Price_update)
 
+    def Cal_PE_PB(a,b):
+        Cal = (a/b)
+        return  Cal
+
+    PE_open = Cal_PE_PB(estimate_moinhat.Price_open,estimate_moinhat.EPS)
+    PB_open = Cal_PE_PB(estimate_moinhat.Price_open,estimate_moinhat.Bookvalue)
+    PE_update = Cal_PE_PB(Update_trade_latest.Price_update,estimate_moinhat.EPS)
+    PB_update = Cal_PE_PB(Update_trade_latest.Price_update,estimate_moinhat.Bookvalue)
+
 
     context = {"post":post,
                "estimate" : estimate,
                "estimate_close" : estimate_close ,
                "recommend": recommend,
                "Gain_Loss_update": Gain_Loss_update,
+               "PE_open": PE_open,
+               "PB_open": PB_open,
+               "PE_update": PE_update,
+               "PB_update": PB_update,
                "Update_trade_all":Update_trade_all,
                "Update_trade_latest": Update_trade_latest,
                "estimate_moinhat" : estimate_moinhat}

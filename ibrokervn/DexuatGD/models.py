@@ -25,7 +25,7 @@ class Stock_Detail(models.Model):
     S_updated =         models.DateTimeField(auto_now=True,null=True)
     S_status =          models.CharField(max_length=10,
                               choices=STATUS_CHOICES,
-                              default='draft',null=True)
+                              default='published',null=True)
     objects = models.Manager()  # The default manager.
     published = PublishedManager()  # The Dahl-specific manager.
 
@@ -96,20 +96,20 @@ class Estimate (models.Model):
             change = "down"
         return Cal,color, change
 
-    def Gain_Loss(self):
+    def Gain_Loss_close(self):
         return self.Cal_Gain_loss(self.Price_open, self.Price_close, )
 
-    @staticmethod
-    def Cal_PE_PB(a,b):
-        Cal = (a/b)
-        return  Cal
+    #@staticmethod
+    #def Cal_PE_PB(a,b):
+    #    Cal = (a/b)
+    #    return  Cal
 
-    EPS =                   models.IntegerField("EPS",null=True, blank=True)
-    def PE(self):
-        return self.Cal_PE_PB(self.Price_close, self.EPS)
-    Bookvalue =             models.IntegerField("Book Value",null=True, blank=True)
-    def PB(self):
-        return self.Cal_PE_PB(self.Price_close, self.Bookvalue)
+    #EPS =                   models.IntegerField("EPS",null=True, blank=True)
+    #def PE(self):
+    #    return self.Cal_PE_PB(self.Price_close, self.EPS)
+    #Bookvalue =             models.IntegerField("Book Value",null=True, blank=True)
+    #def PB(self):
+    #    return self.Cal_PE_PB(self.Price_close, self.Bookvalue)
     Liquidity_30days =      models.BigIntegerField("KL GDTB 30 ngày",blank=True, null=True, )
     Price_change_5days=     models.IntegerField("Giá thay đổi 5 ngày",blank=True, null=True,)
     Price_change_20days=    models.IntegerField("Giá thay đổi 20 ngày",blank=True, null=True,)
