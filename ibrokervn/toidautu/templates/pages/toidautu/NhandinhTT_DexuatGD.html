@@ -35,7 +35,156 @@
 <!-- Main content -->
 <section class="content">
   <div class="row">
-  <div class="row">  
+  <div class="row">
+      <div class="col-md-4">
+          <div class="box box-solid">
+
+            <!-- /.box-header -->
+            <div class="box-body text-center">
+                <p class="text-center content-title" >
+                    Đánh mạnh Thị trường
+                  </p>
+                    <div class="box-body no-padding">
+                      <!-- gauge.js -->
+                      <div >
+                        <div>
+                           <div id="So_Do_Manh" class="preview-textfield"></div>
+                          <canvas id="Do_Manh_TT" ></canvas>
+                          <div id="cmtTT" >{{ Nhandinh_posts.do_manh }}</div>
+                        </div>
+                      </div>
+                    </div>
+                    <script>
+                        var opts1 = {
+                          angle: 0.08, // The span of the gauge arc
+                          lineWidth: 0.44, // The line thickness
+                            radiusScale: 1, // Relative radius
+                          pointer: {
+                            length: 0.6, // // Relative to gauge radius
+                            strokeWidth: 0.035, // The thickness
+                            color: '#000000' // Fill color
+                          },
+                          limitMax: false,     // If false, max value increases automatically if value > maxValue
+                          limitMin: false,     // If true, the min value of the gauge will be fixed
+                          colorStart: '#6FADCF',   // Colors
+                          colorStop: '#23DA2F',    // just experiment with them
+                          strokeColor: '#F2301B',  // to see which ones work best for you
+                          generateGradient: true,
+                          highDpiSupport: true,     // High resolution support
+                          // renderTicks is Optional
+                          renderTicks: {
+                            divisions: 8,
+                            divWidth: 1.2,
+                            divLength: 0.59,
+                            divColor: '#333333',
+                            subDivisions: 4,
+                            subLength: 0.26,
+                            subWidth: 1,
+                            subColor: '#666666'
+                          }
+                        };
+                        var target = document.getElementById('Do_Manh_TT'); // your canvas element
+                        var gauge = new Gauge(target).setOptions(opts1); // create sexy gauge!
+                        gauge.setTextField(document.getElementById("So_Do_Manh"));
+                        gauge.maxValue = 100; // set max gauge value
+                        gauge.setMinValue(0);  // Prefer setter over gauge.minValue = 0
+                        gauge.animationSpeed = 32; // set animation speed (32 is default value)
+                        gauge.set({{ Nhandinh_posts.Streng }}); // set actual value
+                      </script>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      <div class="col-md-8" >
+          <div class="box box-solid" style="height: 300px">
+            <div class="box-header">
+              <h3 class="box-title text-danger">Sparkline Pie</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body text-center">
+              <div class="sparkline" data-type="pie" data-offset="90" data-width="100px" data-height="100px">
+                6,4,8
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+              <div class="col-md-4">
+          <div class="box box-solid">
+            <div class="box-body text-center">
+                <p class="text-center content-title" >
+                    Rủi ro Thị trường
+                  </p>
+                    <div class="box-body no-padding">
+                      <!-- gauge.js -->
+                      <div >
+                        <div>
+                           <div id="So_Rui_Ro" class="preview-textfield"></div>
+                          <canvas id="Rui_Ro_TT" ></canvas>
+                          <div id="cmtTT" >{{ Nhandinh_posts.do_manh }}</div>
+                        </div>
+                      </div>
+                    </div>
+                    <script>
+var opts2 = {
+  angle: -0.18, // The span of the gauge arc
+  lineWidth: 0.36, // The line thickness
+  radiusScale: 1, // Relative radius
+  pointer: {
+    length: 0.65, // // Relative to gauge radius
+    strokeWidth: 0.035, // The thickness
+    color: '#000000' // Fill color
+  },
+  limitMax: false,     // If false, max value increases automatically if value > maxValue
+  limitMin: false,     // If true, the min value of the gauge will be fixed
+  colorStart: '#5BCF3E',   // Colors
+  colorStop: '#DA602C',    // just experiment with them
+  strokeColor: '#2DE03F',  // to see which ones work best for you
+  generateGradient: true,
+  highDpiSupport: true,     // High resolution support
+
+};
+                        var target = document.getElementById('Rui_Ro_TT'); // your canvas element
+                        var gauge = new Gauge(target).setOptions(opts2); // create sexy gauge!
+                        gauge.setTextField(document.getElementById("So_Rui_Ro"));
+                        gauge.maxValue = 100; // set max gauge value
+                        gauge.setMinValue(0);  // Prefer setter over gauge.minValue = 0
+                        gauge.animationSpeed = 32; // set animation speed (32 is default value)
+                        gauge.set({{ Nhandinh_posts.Streng }}); // set actual value
+                      </script>
+            </div>
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+              <div class="col-md-8" >
+          <div class="box box-solid" style="height: 300px">
+            <div class="box-header">
+              <h3 class="box-title text-danger">Sparkline Pie</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body text-center">
+              <div class="sparkline" data-type="pie" data-offset="90" data-width="100px" data-height="100px">
+                6,4,8
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
     <div class="col-md-12">   
       <div class="blog">  
         <div class="blog-item">
@@ -104,7 +253,8 @@
             <!-- /.box-header -->
             <div class="box-body">
               <div class="row">
-                <div class="col-md-8">
+
+                <div class="col-md-6">
                   <div class="content-title" >
                     NHẬN ĐỊNH THỊ TRƯỜNG
                   <div class= "facebook-like">
@@ -122,58 +272,11 @@
 
                 </div>
                 <!-- /.col -->
-                <div class="col-md-4">
+                <div class="col-md-6">
                   <p class="text-center content-title" >
-                    Đánh giá Thị trường
+                    Dòng cổ phiếu Dẫn Dắt TT
                   </p>
-                    <div class="box-body no-padding">  
-                      <!-- gauge.js -->                    
-                      <div >             
-                        <div>  
-                           <div id="preview-textfield"></div>  
-                          <canvas id="gauge" ></canvas>
-                          <div id="cmtTT" >{{ Nhandinh_posts.do_manh }}</div>
-                        </div>
-                      </div>
-                    </div>
-                    <script>
-                        var opts1 = {
-                          angle: 0.08, // The span of the gauge arc
-                          lineWidth: 0.44, // The line thickness
-                            radiusScale: 1, // Relative radius
-                          pointer: {
-                            length: 0.6, // // Relative to gauge radius
-                            strokeWidth: 0.035, // The thickness
-                            color: '#000000' // Fill color
-                          },
-                          limitMax: false,     // If false, max value increases automatically if value > maxValue
-                          limitMin: false,     // If true, the min value of the gauge will be fixed
-                          colorStart: '#6FADCF',   // Colors
-                          colorStop: '#23DA2F',    // just experiment with them
-                          strokeColor: '#F2301B',  // to see which ones work best for you
-                          generateGradient: true,
-                          highDpiSupport: true,     // High resolution support
-                          // renderTicks is Optional
-                          renderTicks: {
-                            divisions: 8,
-                            divWidth: 1.2,
-                            divLength: 0.59,
-                            divColor: '#333333',
-                            subDivisions: 4,
-                            subLength: 0.26,
-                            subWidth: 1,
-                            subColor: '#666666'
-                          }
-                        };
-                        var target = document.getElementById('gauge'); // your canvas element
-                        var gauge = new Gauge(target).setOptions(opts1); // create sexy gauge!
-                        gauge.setTextField(document.getElementById("preview-textfield"));
-                        gauge.maxValue = 100; // set max gauge value
-                        gauge.setMinValue(0);  // Prefer setter over gauge.minValue = 0
-                        gauge.animationSpeed = 32; // set animation speed (32 is default value)
-                        gauge.set({{ Nhandinh_posts.Streng }}); // set actual value                  
-                      </script>
-                      <!--NGÀNH DẪN DẮT THỊ TRƯƠNG -->  
+                      <!--NGÀNH DẪN DẮT THỊ TRƯƠNG -->
                       {% if Nhandinh_posts.nganhdandattt_set.all %}
                       <table class="table" style="margin-top: 15px; ">
                           <thead>
@@ -204,25 +307,22 @@
 
                 </div>
                 <!-- /.col -->
-              </div>
-              <!-- /.row -->
-            </div>
-            <!-- ./box-body -->
-            <div class="Recommend-stock">
-              <div class="row">
-              <div class="row">
-                {% if Nhandinh_posts.update_trade_set.all %} 
 
-                    <!-- CỘT TRÁI --> 
+               {% if Nhandinh_posts.update_trade_set.all %}
+
+                    <!-- CỘT TRÁI -->
                  <div class="col-md-6" >
+                  <p class="text-center content-title" >
+                    ĐỀ XUẤT GIAO DỊCH
+                  </p>
                    <div class="box box-info box-solid">
                      <div class="box-header with-border">
                        <h3 class="box-title">ĐẦU TƯ NGẮN HẠN</h3>
                       </div>
                      <!-- /.box-header -->
-                  
+
               <div class="box-body no-padding">
-             
+
                 <table class="table table-bordered">
                   <tr>
                     <th style="width: 10px; text-align:center;">Stock</th>
@@ -232,9 +332,9 @@
                     <th style="width: 80px; ">Lời/Lỗ</th>
                     <th style="text-align:center;">Độ mạnh</th>
                   </tr>
-                  {% for stock in Nhandinh_posts.update_trade_set.all %} 
-                  {% if stock.Stock.Style == "Ngắn hạn" %} 
-                 
+                  {% for stock in Nhandinh_posts.update_trade_set.all %}
+                  {% if stock.Stock.Style == "Ngắn hạn" %}
+
                   <tr>
                     <td><a href="{{stock.Stock.Stock.get_absolute_url}}">{{stock.Stock.Stock.Symbol}}</a></td>
                     <td><span class="badge bg-{{stock.Color_Trade}}">{{stock.Trade}}</span></td>
@@ -242,23 +342,23 @@
                     <td style="text-align:center;">{{stock.Price_update}}</td>
 
                     <td style="text-align:center;"><span class="description-percentage text-{{stock.Gain_Loss.1}}"><i class="fa fa-caret-{{stock.Gain_Loss.2}}"></i> {{stock.Gain_Loss.0}}%</span></td>
-                   
 
-                
+
+
                     <td style="text-align:center;"><span class="badge bg-{{stock.Color_Trade}}">{{stock.Indicator}}%</span></td>
                   </tr>
-                  {% endif %}  
-                  {% endfor %} 
+                  {% endif %}
+                  {% endfor %}
 
                 </table>
               </div>
-                     <!-- /.box-body -->              
+                     <!-- /.box-body -->
                    </div>
                    <!-- /.box -->
                  </div>
                  <!-- /.col -->
-            
-              <!-- CỘT PHẢI -->      
+
+              <!-- CỘT PHẢI -->
               <div class="col-md-6" >
                 <div class="box box-info box-solid">
                   <div class="box-header with-border">
@@ -276,8 +376,8 @@
                     <th style="width: 80px; ">Lời/Lỗ</th>
                     <th style="text-align:center;">Độ mạnh</th>
                   </tr>
-                  {% for stock in Nhandinh_posts.update_trade_set.all %} 
-                  {% if stock.Stock.Style == 'Dài hạn' %} 
+                  {% for stock in Nhandinh_posts.update_trade_set.all %}
+                  {% if stock.Stock.Style == 'Dài hạn' %}
                   <tr>
 
                     <td><a href="{{stock.Stock.Stock.get_absolute_url}}">{{stock.Stock.Stock.Symbol}}</a></td>
@@ -288,25 +388,109 @@
 
 
                     <td style="text-align:center;"><span class="description-percentage text-{{stock.Gain_Loss.1}}"><i class="fa fa-caret-{{stock.Gain_Loss.2}}"></i> {{stock.Gain_Loss.0}}%</span></td>
-                
+
                     <td style="text-align:center;"><span class="badge bg-{{stock.Color_Trade}}">{{stock.Indicator}}%</span></td>
                   </tr>
-                  {% endif %}  
-                  {% endfor %} 
+                  {% endif %}
+                  {% endfor %}
 
                 </table>
               </div>
-                      <!-- /.box-body -->              
+                      <!-- /.box-body -->
                     </div>
                     <!-- /.box -->
                   </div>
                   <!-- /.col -->
-            {% endif %}      
+              <div class="col-md-6" >
+                <div class="box box-info box-solid">
+                  <div class="box-header with-border">
+                    <h3 class="box-title" >GIAO DỊCH PHÁI SINH</h3>
                   </div>
-                  </div>    
+                  <!-- /.box-header -->
+
+              <div class="box-body no-padding">
+                <table class="table table-bordered">
+                  <tr>
+                    <th style="width: 10px; text-align:center;">Stock</th>
+                    <th style="width: 80px; ">Trade</th>
+                    <th style="width: 80px; text-align:center;">Giá KN</th>
+                    <th style="width: 80px; text-align:center;">Cập nhật</th>
+                    <th style="width: 80px; ">Lời/Lỗ</th>
+                    <th style="text-align:center;">Độ mạnh</th>
+                  </tr>
+                  {% for stock in Nhandinh_posts.update_trade_set.all %}
+                  {% if stock.Stock.Style == 'Dài hạn' %}
+                  <tr>
+
+                    <td><a href="{{stock.Stock.Stock.get_absolute_url}}">{{stock.Stock.Stock.Symbol}}</a></td>
+                    <td><span class="badge bg-{{stock.Color_Trade}}">{{stock.Trade}}</span></td>
+                    <td style="text-align:center;">{{stock.Price_open}}</td>
+                    <td style="text-align:center;">{{stock.Price_update}}</td>
+
+
+
+                    <td style="text-align:center;"><span class="description-percentage text-{{stock.Gain_Loss.1}}"><i class="fa fa-caret-{{stock.Gain_Loss.2}}"></i> {{stock.Gain_Loss.0}}%</span></td>
+
+                    <td style="text-align:center;"><span class="badge bg-{{stock.Color_Trade}}">{{stock.Indicator}}%</span></td>
+                  </tr>
+                  {% endif %}
+                  {% endfor %}
+
+                </table>
               </div>
-             
-              <!-- /.Recommend-stock-->
+                      <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                  </div>
+                  <!-- /.col -->
+                            <div class="col-md-6" >
+                <div class="box box-info box-solid">
+                  <div class="box-header with-border">
+                    <h3 class="box-title" >GIAO DỊCH COVERED WARRANT</h3>
+                  </div>
+                  <!-- /.box-header -->
+
+              <div class="box-body no-padding">
+                <table class="table table-bordered">
+                  <tr>
+                    <th style="width: 10px; text-align:center;">Stock</th>
+                    <th style="width: 80px; ">Trade</th>
+                    <th style="width: 80px; text-align:center;">Giá KN</th>
+                    <th style="width: 80px; text-align:center;">Cập nhật</th>
+                    <th style="width: 80px; ">Lời/Lỗ</th>
+                    <th style="text-align:center;">Độ mạnh</th>
+                  </tr>
+                  {% for stock in Nhandinh_posts.update_trade_set.all %}
+                  {% if stock.Stock.Style == 'Dài hạn' %}
+                  <tr>
+
+                    <td><a href="{{stock.Stock.Stock.get_absolute_url}}">{{stock.Stock.Stock.Symbol}}</a></td>
+                    <td><span class="badge bg-{{stock.Color_Trade}}">{{stock.Trade}}</span></td>
+                    <td style="text-align:center;">{{stock.Price_open}}</td>
+                    <td style="text-align:center;">{{stock.Price_update}}</td>
+
+
+
+                    <td style="text-align:center;"><span class="description-percentage text-{{stock.Gain_Loss.1}}"><i class="fa fa-caret-{{stock.Gain_Loss.2}}"></i> {{stock.Gain_Loss.0}}%</span></td>
+
+                    <td style="text-align:center;"><span class="badge bg-{{stock.Color_Trade}}">{{stock.Indicator}}%</span></td>
+                  </tr>
+                  {% endif %}
+                  {% endfor %}
+
+                </table>
+              </div>
+                      <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                  </div>
+                  <!-- /.col -->
+            {% endif %}
+              </div>
+              <!-- /.row -->
+            </div>
+            <!-- ./box-body -->
+
 
             <div class="box-footer">
               <div class="row">
