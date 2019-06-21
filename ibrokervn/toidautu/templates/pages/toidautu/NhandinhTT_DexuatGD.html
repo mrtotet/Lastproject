@@ -33,28 +33,19 @@
 </section>
 
 <!-- Main content -->
-<section class="content">
+<div class="content">
   <div class="row">
   <div class="row">
 
-      <div class="col-md-6 col-sm-12">
-          <div class="box box-solid">
-            <!-- /.box-header -->
-            <div class="box-body text-center">
-                <p class="text-center content-title" >
-                    Độ mạnh Thị trường
-                </p>
-                <div class="col-md-4 col-sm-12 ">
-                    <div class="box-body no-padding">
-                      <!-- gauge.js -->
-                      <div >
-                        <div>
-                           <div id="So_Do_Manh" class="preview-textfield"></div>
-                          <canvas id="Do_Manh_TT" ></canvas>
-                          <div id="cmtTT" >{{ Nhandinh_posts.do_manh }}</div>
-                        </div>
-                      </div>
-                    </div>
+     <div class="col-md-6 col-sm-12 ">
+      <div class="box box-solid">
+        <!-- /.box-header -->
+        <div class="box-body text-center">
+          <p class="text-center content-title" > Độ mạnh Thị trường </p>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+              <div id="So_Do_Manh" class="preview-textfield"></div>
+              <canvas id="Do_Manh_TT" ></canvas>
+              <div id="cmtTT" >{{ Nhandinh_posts.do_manh }}</div>
                     <script>
                         var opts1 = {
                           angle: 0.08, // The span of the gauge arc
@@ -92,41 +83,27 @@
                         gauge.animationSpeed = 32; // set animation speed (32 is default value)
                         gauge.set({{ Nhandinh_posts.Streng }}); // set actual value
                       </script>
-
-
-
             </div>
-                <div class="col-md-8 col-sm-12 ">
+                <div class="col-md-8 col-sm-8 col-xs-12">
             <div class="box-body chart-responsive">
               <div class="chart" id="line-chart-domanhTT" style="height: 200px;"></div>
             </div>
-
-                </div>
+            </div>
             <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
         </div>
         <!-- /.col -->
-
-
   </div>
-      <div class="col-md-6 col-sm-12">
-          <div class="box box-solid">
-            <div class="box-body text-center">
-                <p class="text-center content-title" >
-                    Rủi ro Thị trường
-                  </p>
-                <div class="col-md-4 col-sm-12">
-                    <div class="box-body no-padding">
-                      <!-- gauge.js -->
-                      <div >
-                        <div>
+  </div>
+      <div class="col-md-6 col-sm-12 ">
+      <div class="box box-solid">
+        <!-- /.box-header -->
+        <div class="box-body text-center">
+                <p class="text-center content-title" > Rủi ro Thị trường  </p>
+                <div class="col-md-4 col-sm-4 col-xs-12">
                            <div id="So_Rui_Ro" class="preview-textfield"></div>
                           <canvas id="Rui_Ro_TT" ></canvas>
                           <div id="cmtTT" >{{ Nhandinh_posts.do_rui_ro }}</div>
-                        </div>
-                      </div>
-                    </div>
+
                     <script>
                         var opts2 = {
 
@@ -166,7 +143,7 @@
                         gauge.set({{ Nhandinh_posts.Risk }}); // set actual value
                       </script>
                 </div>
-               <div class="col-md-8 col-sm-12 ">
+               <div class="col-md-8 col-sm-8 col-xs-12">
             <div class="box-body chart-responsive">
               <div class="chart" id="line-chart-ruiroTT" style="height: 200px;"></div>
             </div>
@@ -178,8 +155,16 @@
 
         <!-- /.col -->
   </div>
-        <!-- /.col -->
+
+
+  </div>  <!-- /.row -->
+  </div>  <!-- /.row -->
+
+
+
     <div class="col-md-12">
+      <div class="row">
+      <div class="row">
       <div class="blog">
         <div class="blog-item">
           <div class="blog-content">
@@ -602,6 +587,8 @@
 
       </div>
       </div>
+    </div>
+    </div>
     </div>
     </div>
   </div>
