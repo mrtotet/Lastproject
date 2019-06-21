@@ -6,136 +6,38 @@
 {% keywords_for Post_moinhat_1 as tags %}
 {% for tag in tags %}{% if not forloop.first %}, {% endif %}{{ tag }}{% endfor %}
 {% endmetablock %}{% endblock %}
-
 {% block meta_description %}{% metablock %}
 {{ Post_moinhat_1.description }}
 {% endmetablock %}{% endblock %}
-
 {% block stylesheets %}
   {{ block.super }}
-
 {% endblock stylesheets %}
 {% block content %}
-
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
     Nhận định Thị trường & Đề xuất Giao dịch
   </h1>
   <ol class="breadcrumb">
-    <li><i class="fa fa-eye"></i>  {{Post_moinhat_1.viewed}} Lượt xem </li>
- 
+    <li><i class="fa fa-eye"></i> {{Post_moinhat_1.viewed}} Lượt xem </li>
   </ol>
-
 {% if settings.COMMENTS_DISQUS_SHORTNAME %}
 {% include "generic/includes/disqus_counts.html" %}
 {% endif %}
 </section>
-
 <!-- Main content -->
-<section class="content">
+<div class="content">
   <div class="row">
-  <div class="row">  
-    <div class="col-md-12">   
-      <div class="blog">  
-        <div class="blog-item">
-          <div class="blog-content">
-          {% if settings.BLOG_USE_FEATURED_IMAGE and Post_moinhat_1.featured_image %}
-           {% block Post_moinhat_1_list_post_featured_image %}
-           <a href="{{ Post_moinhat_1.get_absolute_url }}">
-             <img width="100%" class="img-responsive img-blog" src="{{ MEDIA_URL }}{{ Post_moinhat_1.featured_image }}">
-           </a>
-           {% endblock %}
-           {% endif %}
-   
-           {% block Post_moinhat_1_list_post_title %}  
-             {% editable Post_moinhat_1.title %}
-             <a><h3>{{ Post_moinhat_1.title }}</h3></a>
-             {% endeditable %}
-           {% endblock %}      
-
-            {% block Post_moinhat_1_list_post_metainfo %}
-            {% editable Post_moinhat_1.publish_date %}
-   
-          <div class="entry-meta">
-                <span><i class="icon-user"></i> {% with Post_moinhat_1.user as author %}
-                <a href="{% url "nhandinhthitruong:NhandinhTT_DexuatGD_list_author" author %}">{{ author.get_full_name|default:author.username }}</a>
-                {% endwith %}
-                </span>
-                <span><i class="icon-folder-close"></i>
-                                {% with Post_moinhat_1.categories.all as categories %}
-                {% if categories %}
-                {% trans "chuyên mục" %}
-                {% for category in categories %}
-                <a href="{% url "nhandinhthitruong:NhandinhTT_DexuatGD_list_category" category.slug %}"><strong style="text-transform: uppercase;">
-                "{{ category }}"  </strong></a>{% if not forloop.last %}, {% endif %}
-                {% endfor %}
-                {% endif %}
-                {% endwith %}                                
-                                </span>
-                                <span><i class="icon-calendar"></i> {% blocktrans with sometime=Post_moinhat_1.publish_date|timesince %}{{ sometime }} {% endblocktrans %}</span>
-                                <span><i class="icon-comment"></i> 
-                                {% if Post_moinhat_1.allow_comments %}              
-                  {% if settings.COMMENTS_DISQUS_SHORTNAME %}
-                  <a href="{{ Post_moinhat_1.get_absolute_url }}#disqus_thread"
-                    data-disqus-identifier="{% disqus_id_for Post_moinhat_1 %}">
-                    {% trans "Comments" %}
-                  </a>
-                  {% else %}
-                  <a href="{{ Post_moinhat_1.get_absolute_url }}#comments">
-                    {% blocktrans count comments_count=Post_moinhat_1.comments_count %}{{ comments_count }} comment{% plural %}{{ comments_count }} nhận định khác{% endblocktrans %}
-                  </a>
-                  {% endif %}
-                  {% endif %}                           
-                 </span>
-            </div>
-              {% endeditable %}
-
-              {% endblock %}
-
-              <div class= "facebook-share">
-                    <div class="fb-share-button" data-href="https://www.ibrokervn.com{{Post_moinhat_1.get_absolute_url}}" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.ibrokervn.com%2Ftoidautu%2Fnhandinhthitruong%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"></a>
-                    </div>
-                    <div class="zalo-share-button" data-href="https://www.ibrokervn.com{{Post_moinhat_1.get_absolute_url}}" data-oaid="579745863508352884" data-layout="1" data-color="blue" data-customize=false></div>
-
-              </div>      
-
-
-            <!-- /.box-header -->
-            <div class="box-body">
-              <div class="row">
-                <div class="col-md-8">
-                  <div class="content-title" >
-                    NHẬN ĐỊNH THỊ TRƯỜNG
-                  <div class= "facebook-like">
-                  <div class="fb-like" data-href="https://www.ibrokervn.com{{Post_moinhat_1.get_absolute_url}}" data-layout="button_count" data-ref data-action="like" data-size="small" data-show-faces="true" data-share="false"></div>
-                  </div>
-                  </div>
-
-
-                  {% block Post_moinhat_1_detail_content %}
-                  {% editable Post_moinhat_1.content %}
-                  {{ Post_moinhat_1.content|richtext_filters }}
-                  {% endeditable %}
-                  {% endblock %}
-
-
-                </div>
-                <!-- /.col -->
-                <div class="col-md-4">
-                  <p class="text-center content-title" >
-                    Đánh giá Thị trường
-                  </p>
-                    <div class="box-body no-padding">  
-                      <!-- gauge.js -->                    
-                      <div >             
-                        <div>  
-                           <div id="preview-textfield"></div>  
-                          <canvas id="gauge" ></canvas>
-                          <div id="cmtTT" >{{ Post_moinhat_1.do_manh }}</div>
-                        </div>
-                      </div>
-                    </div>
+  <div class="row">
+     <div class="col-md-6 col-sm-12 ">
+      <div class="box box-solid">
+        <!-- /.box-header -->
+        <div class="box-body text-center">
+          <p class="text-center content-title" > Độ mạnh Thị trường </p>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+              <div id="So_Do_Manh" class="preview-textfield"></div>
+              <canvas id="Do_Manh_TT" ></canvas>
+              <div id="cmtTT" >{{ Post_moinhat_1.do_manh }}</div>
                     <script>
                         var opts1 = {
                           angle: 0.08, // The span of the gauge arc
@@ -165,15 +67,158 @@
                             subColor: '#666666'
                           }
                         };
-                        var target = document.getElementById('gauge'); // your canvas element
+                        var target = document.getElementById('Do_Manh_TT'); // your canvas element
                         var gauge = new Gauge(target).setOptions(opts1); // create sexy gauge!
-                        gauge.setTextField(document.getElementById("preview-textfield"));
+                        gauge.setTextField(document.getElementById("So_Do_Manh"));
                         gauge.maxValue = 100; // set max gauge value
                         gauge.setMinValue(0);  // Prefer setter over gauge.minValue = 0
                         gauge.animationSpeed = 32; // set animation speed (32 is default value)
-                        gauge.set({{ Post_moinhat_1.Streng }}); // set actual value                  
+                        gauge.set({{ Post_moinhat_1.Streng }}); // set actual value
                       </script>
-                      <!--NGÀNH DẪN DẮT THỊ TRƯƠNG -->  
+            </div>
+                <div class="col-md-8 col-sm-8 col-xs-12">
+            <div class="box-body chart-responsive">
+              <div class="chart" id="line-chart-domanhTT" style="height: 200px;"></div>
+            </div>
+            </div>
+        </div>
+  </div>
+  </div>
+      <div class="col-md-6 col-sm-12 ">
+      <div class="box box-solid">
+        <div class="box-body text-center">
+                <p class="text-center content-title" > Rủi ro Thị trường  </p>
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                           <div id="So_Rui_Ro" class="preview-textfield"></div>
+                          <canvas id="Rui_Ro_TT" ></canvas>
+                          <div id="cmtTT" >{{ Post_moinhat_1.do_rui_ro }}</div>
+                    <script>
+                        var opts2 = {
+                          angle: 0.08, // The span of the gauge arc
+                          lineWidth: 0.44, // The line thickness
+                            radiusScale: 1, // Relative radius
+                          pointer: {
+                            length: 0.6, // // Relative to gauge radius
+                            strokeWidth: 0.035, // The thickness
+                            color: '#000000' // Fill color
+                          },
+                          limitMax: false,     // If false, max value increases automatically if value > maxValue
+                          limitMin: false,     // If true, the min value of the gauge will be fixed
+                          colorStart: '#6FADCF',   // Colors
+                          colorStop: '#F2301B',    // just experiment with them
+                          strokeColor: '#23DA2F',  // to see which ones work best for you
+                          generateGradient: true,
+                          highDpiSupport: true,     // High resolution support
+                          // renderTicks is Optional
+                          renderTicks: {
+                            divisions: 8,
+                            divWidth: 1.2,
+                            divLength: 0.59,
+                            divColor: '#333333',
+                            subDivisions: 4,
+                            subLength: 0.26,
+                            subWidth: 1,
+                            subColor: '#666666'
+                          }
+                        };
+                        var target = document.getElementById('Rui_Ro_TT'); // your canvas element
+                        var gauge = new Gauge(target).setOptions(opts2); // create sexy gauge!
+                        gauge.setTextField(document.getElementById("So_Rui_Ro"));
+                        gauge.maxValue = 100; // set max gauge value
+                        gauge.setMinValue(0);  // Prefer setter over gauge.minValue = 0
+                        gauge.animationSpeed = 32; // set animation speed (32 is default value)
+                        gauge.set({{ Post_moinhat_1.Risk }}); // set actual value
+                      </script>
+                </div>
+               <div class="col-md-8 col-sm-8 col-xs-12">
+            <div class="box-body chart-responsive">
+              <div class="chart" id="line-chart-ruiroTT" style="height: 200px;"></div>
+            </div>
+                </div>
+            </div>
+          </div>
+
+  </div>
+  </div>  <!-- /.row -->
+  </div>  <!-- /.row -->
+    <div class="col-md-12">
+      <div class="row">
+      <div class="row">
+      <div class="blog">
+        <div class="blog-item">
+          <div class="blog-content">
+          {% if settings.BLOG_USE_FEATURED_IMAGE and Post_moinhat_1.featured_image %}
+           {% block Post_moinhat_1_list_post_featured_image %}
+           <a href="{{ Post_moinhat_1.get_absolute_url }}">
+             <img width="100%" class="img-responsive img-blog" src="{{ MEDIA_URL }}{{ Post_moinhat_1.featured_image }}">
+           </a>
+           {% endblock %}
+           {% endif %}
+           {% block Post_moinhat_1_list_post_title %}
+             {% editable Post_moinhat_1.title %}
+             <a><h3>{{ Post_moinhat_1.title }}</h3></a>
+             {% endeditable %}
+           {% endblock %}
+            {% block Post_moinhat_1_list_post_metainfo %}
+            {% editable Post_moinhat_1.publish_date %}
+          <div class="entry-meta">
+                <span><i class="icon-user"></i> {% with Post_moinhat_1.user as author %}
+                <a href="{% url "nhandinhthitruong:NhandinhTT_DexuatGD_list_author" author %}">{{ author.get_full_name|default:author.username }}</a>
+                {% endwith %}
+                </span>
+                <span><i class="icon-folder-close"></i>
+                                {% with Post_moinhat_1.categories.all as categories %}
+                {% if categories %}
+                {% trans "chuyên mục" %}
+                {% for category in categories %}
+                <a href="{% url "nhandinhthitruong:NhandinhTT_DexuatGD_list_category" category.slug %}"><strong style="text-transform: uppercase;">
+                "{{ category }}"  </strong></a>{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+                                </span>
+                                <span><i class="icon-calendar"></i> {% blocktrans with sometime=Post_moinhat_1.publish_date|timesince %}{{ sometime }} {% endblocktrans %}</span>
+                                <span><i class="icon-comment"></i>
+                                {% if Post_moinhat_1.allow_comments %}
+                  {% if settings.COMMENTS_DISQUS_SHORTNAME %}
+                  <a href="{{ Post_moinhat_1.get_absolute_url }}#disqus_thread"
+                    data-disqus-identifier="{% disqus_id_for Post_moinhat_1 %}">
+                    {% trans "Comments" %}
+                  </a>
+                  {% else %}
+                  <a href="{{ Post_moinhat_1.get_absolute_url }}#comments">
+                    {% blocktrans count comments_count=Post_moinhat_1.comments_count %}{{ comments_count }} comment{% plural %}{{ comments_count }} nhận định khác{% endblocktrans %}
+                  </a>
+                  {% endif %}
+                  {% endif %}
+                 </span>
+            </div>
+              {% endeditable %}
+
+              {% endblock %}
+              <div class= "facebook-share">
+                  <div class="fb-like" data-href="https://www.ibrokervn.com{{Post_moinhat_1.get_absolute_url}}" data-layout="button_count" data-ref data-action="like" data-size="small" data-show-faces="true" data-share="false"></div>
+                  <div class="fb-share-button" data-href="https://www.ibrokervn.com{{Post_moinhat_1.get_absolute_url}}" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.ibrokervn.com%2Ftoidautu%2Fnhandinhthitruong%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"></a></div>
+                    <div class="zalo-share-button" data-href="https://www.ibrokervn.com{{Post_moinhat_1.get_absolute_url}}" data-oaid="579745863508352884" data-layout="1" data-color="blue" data-customize=false></div>
+              </div>
+            <div class="box-body">
+              <div class="row">
+                <div class="col-md-6 col-sm-12">
+                  <div class="content-title" >
+                    NHẬN ĐỊNH THỊ TRƯỜNG
+                  </div>
+                  {% block Post_moinhat_1_detail_content %}
+                  {% editable Post_moinhat_1.content %}
+                  {{ Post_moinhat_1.content|richtext_filters }}
+                  {% endeditable %}
+                  {% endblock %}
+                </div>
+                <!-- /.col -->
+                <div class="col-md-6 col-sm-12">
+                  <p class="text-center content-title" >
+                    Dòng cổ phiếu Dẫn Dắt TT
+                  </p>
+                      <!--NGÀNH DẪN DẮT THỊ TRƯƠNG -->
                       {% if Post_moinhat_1.nganhdandattt_set.all %}
                       <table class="table" style="margin-top: 15px; ">
                           <thead>
@@ -198,31 +243,22 @@
                             <td>  {% editable nganh.CP_noibat %}{{nganh.CP_noibat}}  {% endeditable %}</td>
                           </tr>
                            {% endfor %}
-
                       </table>
                       {% endif %}
-
                 </div>
-                <!-- /.col -->
-              </div>
-              <!-- /.row -->
-            </div>
-            <!-- ./box-body -->
-            <div class="Recommend-stock">
-              <div class="row">
-              <div class="row">
-                {% if Post_moinhat_1.update_trade_set.all %} 
-
-                    <!-- CỘT TRÁI --> 
-                 <div class="col-md-6" >
+                 {% if Post_moinhat_1.update_trade_set.all %}
+                 <div class="col-md-6  col-sm-12" >
+                  <p class="text-center content-title" >
+                    ĐỀ XUẤT GIAO DỊCH
+                  </p>
+                  <p >
+                     (*) Click vào cổ phiếu để xem chi tiết
+                  </p>
                    <div class="box box-info box-solid">
                      <div class="box-header with-border">
                        <h3 class="box-title">ĐẦU TƯ NGẮN HẠN</h3>
                       </div>
-                     <!-- /.box-header -->
-                  
               <div class="box-body no-padding">
-             
                 <table class="table table-bordered">
                   <tr>
                     <th style="width: 10px; text-align:center;">Stock</th>
@@ -232,34 +268,24 @@
                     <th style="width: 80px; ">Lời/Lỗ</th>
                     <th style="text-align:center;">Độ mạnh</th>
                   </tr>
-                  {% for stock in Post_moinhat_1.update_trade_set.all %} 
-                  {% if stock.Stock.Style == "Ngắn hạn" %} 
-                 
+                  {% for stock in Post_moinhat_1.update_trade_set.all %}
+                  {% if stock.Stock.Style == "Ngắn hạn" %}
                   <tr>
                     <td><a href="{{stock.Stock.Stock.get_absolute_url}}">{{stock.Stock.Stock.Symbol}}</a></td>
                     <td><span class="badge bg-{{stock.Color_Trade}}">{{stock.Trade}}</span></td>
                     <td style="text-align:center;">{{stock.Price_open}}</td>
                     <td style="text-align:center;">{{stock.Price_update}}</td>
-
                     <td style="text-align:center;"><span class="description-percentage text-{{stock.Gain_Loss.1}}"><i class="fa fa-caret-{{stock.Gain_Loss.2}}"></i> {{stock.Gain_Loss.0}}%</span></td>
-                   
-
-                
                     <td style="text-align:center;"><span class="badge bg-{{stock.Color_Trade}}">{{stock.Indicator}}%</span></td>
                   </tr>
-                  {% endif %}  
-                  {% endfor %} 
-
+                  {% endif %}
+                  {% endfor %}
                 </table>
               </div>
-                     <!-- /.box-body -->              
                    </div>
-                   <!-- /.box -->
                  </div>
-                 <!-- /.col -->
-            
-              <!-- CỘT PHẢI -->      
-              <div class="col-md-6" >
+              <!-- CỘT PHẢI -->
+              <div class="col-md-6  col-sm-12" >
                 <div class="box box-info box-solid">
                   <div class="box-header with-border">
                     <h3 class="box-title" >ĐẦU TƯ DÀI HẠN</h3>
@@ -276,38 +302,88 @@
                     <th style="width: 80px; ">Lời/Lỗ</th>
                     <th style="text-align:center;">Độ mạnh</th>
                   </tr>
-                  {% for stock in Post_moinhat_1.update_trade_set.all %} 
-                  {% if stock.Stock.Style == 'Dài hạn' %} 
+                  {% for stock in Post_moinhat_1.update_trade_set.all %}
+                  {% if stock.Stock.Style == 'Dài hạn' %}
                   <tr>
-
                     <td><a href="{{stock.Stock.Stock.get_absolute_url}}">{{stock.Stock.Stock.Symbol}}</a></td>
                     <td><span class="badge bg-{{stock.Color_Trade}}">{{stock.Trade}}</span></td>
                     <td style="text-align:center;">{{stock.Price_open}}</td>
                     <td style="text-align:center;">{{stock.Price_update}}</td>
-
-
-
                     <td style="text-align:center;"><span class="description-percentage text-{{stock.Gain_Loss.1}}"><i class="fa fa-caret-{{stock.Gain_Loss.2}}"></i> {{stock.Gain_Loss.0}}%</span></td>
-                
                     <td style="text-align:center;"><span class="badge bg-{{stock.Color_Trade}}">{{stock.Indicator}}%</span></td>
                   </tr>
-                  {% endif %}  
-                  {% endfor %} 
+                  {% endif %}
+                  {% endfor %}
+                </table>
+              </div>
+                    </div>
+                  </div>
+              <div class="col-md-6  col-sm-12" >
+                <div class="box box-info box-solid">
+                  <div class="box-header with-border">
+                    <h3 class="box-title" >GIAO DỊCH PHÁI SINH</h3>
+                  </div>
+              <div class="box-body no-padding">
+                <table class="table table-bordered">
+                  <tr>
+                    <th style="width: 10px; text-align:center;">Stock</th>
+                    <th style="width: 80px; ">Trade</th>
+                    <th style="width: 80px; text-align:center;">Giá KN</th>
+                    <th style="width: 80px; text-align:center;">Cập nhật</th>
+                    <th style="width: 80px; ">Lời/Lỗ</th>
+                    <th style="text-align:center;">Độ mạnh</th>
+                  </tr>
+                  {% for stock in Post_moinhat_1.update_trade_set.all %}
+                  {% if stock.Stock.Style == 'Dài hạn' %}
+                  <tr>
+                    <td><a href="{{stock.Stock.Stock.get_absolute_url}}">{{stock.Stock.Stock.Symbol}}</a></td>
+                    <td><span class="badge bg-{{stock.Color_Trade}}">{{stock.Trade}}</span></td>
+                    <td style="text-align:center;">{{stock.Price_open}}</td>
+                    <td style="text-align:center;">{{stock.Price_update}}</td>
+                    <td style="text-align:center;"><span class="description-percentage text-{{stock.Gain_Loss.1}}"><i class="fa fa-caret-{{stock.Gain_Loss.2}}"></i> {{stock.Gain_Loss.0}}%</span></td>
+                    <td style="text-align:center;"><span class="badge bg-{{stock.Color_Trade}}">{{stock.Indicator}}%</span></td>
+                  </tr>
+                  {% endif %}
+                  {% endfor %}
+                </table>
+              </div>
+                    </div>
+                  </div>
+                             <div class="col-md-6" >
+                <div class="box box-info box-solid">
+                  <div class="box-header with-border">
+                    <h3 class="box-title" >GIAO DỊCH COVERED WARRANT</h3>
+                  </div>
+              <div class="box-body no-padding">
+                <table class="table table-bordered">
+                  <tr>
+                    <th style="width: 10px; text-align:center;">Stock</th>
+                    <th style="width: 80px; ">Trade</th>
+                    <th style="width: 80px; text-align:center;">Giá KN</th>
+                    <th style="width: 80px; text-align:center;">Cập nhật</th>
+                    <th style="width: 80px; ">Lời/Lỗ</th>
+                    <th style="text-align:center;">Độ mạnh</th>
+                  </tr>
+                  {% for stock in Post_moinhat_1.update_trade_set.all %}
+                  {% if stock.Stock.Style == 'Dài hạn' %}
+                  <tr>
+                    <td><a href="{{stock.Stock.Stock.get_absolute_url}}">{{stock.Stock.Stock.Symbol}}</a></td>
+                    <td><span class="badge bg-{{stock.Color_Trade}}">{{stock.Trade}}</span></td>
+                    <td style="text-align:center;">{{stock.Price_open}}</td>
+                    <td style="text-align:center;">{{stock.Price_update}}</td>
+                    <td style="text-align:center;"><span class="description-percentage text-{{stock.Gain_Loss.1}}"><i class="fa fa-caret-{{stock.Gain_Loss.2}}"></i> {{stock.Gain_Loss.0}}%</span></td>
+                    <td style="text-align:center;"><span class="badge bg-{{stock.Color_Trade}}">{{stock.Indicator}}%</span></td>
+                  </tr>
+                  {% endif %}
+                  {% endfor %}
 
                 </table>
               </div>
-                      <!-- /.box-body -->              
                     </div>
-                    <!-- /.box -->
                   </div>
-                  <!-- /.col -->
-            {% endif %}      
-                  </div>
-                  </div>    
+            {% endif %}
               </div>
-             
-              <!-- /.Recommend-stock-->
-
+            </div>
             <div class="box-footer">
               <div class="row">
                 {% block Post_moinhat_1_detail_keywords %}
@@ -341,7 +417,7 @@
                 {% endwith %}
                 </ul>
                 {% endblock %}
-                
+
                 {% block Post_moinhat_1_detail_related_posts %}
                 {% if related_posts %}
                 <div id="related-posts">
@@ -353,31 +429,23 @@
                 </ul>
                 </div>
                 {% endif %}
-                {% endblock %}                  
+                {% endblock %}
                 {% block Post_moinhat_1_detail_rating %}
                 <div class="panel panel-default rating">
                     <div class="panel-body">
-                    
                     {% rating_for Post_moinhat_1 %}
-          
                     </div>
                 </div>
                 {% endblock %}
-
-              <!-- /.row -->
             </div>
-            <!-- /.box-footer -->
           </div>
-          <!-- /.box -->
         </div>
       </div>
-        <!-- /.col -->
         <div class="blog-item">
           <div class="blog-content">
           <div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title">HÃY ĐĂNG NHẬP VÀ CÙNG THAM GIA NHẬN ĐỊNH THỊ TRƯỜNG</h3>
-
+              <h3 class="box-title">HÃY ĐĂNG NHẬP VÀ CÙNG THAM GIA NHẬN ĐỊNH THỊ TRƯỜNG </h3>
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                 </button>
@@ -395,54 +463,88 @@
                 <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
               </div>
             </div>
-            <!-- /.box-header -->
             <div class="box-body">
-
-
-
 {% block Post_moinhat_1_detail_comments %}
 {% if Post_moinhat_1.allow_comments %}{% comments_for Post_moinhat_1 %}{% endif %}
 {% endblock %}
-
-
-
             </div>
-            <!-- ./box-body -->
             <div class="box-footer">
-
-
-
-            <!-- /.box-footer -->
           </div>
-          <!-- /.box -->
         </div>
-        <!-- /.col -->
-
       </div>
       </div>
+    </div>
+    </div>
     </div>
     </div>
   </div>
-
-
-
-
-
-
-
-
 </div><!-- Kết thúc row -->
-
 </section>
 <!-- /.content -->
-
-          
-
 {% endblock content %}
-
 {% block javascripts %}
   {{ block.super}}
 <!-- REQUIRED JS SCRIPTS -->
+<!-- page script -->
+<script>
+  $(function () {
+    "use strict";
 
+    // LINE CHART DO MANH TT
+    var line = new Morris.Line({
+      element: 'line-chart-domanhTT',
+      resize: true,
+  data: [
+      { period: '2019-06-10', park1: 80 },
+    { period: '2019-06-11', park1: 15,},
+    { period: '2019-06-12', park1: 80,},
+    { period: '2019-06-13', park1: 60 },
+    { period: '2019-06-14', park1: 50},
+    { period: '2019-06-15', park1: 75,},
+    { period: '2019-06-16', park1: 60 },
+    { period: '2019-06-17', park1: 50 },
+      {% for post in Post_moinhat_40 %}
+      { period: '{{ post.publish_date|date:"Y-m-d" }}', park1: {{ post.Streng }} },
+      {% endfor %}
 
+  ],
+  lineColors: ['#3c8dbc', ],
+  xkey: 'period',
+  ykeys: ['park1',],
+  labels: ['Độ mạnh', ],
+  xLabels: 'day',
+  xLabelAngle: 45,
+
+  resize: true
+});
+
+         // LINE CHART DO MANH TT
+    var line = new Morris.Line({
+      element: 'line-chart-ruiroTT',
+      resize: true, data: [
+      { period: '2019-06-10', park1: 80 },
+    { period: '2019-06-11', park1: 15,},
+    { period: '2019-06-12', park1: 80,},
+    { period: '2019-06-13', park1: 60 },
+    { period: '2019-06-14', park1: 50},
+    { period: '2019-06-15', park1: 75,},
+    { period: '2019-06-16', park1: 60 },
+    { period: '2019-06-17', park1: 50 },
+      {% for post in Nhandinh_posts_all %}
+      { period: '{{ post.publish_date|date:"Y-m-d" }}', park1: {{ post.Risk }} },
+      {% endfor %}
+
+  ],
+  lineColors: ['#f2301b', ],
+  xkey: 'period',
+  ykeys: ['park1',],
+  labels: ['Rủi ro', ],
+  xLabels: 'day',
+  xLabelAngle: 45,
+
+  resize: true
+});
+  });
+</script>
 {% endblock javascripts %}
+

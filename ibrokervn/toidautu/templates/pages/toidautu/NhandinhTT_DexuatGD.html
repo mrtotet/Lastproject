@@ -1,42 +1,32 @@
 {% extends "pages/toidautu/NhandinhTT_DexuatGD_list.html" %}
 {% load mezzanine_tags comment_tags keyword_tags rating_tags i18n disqus_tags staticfiles toidautu_tags %}
 {% block meta_title %}{{ Nhandinh_posts.meta_title }}{% endblock %}
-
 {% block meta_keywords %}{% metablock %}
 {% keywords_for Nhandinh_posts as tags %}
 {% for tag in tags %}{% if not forloop.first %}, {% endif %}{{ tag }}{% endfor %}
 {% endmetablock %}{% endblock %}
-
 {% block meta_description %}{% metablock %}
 {{ Nhandinh_posts.description }}
 {% endmetablock %}{% endblock %}
-
 {% block stylesheets %}
   {{ block.super }}
-
 {% endblock stylesheets %}
 {% block content %}
-
-<!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
     Nhận định Thị trường & Đề xuất Giao dịch
   </h1>
   <ol class="breadcrumb">
     <li><i class="fa fa-eye"></i> {{Nhandinh_posts.viewed}} Lượt xem </li>
-
   </ol>
-
 {% if settings.COMMENTS_DISQUS_SHORTNAME %}
 {% include "generic/includes/disqus_counts.html" %}
 {% endif %}
 </section>
-
 <!-- Main content -->
 <div class="content">
   <div class="row">
   <div class="row">
-
      <div class="col-md-6 col-sm-12 ">
       <div class="box box-solid">
         <!-- /.box-header -->
@@ -89,24 +79,19 @@
               <div class="chart" id="line-chart-domanhTT" style="height: 200px;"></div>
             </div>
             </div>
-            <!-- /.box-body -->
         </div>
-        <!-- /.col -->
   </div>
   </div>
       <div class="col-md-6 col-sm-12 ">
       <div class="box box-solid">
-        <!-- /.box-header -->
         <div class="box-body text-center">
                 <p class="text-center content-title" > Rủi ro Thị trường  </p>
                 <div class="col-md-4 col-sm-4 col-xs-12">
                            <div id="So_Rui_Ro" class="preview-textfield"></div>
                           <canvas id="Rui_Ro_TT" ></canvas>
                           <div id="cmtTT" >{{ Nhandinh_posts.do_rui_ro }}</div>
-
                     <script>
                         var opts2 = {
-
                           angle: 0.08, // The span of the gauge arc
                           lineWidth: 0.44, // The line thickness
                             radiusScale: 1, // Relative radius
@@ -149,19 +134,11 @@
             </div>
                 </div>
             </div>
-
           </div>
-          <!-- /.box -->
 
-        <!-- /.col -->
   </div>
-
-
   </div>  <!-- /.row -->
   </div>  <!-- /.row -->
-
-
-
     <div class="col-md-12">
       <div class="row">
       <div class="row">
@@ -175,16 +152,13 @@
            </a>
            {% endblock %}
            {% endif %}
-
            {% block Nhandinh_posts_list_post_title %}
              {% editable Nhandinh_posts.title %}
              <a><h3>{{ Nhandinh_posts.title }}</h3></a>
              {% endeditable %}
            {% endblock %}
-
             {% block Nhandinh_posts_list_post_metainfo %}
             {% editable Nhandinh_posts.publish_date %}
-
           <div class="entry-meta">
                 <span><i class="icon-user"></i> {% with Nhandinh_posts.user as author %}
                 <a href="{% url "nhandinhthitruong:NhandinhTT_DexuatGD_list_author" author %}">{{ author.get_full_name|default:author.username }}</a>
@@ -220,34 +194,22 @@
               {% endeditable %}
 
               {% endblock %}
-
               <div class= "facebook-share">
-
                   <div class="fb-like" data-href="https://www.ibrokervn.com{{Nhandinh_posts.get_absolute_url}}" data-layout="button_count" data-ref data-action="like" data-size="small" data-show-faces="true" data-share="false"></div>
                   <div class="fb-share-button" data-href="https://www.ibrokervn.com{{Nhandinh_posts.get_absolute_url}}" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.ibrokervn.com%2Ftoidautu%2Fnhandinhthitruong%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"></a></div>
                     <div class="zalo-share-button" data-href="https://www.ibrokervn.com{{Nhandinh_posts.get_absolute_url}}" data-oaid="579745863508352884" data-layout="1" data-color="blue" data-customize=false></div>
               </div>
-
-
-            <!-- /.box-header -->
             <div class="box-body">
               <div class="row">
-
                 <div class="col-md-6 col-sm-12">
                   <div class="content-title" >
                     NHẬN ĐỊNH THỊ TRƯỜNG
-
                   </div>
-
-
                   {% block Nhandinh_posts_detail_content %}
-
                   {% editable Nhandinh_posts.content %}
                   {{ Nhandinh_posts.content|richtext_filters }}
                   {% endeditable %}
                   {% endblock %}
-
-
                 </div>
                 <!-- /.col -->
                 <div class="col-md-6 col-sm-12">
@@ -279,16 +241,10 @@
                             <td>  {% editable nganh.CP_noibat %}{{nganh.CP_noibat}}  {% endeditable %}</td>
                           </tr>
                            {% endfor %}
-
                       </table>
                       {% endif %}
-
                 </div>
-                <!-- /.col -->
-
-               {% if Nhandinh_posts.update_trade_set.all %}
-
-                    <!-- CỘT TRÁI -->
+                 {% if Nhandinh_posts.update_trade_set.all %}
                  <div class="col-md-6  col-sm-12" >
                   <p class="text-center content-title" >
                     ĐỀ XUẤT GIAO DỊCH
@@ -300,10 +256,7 @@
                      <div class="box-header with-border">
                        <h3 class="box-title">ĐẦU TƯ NGẮN HẠN</h3>
                       </div>
-                     <!-- /.box-header -->
-
               <div class="box-body no-padding">
-
                 <table class="table table-bordered">
                   <tr>
                     <th style="width: 10px; text-align:center;">Stock</th>
@@ -315,30 +268,20 @@
                   </tr>
                   {% for stock in Nhandinh_posts.update_trade_set.all %}
                   {% if stock.Stock.Style == "Ngắn hạn" %}
-
                   <tr>
                     <td><a href="{{stock.Stock.Stock.get_absolute_url}}">{{stock.Stock.Stock.Symbol}}</a></td>
                     <td><span class="badge bg-{{stock.Color_Trade}}">{{stock.Trade}}</span></td>
                     <td style="text-align:center;">{{stock.Price_open}}</td>
                     <td style="text-align:center;">{{stock.Price_update}}</td>
-
                     <td style="text-align:center;"><span class="description-percentage text-{{stock.Gain_Loss.1}}"><i class="fa fa-caret-{{stock.Gain_Loss.2}}"></i> {{stock.Gain_Loss.0}}%</span></td>
-
-
-
                     <td style="text-align:center;"><span class="badge bg-{{stock.Color_Trade}}">{{stock.Indicator}}%</span></td>
                   </tr>
                   {% endif %}
                   {% endfor %}
-
                 </table>
               </div>
-                     <!-- /.box-body -->
                    </div>
-                   <!-- /.box -->
                  </div>
-                 <!-- /.col -->
-
               <!-- CỘT PHẢI -->
               <div class="col-md-6  col-sm-12" >
                 <div class="box box-info box-solid">
@@ -360,35 +303,24 @@
                   {% for stock in Nhandinh_posts.update_trade_set.all %}
                   {% if stock.Stock.Style == 'Dài hạn' %}
                   <tr>
-
                     <td><a href="{{stock.Stock.Stock.get_absolute_url}}">{{stock.Stock.Stock.Symbol}}</a></td>
                     <td><span class="badge bg-{{stock.Color_Trade}}">{{stock.Trade}}</span></td>
                     <td style="text-align:center;">{{stock.Price_open}}</td>
                     <td style="text-align:center;">{{stock.Price_update}}</td>
-
-
-
                     <td style="text-align:center;"><span class="description-percentage text-{{stock.Gain_Loss.1}}"><i class="fa fa-caret-{{stock.Gain_Loss.2}}"></i> {{stock.Gain_Loss.0}}%</span></td>
-
                     <td style="text-align:center;"><span class="badge bg-{{stock.Color_Trade}}">{{stock.Indicator}}%</span></td>
                   </tr>
                   {% endif %}
                   {% endfor %}
-
                 </table>
               </div>
-                      <!-- /.box-body -->
                     </div>
-                    <!-- /.box -->
                   </div>
-                  <!-- /.col -->
               <div class="col-md-6  col-sm-12" >
                 <div class="box box-info box-solid">
                   <div class="box-header with-border">
                     <h3 class="box-title" >GIAO DỊCH PHÁI SINH</h3>
                   </div>
-                  <!-- /.box-header -->
-
               <div class="box-body no-padding">
                 <table class="table table-bordered">
                   <tr>
@@ -402,35 +334,24 @@
                   {% for stock in Nhandinh_posts.update_trade_set.all %}
                   {% if stock.Stock.Style == 'Dài hạn' %}
                   <tr>
-
                     <td><a href="{{stock.Stock.Stock.get_absolute_url}}">{{stock.Stock.Stock.Symbol}}</a></td>
                     <td><span class="badge bg-{{stock.Color_Trade}}">{{stock.Trade}}</span></td>
                     <td style="text-align:center;">{{stock.Price_open}}</td>
                     <td style="text-align:center;">{{stock.Price_update}}</td>
-
-
-
                     <td style="text-align:center;"><span class="description-percentage text-{{stock.Gain_Loss.1}}"><i class="fa fa-caret-{{stock.Gain_Loss.2}}"></i> {{stock.Gain_Loss.0}}%</span></td>
-
                     <td style="text-align:center;"><span class="badge bg-{{stock.Color_Trade}}">{{stock.Indicator}}%</span></td>
                   </tr>
                   {% endif %}
                   {% endfor %}
-
                 </table>
               </div>
-                      <!-- /.box-body -->
                     </div>
-                    <!-- /.box -->
                   </div>
-                  <!-- /.col -->
-                            <div class="col-md-6" >
+                             <div class="col-md-6" >
                 <div class="box box-info box-solid">
                   <div class="box-header with-border">
                     <h3 class="box-title" >GIAO DỊCH COVERED WARRANT</h3>
                   </div>
-                  <!-- /.box-header -->
-
               <div class="box-body no-padding">
                 <table class="table table-bordered">
                   <tr>
@@ -444,16 +365,11 @@
                   {% for stock in Nhandinh_posts.update_trade_set.all %}
                   {% if stock.Stock.Style == 'Dài hạn' %}
                   <tr>
-
                     <td><a href="{{stock.Stock.Stock.get_absolute_url}}">{{stock.Stock.Stock.Symbol}}</a></td>
                     <td><span class="badge bg-{{stock.Color_Trade}}">{{stock.Trade}}</span></td>
                     <td style="text-align:center;">{{stock.Price_open}}</td>
                     <td style="text-align:center;">{{stock.Price_update}}</td>
-
-
-
                     <td style="text-align:center;"><span class="description-percentage text-{{stock.Gain_Loss.1}}"><i class="fa fa-caret-{{stock.Gain_Loss.2}}"></i> {{stock.Gain_Loss.0}}%</span></td>
-
                     <td style="text-align:center;"><span class="badge bg-{{stock.Color_Trade}}">{{stock.Indicator}}%</span></td>
                   </tr>
                   {% endif %}
@@ -461,18 +377,11 @@
 
                 </table>
               </div>
-                      <!-- /.box-body -->
                     </div>
-                    <!-- /.box -->
                   </div>
-                  <!-- /.col -->
             {% endif %}
               </div>
-              <!-- /.row -->
             </div>
-            <!-- ./box-body -->
-
-
             <div class="box-footer">
               <div class="row">
                 {% block Nhandinh_posts_detail_keywords %}
@@ -522,29 +431,19 @@
                 {% block Nhandinh_posts_detail_rating %}
                 <div class="panel panel-default rating">
                     <div class="panel-body">
-
                     {% rating_for Nhandinh_posts %}
-
                     </div>
                 </div>
                 {% endblock %}
-
-              <!-- /.row -->
             </div>
-            <!-- /.box-footer -->
           </div>
-          <!-- /.box -->
         </div>
       </div>
-        <!-- /.col -->
         <div class="blog-item">
           <div class="blog-content">
           <div class="box">
             <div class="box-header with-border">
               <h3 class="box-title">HÃY ĐĂNG NHẬP VÀ CÙNG THAM GIA NHẬN ĐỊNH THỊ TRƯỜNG </h3>
-
-
-
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                 </button>
@@ -562,29 +461,14 @@
                 <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
               </div>
             </div>
-            <!-- /.box-header -->
             <div class="box-body">
-
-
-
 {% block Nhandinh_posts_detail_comments %}
 {% if Nhandinh_posts.allow_comments %}{% comments_for Nhandinh_posts %}{% endif %}
 {% endblock %}
-
-
-
             </div>
-            <!-- ./box-body -->
             <div class="box-footer">
-
-
-
-            <!-- /.box-footer -->
           </div>
-          <!-- /.box -->
         </div>
-        <!-- /.col -->
-
       </div>
       </div>
     </div>
@@ -592,33 +476,18 @@
     </div>
     </div>
   </div>
-
-
-
-
-
-
-
-
 </div><!-- Kết thúc row -->
-
 </section>
 <!-- /.content -->
-
-
-
 {% endblock content %}
-
 {% block javascripts %}
   {{ block.super}}
 <!-- REQUIRED JS SCRIPTS -->
-
-<!-- page script -->
 <!-- page script -->
 <script>
   $(function () {
     "use strict";
-      {% block Linechart %}
+
     // LINE CHART DO MANH TT
     var line = new Morris.Line({
       element: 'line-chart-domanhTT',
@@ -646,15 +515,8 @@
 
   resize: true
 });
-  {% endblock %}
 
-  });
-</script>
-
-<script>
-  $(function () {
-    "use strict";
-    // LINE CHART DO MANH TT
+         // LINE CHART DO MANH TT
     var line = new Morris.Line({
       element: 'line-chart-ruiroTT',
       resize: true, data: [
@@ -680,11 +542,7 @@
 
   resize: true
 });
-
-
   });
 </script>
-
-
 {% endblock javascripts %}
 
