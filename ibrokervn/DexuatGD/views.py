@@ -106,7 +106,7 @@ def Nhandinh_detail_moinhat(request, year=None, month=None, day=None,
     Post_moinhat_1.viewed +=1
     Post_moinhat_1.save()
     related_posts = Post_moinhat_1.related_posts.published(for_user=request.user)
-    context = {"Post_moinhat_1": Post_moinhat_1,"editable_obj": Nhandinh_posts,
+    context = {"Post_moinhat_1": Post_moinhat_1,"Nhandinh_posts": Nhandinh_posts,
                 "related_posts": related_posts}
     context.update(extra_context or {})
     templates = [u"pages/toidautu/NhandinhTT_DexuatGD_moinhat.html", template]
@@ -115,12 +115,15 @@ def Nhandinh_detail_moinhat(request, year=None, month=None, day=None,
 def Nhandinh_detail(request, slug, year=None, month=None, day=None,
                    template="pages/toidautu/NhandinhTT_DexuatGD.html",
                    extra_context=None):
-    Nhandinh_posts = Recommend.objects.published(for_user=request.user)
-    Nhandinh_posts = get_object_or_404(Nhandinh_posts, slug=slug)
+    Nhandinh_posts_all = Recommend.objects.published(for_user=request.user)
+    Post_moinhat_40 = Nhandinh_posts_all.order_by('-publish_date')[:40]
+    #Post_moinhat_40 = reversed(Post_moinhat_40) # đảo ngược đồ thị từ cũ tới mới
+    Post_moinhat_40_ruiro = Nhandinh_posts_all.order_by('-publish_date')[:40]
+    Nhandinh_posts = get_object_or_404(Nhandinh_posts_all, slug=slug)
     Nhandinh_posts.viewed +=1
     Nhandinh_posts.save()
     related_posts = Nhandinh_posts.related_posts.published(for_user=request.user)
-    context = {"Nhandinh_posts": Nhandinh_posts,"editable_obj": Nhandinh_posts,
+    context = {"Post_moinhat_40_ruiro": Post_moinhat_40_ruiro,"Nhandinh_posts_all": Nhandinh_posts_all,"Post_moinhat_40": Post_moinhat_40,"Nhandinh_posts": Nhandinh_posts,"editable_obj": Nhandinh_posts,
                 "related_posts": related_posts}
     context.update(extra_context or {})
     templates = [u"pages/toidautu/NhandinhTT_DexuatGD_%s.html" % str(slug), template]

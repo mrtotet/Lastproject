@@ -23,8 +23,8 @@
     Nhận định Thị trường & Đề xuất Giao dịch
   </h1>
   <ol class="breadcrumb">
-    <li><i class="fa fa-eye"></i>  {{Nhandinh_posts.viewed}} Lượt xem </li>
- 
+    <li><i class="fa fa-eye"></i> {{Nhandinh_posts.viewed}} Lượt xem </li>
+
   </ol>
 
 {% if settings.COMMENTS_DISQUS_SHORTNAME %}
@@ -36,14 +36,15 @@
 <section class="content">
   <div class="row">
   <div class="row">
-      <div class="col-md-4">
-          <div class="box box-solid">
 
+      <div class="col-md-6 col-sm-12">
+          <div class="box box-solid">
             <!-- /.box-header -->
             <div class="box-body text-center">
                 <p class="text-center content-title" >
-                    Đánh mạnh Thị trường
-                  </p>
+                    Độ mạnh Thị trường
+                </p>
+                <div class="col-md-4 col-sm-12 ">
                     <div class="box-body no-padding">
                       <!-- gauge.js -->
                       <div >
@@ -91,102 +92,95 @@
                         gauge.animationSpeed = 32; // set animation speed (32 is default value)
                         gauge.set({{ Nhandinh_posts.Streng }}); // set actual value
                       </script>
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-        </div>
-        <!-- /.col -->
-      <div class="col-md-8" >
-          <div class="box box-solid" style="height: 300px">
-            <div class="box-header">
-              <h3 class="box-title text-danger">Sparkline Pie</h3>
 
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
-              </div>
+
+
             </div>
-            <!-- /.box-header -->
-            <div class="box-body text-center">
-              <div class="sparkline" data-type="pie" data-offset="90" data-width="100px" data-height="100px">
-                6,4,8
-              </div>
+                <div class="col-md-8 col-sm-12 ">
+            <div class="box-body chart-responsive">
+              <div class="chart" id="line-chart-domanhTT" style="height: 200px;"></div>
             </div>
+
+                </div>
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
         </div>
         <!-- /.col -->
-              <div class="col-md-4">
+
+
+  </div>
+      <div class="col-md-6 col-sm-12">
           <div class="box box-solid">
             <div class="box-body text-center">
                 <p class="text-center content-title" >
                     Rủi ro Thị trường
                   </p>
+                <div class="col-md-4 col-sm-12">
                     <div class="box-body no-padding">
                       <!-- gauge.js -->
                       <div >
                         <div>
                            <div id="So_Rui_Ro" class="preview-textfield"></div>
                           <canvas id="Rui_Ro_TT" ></canvas>
-                          <div id="cmtTT" >{{ Nhandinh_posts.do_manh }}</div>
+                          <div id="cmtTT" >{{ Nhandinh_posts.do_rui_ro }}</div>
                         </div>
                       </div>
                     </div>
                     <script>
-var opts2 = {
-  angle: -0.18, // The span of the gauge arc
-  lineWidth: 0.36, // The line thickness
-  radiusScale: 1, // Relative radius
-  pointer: {
-    length: 0.65, // // Relative to gauge radius
-    strokeWidth: 0.035, // The thickness
-    color: '#000000' // Fill color
-  },
-  limitMax: false,     // If false, max value increases automatically if value > maxValue
-  limitMin: false,     // If true, the min value of the gauge will be fixed
-  colorStart: '#5BCF3E',   // Colors
-  colorStop: '#DA602C',    // just experiment with them
-  strokeColor: '#2DE03F',  // to see which ones work best for you
-  generateGradient: true,
-  highDpiSupport: true,     // High resolution support
+                        var opts2 = {
 
-};
+                          angle: 0.08, // The span of the gauge arc
+                          lineWidth: 0.44, // The line thickness
+                            radiusScale: 1, // Relative radius
+                          pointer: {
+                            length: 0.6, // // Relative to gauge radius
+                            strokeWidth: 0.035, // The thickness
+                            color: '#000000' // Fill color
+                          },
+                          limitMax: false,     // If false, max value increases automatically if value > maxValue
+                          limitMin: false,     // If true, the min value of the gauge will be fixed
+                          colorStart: '#6FADCF',   // Colors
+                          colorStop: '#F2301B',    // just experiment with them
+                          strokeColor: '#23DA2F',  // to see which ones work best for you
+                          generateGradient: true,
+                          highDpiSupport: true,     // High resolution support
+                          // renderTicks is Optional
+                          renderTicks: {
+                            divisions: 8,
+                            divWidth: 1.2,
+                            divLength: 0.59,
+                            divColor: '#333333',
+                            subDivisions: 4,
+                            subLength: 0.26,
+                            subWidth: 1,
+                            subColor: '#666666'
+                          }
+                        };
                         var target = document.getElementById('Rui_Ro_TT'); // your canvas element
                         var gauge = new Gauge(target).setOptions(opts2); // create sexy gauge!
                         gauge.setTextField(document.getElementById("So_Rui_Ro"));
                         gauge.maxValue = 100; // set max gauge value
                         gauge.setMinValue(0);  // Prefer setter over gauge.minValue = 0
                         gauge.animationSpeed = 32; // set animation speed (32 is default value)
-                        gauge.set({{ Nhandinh_posts.Streng }}); // set actual value
+                        gauge.set({{ Nhandinh_posts.Risk }}); // set actual value
                       </script>
+                </div>
+               <div class="col-md-8 col-sm-12 ">
+            <div class="box-body chart-responsive">
+              <div class="chart" id="line-chart-ruiroTT" style="height: 200px;"></div>
             </div>
-          </div>
-          <!-- /.box -->
-        </div>
-        <!-- /.col -->
-              <div class="col-md-8" >
-          <div class="box box-solid" style="height: 300px">
-            <div class="box-header">
-              <h3 class="box-title text-danger">Sparkline Pie</h3>
+                </div>
+            </div>
 
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
-              </div>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body text-center">
-              <div class="sparkline" data-type="pie" data-offset="90" data-width="100px" data-height="100px">
-                6,4,8
-              </div>
-            </div>
-            <!-- /.box-body -->
           </div>
           <!-- /.box -->
-        </div>
+
         <!-- /.col -->
-    <div class="col-md-12">   
-      <div class="blog">  
+  </div>
+        <!-- /.col -->
+    <div class="col-md-12">
+      <div class="blog">
         <div class="blog-item">
           <div class="blog-content">
           {% if settings.BLOG_USE_FEATURED_IMAGE and Nhandinh_posts.featured_image %}
@@ -196,16 +190,16 @@ var opts2 = {
            </a>
            {% endblock %}
            {% endif %}
-   
-           {% block Nhandinh_posts_list_post_title %}  
+
+           {% block Nhandinh_posts_list_post_title %}
              {% editable Nhandinh_posts.title %}
              <a><h3>{{ Nhandinh_posts.title }}</h3></a>
              {% endeditable %}
-           {% endblock %}      
+           {% endblock %}
 
             {% block Nhandinh_posts_list_post_metainfo %}
             {% editable Nhandinh_posts.publish_date %}
-   
+
           <div class="entry-meta">
                 <span><i class="icon-user"></i> {% with Nhandinh_posts.user as author %}
                 <a href="{% url "nhandinhthitruong:NhandinhTT_DexuatGD_list_author" author %}">{{ author.get_full_name|default:author.username }}</a>
@@ -220,11 +214,11 @@ var opts2 = {
                 "{{ category }}"  </strong></a>{% if not forloop.last %}, {% endif %}
                 {% endfor %}
                 {% endif %}
-                {% endwith %}                                
+                {% endwith %}
                                 </span>
                                 <span><i class="icon-calendar"></i> {% blocktrans with sometime=Nhandinh_posts.publish_date|timesince %}{{ sometime }} {% endblocktrans %}</span>
-                                <span><i class="icon-comment"></i> 
-                                {% if Nhandinh_posts.allow_comments %}              
+                                <span><i class="icon-comment"></i>
+                                {% if Nhandinh_posts.allow_comments %}
                   {% if settings.COMMENTS_DISQUS_SHORTNAME %}
                   <a href="{{ Nhandinh_posts.get_absolute_url }}#disqus_thread"
                     data-disqus-identifier="{% disqus_id_for Nhandinh_posts %}">
@@ -235,7 +229,7 @@ var opts2 = {
                     {% blocktrans count comments_count=Nhandinh_posts.comments_count %}{{ comments_count }} comment{% plural %}{{ comments_count }} nhận định khác{% endblocktrans %}
                   </a>
                   {% endif %}
-                  {% endif %}                           
+                  {% endif %}
                  </span>
             </div>
               {% endeditable %}
@@ -243,11 +237,11 @@ var opts2 = {
               {% endblock %}
 
               <div class= "facebook-share">
-                    <div class="fb-share-button" data-href="https://www.ibrokervn.com{{Nhandinh_posts.get_absolute_url}}" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.ibrokervn.com%2Ftoidautu%2Fnhandinhthitruong%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"></a>
-                    </div>
-                    <div class="zalo-share-button" data-href="https://www.ibrokervn.com{{Nhandinh_posts.get_absolute_url}}" data-oaid="579745863508352884" data-layout="1" data-color="blue" data-customize=false></div>
 
-              </div>      
+                  <div class="fb-like" data-href="https://www.ibrokervn.com{{Nhandinh_posts.get_absolute_url}}" data-layout="button_count" data-ref data-action="like" data-size="small" data-show-faces="true" data-share="false"></div>
+                  <div class="fb-share-button" data-href="https://www.ibrokervn.com{{Nhandinh_posts.get_absolute_url}}" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.ibrokervn.com%2Ftoidautu%2Fnhandinhthitruong%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"></a></div>
+                    <div class="zalo-share-button" data-href="https://www.ibrokervn.com{{Nhandinh_posts.get_absolute_url}}" data-oaid="579745863508352884" data-layout="1" data-color="blue" data-customize=false></div>
+              </div>
 
 
             <!-- /.box-header -->
@@ -257,13 +251,12 @@ var opts2 = {
                 <div class="col-md-6">
                   <div class="content-title" >
                     NHẬN ĐỊNH THỊ TRƯỜNG
-                  <div class= "facebook-like">
-                  <div class="fb-like" data-href="https://www.ibrokervn.com{{Nhandinh_posts.get_absolute_url}}" data-layout="button_count" data-ref data-action="like" data-size="small" data-show-faces="true" data-share="false"></div>
-                  </div>
+
                   </div>
 
 
                   {% block Nhandinh_posts_detail_content %}
+
                   {% editable Nhandinh_posts.content %}
                   {{ Nhandinh_posts.content|richtext_filters }}
                   {% endeditable %}
@@ -314,6 +307,9 @@ var opts2 = {
                  <div class="col-md-6" >
                   <p class="text-center content-title" >
                     ĐỀ XUẤT GIAO DỊCH
+                  </p>
+                  <p >
+                     (*) Click vào cổ phiếu để xem chi tiết
                   </p>
                    <div class="box box-info box-solid">
                      <div class="box-header with-border">
@@ -525,7 +521,7 @@ var opts2 = {
                 {% endwith %}
                 </ul>
                 {% endblock %}
-                
+
                 {% block Nhandinh_posts_detail_related_posts %}
                 {% if related_posts %}
                 <div id="related-posts">
@@ -537,13 +533,13 @@ var opts2 = {
                 </ul>
                 </div>
                 {% endif %}
-                {% endblock %}                  
+                {% endblock %}
                 {% block Nhandinh_posts_detail_rating %}
                 <div class="panel panel-default rating">
                     <div class="panel-body">
-                    
+
                     {% rating_for Nhandinh_posts %}
-          
+
                     </div>
                 </div>
                 {% endblock %}
@@ -560,7 +556,9 @@ var opts2 = {
           <div class="blog-content">
           <div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title">HÃY ĐĂNG NHẬP VÀ CÙNG THAM GIA NHẬN ĐỊNH THỊ TRƯỜNG</h3>
+              <h3 class="box-title">HÃY ĐĂNG NHẬP VÀ CÙNG THAM GIA NHẬN ĐỊNH THỊ TRƯỜNG </h3>
+
+
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -620,7 +618,7 @@ var opts2 = {
 </section>
 <!-- /.content -->
 
-          
+
 
 {% endblock content %}
 
@@ -628,5 +626,78 @@ var opts2 = {
   {{ block.super}}
 <!-- REQUIRED JS SCRIPTS -->
 
+<!-- page script -->
+<!-- page script -->
+<script>
+  $(function () {
+    "use strict";
+      {% block Linechart %}
+    // LINE CHART DO MANH TT
+    var line = new Morris.Line({
+      element: 'line-chart-domanhTT',
+      resize: true,
+  data: [
+      { period: '2019-06-10', park1: 80 },
+    { period: '2019-06-11', park1: 15,},
+    { period: '2019-06-12', park1: 80,},
+    { period: '2019-06-13', park1: 60 },
+    { period: '2019-06-14', park1: 50},
+    { period: '2019-06-15', park1: 75,},
+    { period: '2019-06-16', park1: 60 },
+    { period: '2019-06-17', park1: 50 },
+      {% for post in Post_moinhat_40 %}
+      { period: '{{ post.publish_date|date:"Y-m-d" }}', park1: {{ post.Streng }} },
+      {% endfor %}
+
+  ],
+  lineColors: ['#3c8dbc', ],
+  xkey: 'period',
+  ykeys: ['park1',],
+  labels: ['Độ mạnh', ],
+  xLabels: 'day',
+  xLabelAngle: 45,
+
+  resize: true
+});
+  {% endblock %}
+
+  });
+</script>
+
+<script>
+  $(function () {
+    "use strict";
+    // LINE CHART DO MANH TT
+    var line = new Morris.Line({
+      element: 'line-chart-ruiroTT',
+      resize: true, data: [
+      { period: '2019-06-10', park1: 80 },
+    { period: '2019-06-11', park1: 15,},
+    { period: '2019-06-12', park1: 80,},
+    { period: '2019-06-13', park1: 60 },
+    { period: '2019-06-14', park1: 50},
+    { period: '2019-06-15', park1: 75,},
+    { period: '2019-06-16', park1: 60 },
+    { period: '2019-06-17', park1: 50 },
+      {% for post in Nhandinh_posts_all %}
+      { period: '{{ post.publish_date|date:"Y-m-d" }}', park1: {{ post.Risk }} },
+      {% endfor %}
+
+  ],
+  lineColors: ['#f2301b', ],
+  xkey: 'period',
+  ykeys: ['park1',],
+  labels: ['Rủi ro', ],
+  xLabels: 'day',
+  xLabelAngle: 45,
+
+  resize: true
+});
+
+
+  });
+</script>
+
 
 {% endblock javascripts %}
+

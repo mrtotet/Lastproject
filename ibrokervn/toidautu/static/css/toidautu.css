@@ -2,7 +2,7 @@
 
 #preview-textfield, .preview-textfield{
   position: relative; top: 10px; left: 0; right: 0;
-  text-align: center; font-size: 2em; font-weight: bold;
+  text-align: center; font-size: 1.4em; font-weight: bold;
   color: black; font-family: 'Amaranth', sans-serif;
 }
 
@@ -16,7 +16,7 @@
 
 #cmtTT{
   position: relative; top: 10px; left: 0; right: 0;
-  text-align: center; font-size: 2em; font-weight: bold;
+  text-align: center; font-size: 1.4em; font-weight: bold;
   color: black; font-family: 'Amaranth', sans-serif;
 } 
 
@@ -24,6 +24,7 @@ canvas {
     display: block;  
     top: 10px;
     position: relative;
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
 }
@@ -73,7 +74,7 @@ canvas {
       padding-top: 5px; 
       }
 
-.fb-share-button {
+.fb-share-button , .fb_iframe_widget {
       position: absolute;
       display: block; 
       top: -6px; 

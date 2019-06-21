@@ -99,17 +99,17 @@ class Estimate (models.Model):
     def Gain_Loss_close(self):
         return self.Cal_Gain_loss(self.Price_open, self.Price_close, )
 
-    #@staticmethod
-    #def Cal_PE_PB(a,b):
-    #    Cal = (a/b)
-    #    return  Cal
+    @staticmethod
+    def Cal_PE_PB(a,b):
+        Cal = (a/b)
+        return  Cal
 
-    #EPS =                   models.IntegerField("EPS",null=True, blank=True)
-    #def PE(self):
-    #    return self.Cal_PE_PB(self.Price_close, self.EPS)
-    #Bookvalue =             models.IntegerField("Book Value",null=True, blank=True)
-    #def PB(self):
-    #    return self.Cal_PE_PB(self.Price_close, self.Bookvalue)
+    EPS =                   models.IntegerField("EPS",null=True, blank=True)
+    def PE(self):
+        return self.Cal_PE_PB(self.Price_close, self.EPS)
+    Bookvalue =             models.IntegerField("Book Value",null=True, blank=True)
+    def PB(self):
+        return self.Cal_PE_PB(self.Price_close, self.Bookvalue)
     Liquidity_30days =      models.BigIntegerField("KL GDTB 30 ngày",blank=True, null=True, )
     Price_change_5days=     models.IntegerField("Giá thay đổi 5 ngày",blank=True, null=True,)
     Price_change_20days=    models.IntegerField("Giá thay đổi 20 ngày",blank=True, null=True,)
@@ -133,7 +133,7 @@ class Estimate (models.Model):
     Commnent =              models.TextField("Đánh giá DN", max_length=2000, blank=True, null=True,help_text='mặc định chuẩn, có thể thay đổi khi cần thiết')
     #Indicator =             models.IntegerField(default=50,  validators = [MaxValueValidator(100),MinValueValidator(0)],help_text='0-100')
     action =                models.TextField('Nhận xét',max_length=2000, blank=True, null=True,help_text='Cho nhận xét về DN')
-    Risk = models.IntegerField('Rủi ro',default=50, validators=[MaxValueValidator(100), MinValueValidator(0)],
+    Risk =                  models.IntegerField('Rủi ro',default=50, validators=[MaxValueValidator(100), MinValueValidator(0)],
                                     help_text='0-100')
     estimate_url =          models.URLField('URL',max_length= 500,blank=True, null=True,help_text='đường dẫn youtube hoặc url khác')
 
@@ -198,6 +198,7 @@ class Recommend(Displayable, Ownable, RichText, AdminThumbMixin,):
 
     Stock_chosen =  models.ManyToManyField(Estimate, through= 'Update_Trade', verbose_name="Chọn CP", blank=True,related_name="Recommend")
     Streng =    models.IntegerField("Độ mạnh",null=True, blank=True, validators = [MaxValueValidator(100),MinValueValidator(0)], help_text='0-100')
+    Risk =      models.IntegerField("Rủi ro",null=True, blank=True, validators = [MaxValueValidator(100),MinValueValidator(0)], help_text='0-100')
 
     @staticmethod
     def sohoa(a):
@@ -218,6 +219,26 @@ class Recommend(Displayable, Ownable, RichText, AdminThumbMixin,):
         return Do_manh
     def do_manh(self):
         return self.sohoa(self.Streng)
+
+    @staticmethod
+    def sohoa2(a):
+        So = int(a)
+        if So >= 85:
+            do_rui_ro= "RẤT CAO"
+        elif So >= 75:
+            do_rui_ro = "CAO"
+        elif So >= 65:
+            do_rui_ro = "KHÁ CAO"
+        elif So >= 40:
+            do_rui_ro = "TRUNG BÌNH"
+        elif So >= 30:
+            do_rui_ro = "THẤP"
+
+        else:
+            do_rui_ro = "RẤT THẤP"
+        return do_rui_ro
+    def do_rui_ro(self):
+        return self.sohoa2(self.Risk)
     categories = models.ManyToManyField("Recommend_Category",
                                         blank=True, related_name="Recommends")
     allow_comments = models.BooleanField(verbose_name="Allow comments",

@@ -18,7 +18,7 @@
     <title>{% block meta_title %}{% endblock %}{% if settings.SITE_TITLE %} | {{ settings.SITE_TITLE }}{% endif %}</title>
     <link rel="shortcut icon" href="{% static "images/logo_ibrokervn/favicon.ico" %}">
     <link rel="icon" href="{% static "images/logo_ibrokervn/favicon.ico" %}">
-    {% compress csss %}    
+    {% compress csss %}
     {% block stylesheets %}
       <link href="{% static "css/reset.css" %}" rel="stylesheet">
       <link href="{% static "css/bootstrap.css" %}" rel="stylesheet">
@@ -29,8 +29,11 @@
       {% if LANGUAGE_BIDI %}
       <link rel="stylesheet" href="{% static "css/bootstrap-rtl.css" %}">
       {% endif %}
+
+      <link rel="stylesheet" href="{% static "bower_components/morris.js/morris.css" %}">
+
       <link href="{% static "css/font-awesome1.min.css" %}" rel="stylesheet">
-      <link href="{% static "css/ionicons.min.css" %}" rel="stylesheet">
+      <link href="{% static "bower_components/morris.js/morris.css" %}" rel="stylesheet">
       <link href="{% static "css/AdminLTE.css" %}" rel="stylesheet">
       <link rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -42,16 +45,22 @@
     {% endblock stylesheets %}
     {% endcompress %}
     {% compress js %}
+
+      <script src="{% static "bower_components/jquery/dist/jquery.min.js" %}"></script>
+      <script src="{% static "bower_components/raphael/raphael.min.js" %}"></script>
+     <script src="{% static "bower_components/morris.js/morris.min.js" %}"></script>
+
     <script src="{% static "mezzanine/js/"|add:settings.JQUERY_FILENAME %}"></script>
     <script src="{% static "js/bootstrap.js" %}"></script>
     <script src="{% static "js/bootstrap-extras.js" %}"></script>
     <script src="https://sp.zalo.me/plugins/sdk.js"></script>
     <script src="{% static "js/gauge.js" %}"></script>
+
     {% block extra_js %}{% endblock %}
     {% endcompress %}
   {% endblock head %}
 </head>
-<body class="{% block body_class %}hold-transition skin-blue fixed sidebar-mini {% endblock body_class %} ">
+<body class="{% block body_class %}hold-transition skin-blue sidebar-mini {% endblock body_class %} ">
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v3.2&appId=1129257863825756&autoLogAppEvents=1"></script>
 {% block body %}
   <div class="wrapper">
@@ -93,6 +102,9 @@
     {% endblock Control_Sidebar %}
     </div>
 {% block javascripts %}
+<script src="{% static "bower_components/jquery/dist/jquery.min.js"%}></script>
+<script src="{% static "bower_components/raphael/raphael.min.js"%}></script>
+<script src="{% static "bower_components/morris.js/morris.min.js"%}></script>
 <script src="{% static "js/jquery.min.js" %}"></script>
 <script src="{% static "js/bootstrap1.min.js" %}"></script>
 <script src="{% static "js/adminlte.min.js" %}"></script>
