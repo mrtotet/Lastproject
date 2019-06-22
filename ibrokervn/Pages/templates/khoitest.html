@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}"{% if LANGUAGE_BIDI %} dir="rtl"{% endif %}>
+
+<link href="{% static "bower_components/morris.js/morris.css" %}" rel="stylesheet">
+  <!-- Morris charts -->
+  <link rel="stylesheet" href="../../bower_components/morris.js/morris.css">
+            
+            <div class="box-body chart-responsive">
+              <div class="chart" id="line-chart" style="height: 300px;"></div>
+            </div>
+
+   
+<!-- jQuery 3 -->
+<script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+<script src="../../bower_components/raphael/raphael.min.js"></script>
+<script src="../../bower_components/morris.js/morris.min.js"></script>
+<!-- FastClick -->
+{% block javascripts %}
+<script src="{% static "bower_components/jquery/dist/jquery.min.js"%}></script>
+<script src="{% static "bower_components/raphael/raphael.min.js"%}></script>
+<script src="{% static "bower_components/morris.js/morris.min.js"%}></script>
+<script src="{% static "js/adminlte.min.js" %}"></script>
+{% endblock javascripts %}
+<!-- page script -->
+<script>
+  $(function () {
+    "use strict";
+
+    // AREA CHART
+  
+    // LINE CHART
+    var line = new Morris.Line({
+      element: 'line-chart',
+      resize: true,
+      data: [
+        {y: '2011 Q1', item1: 2666},
+        {y: '2011 Q2', item1: 2778},
+        {y: '2011 Q3', item1: 4912},
+        {y: '2011 Q4', item1: 3767},
+        {y: '2012 Q1', item1: 6810},
+        {y: '2012 Q2', item1: 5670},
+        {y: '2012 Q3', item1: 4820},
+        {y: '2012 Q4', item1: 15073},
+        {y: '2013 Q1', item1: 10687},
+        {y: '2013 Q2', item1: 8432}
+      ],
+      xkey: 'y',
+      ykeys: ['item1'],
+      labels: ['Item 1'],
+      lineColors: ['#3c8dbc'],
+      hideHover: 'auto'
+    });
+
+  
+  });
+</script>
+{% block javascripts %}
+<script src="{% static "bower_components/jquery/dist/jquery.min.js"%}></script>
+<script src="{% static "bower_components/raphael/raphael.min.js"%}></script>
+<script src="{% static "bower_components/morris.js/morris.min.js"%}></script>
+<script src="{% static "js/adminlte.min.js" %}"></script>
+{% endblock javascripts %}
+{% endblock body %}
+{% block footer_js %}
+      {% include "includes/footer_scripts.html" %}
+{% endblock %}
+</body>
+</html>

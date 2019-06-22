@@ -1,0 +1,52 @@
+<!-- page script -->
+<script>
+  $(function () {
+    "use strict";
+
+
+    // LINE CHART
+    var line = new Morris.Line({
+      element: 'line-chart',
+      resize: true,
+  data: [
+    { period: '2019-05-10', park1: 200, park2: 200, park3: 50, park4: 10, park5: 0 },
+    { period: '2019-05-11', park1: 15, park2: 275, park3: 5, park4: 60, park5: 0 },
+    { period: '2019-05-12', park1: 80, park2: 20, park3: 30, park4: 30, park5: 0 },
+    { period: '2019-05-13', park1: 100, park2: 200, park3: 250, park4: 50, park5: 0 },
+    { period: '2019-05-14', park1: 50, park2: 60, park3: 20, park4: 10, park5: 0 },
+    { period: '2019-05-15', park1: 75, park2: 65, park3: 10, park4: 60, park5: 0 },
+    { period: '2019-05-16', park1: 175, park2:95, park3: 110, park4: 30, park5: 0 },
+    { period: '2019-05-17', park1: 150, park2:95, park3: 90, park4: 111, park5: 0 },
+    { period: '2019-05-18', park1: 120, park2:95, park3: 60, park4: 47, park5: 0 },
+    { period: '2019-05-19', park1: 60, park2:95, park3: 50, park4: 231, park5: 0 },
+    { period: '2019-05-20', park1: 10, park2:95, park3: 100, park4: 80, park5: 0 }
+  ],
+  lineColors: ['#819C79', '#fc8710', '#FF6541', '#A4ADD3', '#766B56'],
+  xkey: 'period',
+  ykeys: ['park1','park2','park3','park4','park5'],
+  labels: ['PARK 1', 'PARK 2', 'PARK 3', 'PARK 4', 'PARK 5'],
+  xLabels: 'day',
+  xLabelAngle: 45,
+ 
+  resize: true
+});
+
+  });
+</script>
+
+
+
+
+           {% for post in Post_moinhat_40 %}
+        {y: '{{ post.publish_date|date:"Y-m-d" }}', item1: {{ post.Streng }}},
+      {% endfor %}
+
+               <div class="col-md-8 ">
+            <div class="box-body chart-responsive">
+              <div class="chart" id="line-chart" style="height: 200px;"></div>
+            </div>
+                </div>
+
+      col-sm-4 col-xs-12
+
+      col-sm-8
