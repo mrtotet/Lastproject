@@ -213,6 +213,7 @@
                 </div>
                 <!-- /.col -->
                 <div class="col-md-6 col-sm-12">
+                    <div class="row">
                   <p class="text-center content-title" >
                     Dòng cổ phiếu Dẫn Dắt TT
                   </p>
@@ -243,9 +244,11 @@
                            {% endfor %}
                       </table>
                       {% endif %}
-                </div>
+
+
+
                  {% if Nhandinh_posts.update_trade_set.all %}
-                 <div class="col-md-6  col-sm-12" >
+
                   <p class="text-center content-title" >
                     ĐỀ XUẤT GIAO DỊCH
                   </p>
@@ -281,9 +284,10 @@
                 </table>
               </div>
                    </div>
-                 </div>
+
+
               <!-- CỘT PHẢI -->
-              <div class="col-md-6  col-sm-12" >
+
                 <div class="box box-info box-solid">
                   <div class="box-header with-border">
                     <h3 class="box-title" >ĐẦU TƯ DÀI HẠN</h3>
@@ -315,8 +319,8 @@
                 </table>
               </div>
                     </div>
-                  </div>
-              <div class="col-md-6  col-sm-12" >
+
+
                 <div class="box box-info box-solid">
                   <div class="box-header with-border">
                     <h3 class="box-title" >GIAO DỊCH PHÁI SINH</h3>
@@ -346,8 +350,8 @@
                 </table>
               </div>
                     </div>
-                  </div>
-                             <div class="col-md-6" >
+
+
                 <div class="box box-info box-solid">
                   <div class="box-header with-border">
                     <h3 class="box-title" >GIAO DỊCH COVERED WARRANT</h3>
@@ -377,11 +381,13 @@
 
                 </table>
               </div>
-                    </div>
-                  </div>
+                </div>
+
             {% endif %}
               </div>
             </div>
+            </div>
+        </div>
             <div class="box-footer">
               <div class="row">
                 {% block Nhandinh_posts_detail_keywords %}
@@ -438,7 +444,10 @@
             </div>
           </div>
         </div>
+          <!--/Blog content-->
       </div>
+
+
         <div class="blog-item">
           <div class="blog-content">
           <div class="box">
@@ -528,7 +537,7 @@
     { period: '2019-06-15', park1: 75,},
     { period: '2019-06-16', park1: 60 },
     { period: '2019-06-17', park1: 50 },
-      {% for post in Nhandinh_posts_all %}
+      {% for post in Post_moinhat_40_ruiro %}
       { period: '{{ post.publish_date|date:"Y-m-d" }}', park1: {{ post.Risk }} },
       {% endfor %}
 
