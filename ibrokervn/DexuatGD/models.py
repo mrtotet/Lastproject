@@ -199,7 +199,8 @@ class Recommend(Displayable, Ownable, RichText, AdminThumbMixin,):
     Stock_chosen =  models.ManyToManyField(Estimate, through= 'Update_Trade', verbose_name="Chọn CP", blank=True,related_name="Recommend")
     Streng =    models.IntegerField("Độ mạnh",null=True, blank=True, validators = [MaxValueValidator(100),MinValueValidator(0)], help_text='0-100')
     Risk =      models.IntegerField("Rủi ro",null=True, blank=True, validators = [MaxValueValidator(100),MinValueValidator(0)], help_text='0-100')
-
+    Recommend_url = models.URLField('URL', max_length=500, blank=True, null=True,
+                                   help_text='đường dẫn youtube hoặc url khác')
     @staticmethod
     def sohoa(a):
         So = int(a)
